@@ -14,7 +14,7 @@ a.metric('Stored through draw',f"#{state['latest_draw_no']}")
 b.metric('Stored through date',state['latest_date'])
 c.metric('Expected next draw',f"#{target['draw_no']} · {target['date']}")
 
-st.success('Automatic GitHub sync checks the official BST result pages after Thursday and Sunday draws. When a new official result is found, it updates the draw CSV, payout metadata and sync state, then Streamlit redeploys.')
+st.success('A scheduled ChatGPT sync checks official BST result pages after Thursday and Sunday draws. When a newer result is fully verified, it updates the GitHub draw data and payout metadata; Streamlit then redeploys.')
 
 with st.expander('Manual fallback / immediate use'):
     draw_no=st.number_input('Draw number',min_value=1,value=int(target['draw_no']),step=1)
@@ -50,7 +50,7 @@ with st.expander('Manual fallback / immediate use'):
                     load_draws_df.clear()
                 except Exception as e:st.error(f'GitHub update failed: {e}')
     elif not has_admin:
-        st.caption('Optional direct manual GitHub commits require ADMIN_PASSWORD + GITHUB_TOKEN in Streamlit Secrets. Automatic official sync does not require those secrets.')
+        st.caption('Optional direct manual GitHub commits require ADMIN_PASSWORD + GITHUB_TOKEN in Streamlit Secrets. The scheduled official sync is separate and does not require these app secrets.')
 
 with st.expander('Current newest stored row'):
     st.write(load_draws_df(game).iloc[0].to_dict())
