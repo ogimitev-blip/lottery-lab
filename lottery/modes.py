@@ -36,5 +36,5 @@ def generate_mode(game,mode_id,draws,target_draw_no=None):
         return {"pool":pool,"additions":adds,"diagnostics":diag,"tickets":tickets,"k":28,"cost":cost(game,len(tickets),target_draw_no),"label":m["name"],"status":m["status"],"mode":m}
     k=m["k"];n=m["lines"];pool,adds,diag,score=current_pool_649(draws,k)
     base=build_broad_six(pool,score,649)
-    tickets=base if n==6 else extend_sequence(base,pool,score,n,20260917+490000+k)
+    tickets=base if n==6 else extend_sequence(base,pool,score,n,20260917+490000)
     return {"pool":pool,"additions":adds,"diagnostics":diag,"tickets":tickets,"k":k,"cost":cost(game,len(tickets),target_draw_no),"label":m["name"],"status":m["status"],"mode":m}
