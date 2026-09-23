@@ -1,18 +1,13 @@
-name: Sync official Toto draws
+name: Manual BST parser probe
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "30 20 * * 4"
-    - cron: "30 20 * * 0"
-    - cron: "30 22 * * 4"
-    - cron: "30 22 * * 0"
 
 permissions:
   contents: write
 
 jobs:
-  sync:
+  probe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,18 +15,16 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pandas requests beautifulsoup4
-      - name: Sync newest official result
+      - name: Try direct BST fetch
         run: python scripts/sync_toto.py
-      - name: One-time 2026 dates and payout backfill
-        run: python scripts/backfill_2026.py
-      - name: Commit if changed
+      - name: Commit only if official data were actually retrieved
         run: |
           if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
-            echo "No new official data found."
+            echo "No verified new official data retrieved."
             exit 0
           fi
           git config user.name "lottery-lab-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/
-          git commit -m "Sync official Toto data"
+          git commit -m "Sync verified official Toto data"
           git push
