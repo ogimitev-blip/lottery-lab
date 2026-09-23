@@ -28,7 +28,7 @@ for g in ['6/42','6/49']:
     e,w=validate_history(g)
     if e:issues.append(f"{g}: {len(e)} error(s)")
 if issues:st.error('Data validation: '+'; '.join(issues))
-else:st.success('Core draw-data validation passed. Official GitHub sync is scheduled for Thursday/Sunday after draws.')
+else:st.success('Core draw-data validation passed. Scheduled official-result sync is active for Thursday/Sunday after draws.')
 
 st.caption(f'Lottery Lab {APP_VERSION}')
 caveat()
