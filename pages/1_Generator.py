@@ -54,7 +54,7 @@ if 'Shadow' in state['status']:
     st.warning('Shadow mode: shown for comparison and prospective tracking, not promoted to production.')
 if 'high spend' in state['status']:
     st.warning('High-spend analytical mode. It is not the baseline play size.')
-if mode.get('kind')=='exact':
+if mode.get('kind') in ('exact','exact_curated'):
     st.info(
         f"Exact published reduced system #{mode['system_no']} · K{mode['k']} · {mode['lines']} lines · "
         f"published guarantee {mode.get('guarantee','—')}. This is the exact-system challenger identified in the v10 robustness work, "
@@ -90,7 +90,7 @@ if c.button('Stage as prospective play',use_container_width=True):
     play=make_play(game,mode_id,target,state['pool'],state['additions'],tickets,state['cost'],model_version,APP_VERSION)
     play['wheel_version']=conversion_version
     play['mode_status']=state['status']
-    if mode.get('kind')=='exact':
+    if mode.get('kind') in ('exact','exact_curated'):
         play['system_no']=mode['system_no']
         play['mapping_method']=state['mapping_method']
     append_session(play,st.session_state)
