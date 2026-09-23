@@ -75,3 +75,15 @@ def load_custom_wheel():
 def load_system36():
     df=pd.read_csv(ROOT/"systems"/"official_system36.csv")
     return [tuple(map(int,row)) for row in df.to_numpy().tolist()]
+
+@st.cache_data
+def load_system104():
+    df=pd.read_csv(ROOT/"systems"/"official_system104.csv")
+    cols=[c for c in df.columns if c.startswith("pos")]
+    return [tuple(map(int,row)) for row in df[cols].to_numpy().tolist()]
+
+@st.cache_data
+def load_system118():
+    df=pd.read_csv(ROOT/"systems"/"official_system118.csv")
+    cols=[c for c in df.columns if c.startswith("pos")]
+    return [tuple(map(int,row)) for row in df[cols].to_numpy().tolist()]
