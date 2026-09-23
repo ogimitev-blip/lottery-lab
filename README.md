@@ -21,17 +21,9 @@ Streamlit control panel for the Bulgarian Toto 2 6/42 and 6/49 research workflow
 
 ## Official result syncing
 
-GitHub Actions runs after Thursday and Sunday draws and checks the official BST result pages at `info.toto.bg`.
+A scheduled ChatGPT task checks the official BST result pages after Thursday and Sunday draws. It reads `data/sync_state.json` and, only when a newer official draw is fully verifiable, updates the GitHub repository with winning numbers and payout metadata. Streamlit then redeploys from `main`.
 
-When a new official result is published it updates:
-
-- `data/draws_642.csv`
-- `data/draws_649.csv`
-- `data/results_meta_642.csv`
-- `data/results_meta_649.csv`
-- `data/sync_state.json`
-
-The workflow also performs a one-time 2026 backfill of draw numbers, dates, jackpots and 3/4/5/6 payout metadata when official result pages can be matched to the local history.
+A direct GitHub Actions scraper was tested, but BST's Radware browser verification blocks GitHub-hosted runner IPs. That workflow is therefore kept as a **manual probe only**, not relied on for production syncing.
 
 Manual entry remains available inside the app as a fallback.
 
