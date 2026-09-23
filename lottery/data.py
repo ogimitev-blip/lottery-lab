@@ -87,3 +87,15 @@ def load_system118():
     df=pd.read_csv(ROOT/"systems"/"official_system118.csv")
     cols=[c for c in df.columns if c.startswith("pos")]
     return [tuple(map(int,row)) for row in df[cols].to_numpy().tolist()]
+
+@st.cache_data
+def load_curated_exact_systems():
+    return json.loads((ROOT/"systems"/"official_exact_curated.json").read_text())
+
+def load_curated_exact_system(system_no):
+    spec=load_curated_exact_systems()[str(int(system_no))]
+    return {
+        "k":int(spec["k"]),
+        "guarantees":[tuple(map(int,g)) for g in spec["guarantees"]],
+        "layout":[tuple(map(int,row)) for row in spec["layout"]],
+    }
