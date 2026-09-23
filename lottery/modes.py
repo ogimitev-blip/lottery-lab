@@ -44,6 +44,7 @@ def generate_mode(game,mode_id,draws,target_draw_no=None):
             "status":m["status"],
             "mode":m,
             "architecture_note":"Exact published reduced system; model ranks are mapped to system positions by exposure, matching the v10 primary backtest mapping. The repeat/flex rule is not used in this exact-system mode.",
+            "conversion_version":f"Official System {m['system_no']} · exposure-aware v10",
         })
         return state
 
