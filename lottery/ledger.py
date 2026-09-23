@@ -1,12 +1,13 @@
 import base64,json,uuid
+from pathlib import Path
 from datetime import datetime,timezone
-from io import StringIO
 import pandas as pd
 import requests
 from .data import load_draws_df,load_results_meta
 
 REPO="ogimitev-blip/lottery-lab"
 PATH="data/prospective_plays.jsonl"
+LOCAL_PATH=Path(__file__).resolve().parents[1]/PATH
 
 def make_play(game,mode_id,target,pool,additions,tickets,stake,model_version,app_version):
     return {
@@ -23,12 +24,18 @@ def append_session(play,session_state):
     rows=session_state.setdefault("prospective_plays",[])
     if not any(x["play_id"]==play["play_id"] for x in rows):rows.append(play)
 
+def load_persisted():
+    if not LOCAL_PATH.exists():return []
+    return parse_jsonl(LOCAL_PATH.read_text())
+
 def github_append_play(play,token):
     headers={"Authorization":f"Bearer {token}","Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}
     url=f"https://api.github.com/repos/{REPO}/contents/{PATH}"
     r=requests.get(url,headers=headers,params={"ref":"main"},timeout=20);r.raise_for_status();meta=r.json()
     current=base64.b64decode(meta["content"]).decode() if meta.get("content") else ""
-    body=current.rstrip()+"\n"+json.dumps(play,separators=(",",":"))+"\n" if current.strip() else json.dumps(play,separators=(",",":"))+"\n"
+    existing={x.get("play_id") for x in parse_jsonl(current)}
+    if play["play_id"] in existing:return meta.get("html_url",f"https://github.com/{REPO}/blob/main/{PATH}")
+    body=(current.rstrip()+"\n" if current.strip() else "")+json.dumps(play,separators=(",",":"))+"\n"
     payload={"message":f"Record prospective play {play['game']} draw {play['target_draw_no']}","content":base64.b64encode(body.encode()).decode(),"sha":meta["sha"],"branch":"main"}
     u=requests.put(url,headers=headers,json=payload,timeout=20);u.raise_for_status()
     return u.json()["commit"]["html_url"]
@@ -41,6 +48,11 @@ def parse_jsonl(text):
             try:out.append(json.loads(line))
             except Exception:pass
     return out
+
+def all_plays(session_state):
+    rows={p["play_id"]:p for p in load_persisted()}
+    for p in session_state.get("prospective_plays",[]):rows[p["play_id"]]=p
+    return list(rows.values())
 
 def score_play(play):
     game=play["game"];df=load_draws_df(game);cols=[f"n{i}" for i in range(1,7)]
