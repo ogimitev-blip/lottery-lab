@@ -1,12 +1,15 @@
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+
 from lottery.data import get_draws,next_draw_info,validate_history
 from lottery.modes import modes_for_game,generate_mode
 from lottery.wheels import line_price
+import lottery.data as data
 
 class DummyState(dict):
     pass
 
-# Streamlit session state is not needed for repository-backed draw loading in this smoke test.
-import lottery.data as data
 data.st.session_state = DummyState()
 
 for game in ["6/42","6/49"]:
