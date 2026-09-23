@@ -1,5 +1,5 @@
 from .models import current_pool_642,current_pool_649
-from .data import load_custom_wheel,load_system36,load_system104,load_system118
+from .data import load_custom_wheel,load_system36,load_system104,load_system118,load_curated_exact_system
 from .wheels import map_positions,build_broad_six,extend_sequence,cost
 from .exact_systems import generate_exact_system
 
@@ -11,6 +11,13 @@ MODE_REGISTRY=[
 {"id":"642_80","game":"6/42","name":"K28 custom — 80 lines","status":"Analytical / high spend","k":28,"lines":80,"kind":"custom"},
 {"id":"642_130","game":"6/42","name":"K28 custom — 130 lines","status":"Analytical / high spend","k":28,"lines":130,"kind":"custom"},
 {"id":"642_sys36","game":"6/42","name":"Official System 36 — K28 / 50 lines","status":"Benchmark","k":28,"lines":50,"kind":"benchmark"},
+{"id":"642_sys46","game":"6/42","name":"Official System 46 — 20 numbers / 10 lines","status":"Official · budget exact","k":20,"lines":10,"kind":"exact_curated","system_no":46,"guarantee":"3/6"},
+{"id":"642_sys28","game":"6/42","name":"Official System 28 — 20 numbers / 18 lines","status":"Official · budget exact","k":20,"lines":18,"kind":"exact_curated","system_no":28,"guarantee":"3/5"},
+{"id":"642_sys30","game":"6/42","name":"Official System 30 — 22 numbers / 22 lines","status":"Official · budget exact","k":22,"lines":22,"kind":"exact_curated","system_no":30,"guarantee":"3/5"},
+{"id":"642_sys107","game":"6/42","name":"Official System 107 — 10 numbers / 30 lines","status":"Official · budget exact","k":10,"lines":30,"kind":"exact_curated","system_no":107,"guarantee":"3/3 · 4/4 · 5/6"},
+{"id":"642_sys105","game":"6/42","name":"Official System 105 — 20 numbers / 39 lines","status":"Official · budget exact","k":20,"lines":39,"kind":"exact_curated","system_no":105,"guarantee":"3/4"},
+{"id":"642_sys10","game":"6/42","name":"Official System 10 — 22 numbers / 77 lines","status":"Official · mid-cost exact","k":22,"lines":77,"kind":"exact_curated","system_no":10,"guarantee":"3/3"},
+{"id":"642_sys76","game":"6/42","name":"Official System 76 — 20 numbers / 100 lines","status":"Official · mid-cost exact","k":20,"lines":100,"kind":"exact_curated","system_no":76,"guarantee":"3/5 · 4/6"},
 {"id":"642_sys104","game":"6/42","name":"Official System 104 — 26 numbers / 130 lines","status":"V10 exact-system challenger","k":26,"lines":130,"kind":"exact","system_no":104,"guarantee":"3/3"},
 
 {"id":"649_k22_6","game":"6/49","name":"6 tickets — K22","status":"Production","k":22,"lines":6,"kind":"custom"},
@@ -25,6 +32,13 @@ MODE_REGISTRY=[
 {"id":"649_k26_22","game":"6/49","name":"K26 shadow — 22 lines","status":"Shadow","k":26,"lines":22,"kind":"custom"},
 {"id":"649_k26_28","game":"6/49","name":"K26 shadow — 28 lines","status":"Shadow","k":26,"lines":28,"kind":"custom"},
 {"id":"649_k26_33","game":"6/49","name":"K26 shadow — 33 lines","status":"Shadow","k":26,"lines":33,"kind":"custom"},
+{"id":"649_sys46","game":"6/49","name":"Official System 46 — 20 numbers / 10 lines","status":"Official · budget exact","k":20,"lines":10,"kind":"exact_curated","system_no":46,"guarantee":"3/6"},
+{"id":"649_sys28","game":"6/49","name":"Official System 28 — 20 numbers / 18 lines","status":"Official · budget exact","k":20,"lines":18,"kind":"exact_curated","system_no":28,"guarantee":"3/5"},
+{"id":"649_sys30","game":"6/49","name":"Official System 30 — 22 numbers / 22 lines","status":"Official · budget exact","k":22,"lines":22,"kind":"exact_curated","system_no":30,"guarantee":"3/5"},
+{"id":"649_sys107","game":"6/49","name":"Official System 107 — 10 numbers / 30 lines","status":"Official · budget exact","k":10,"lines":30,"kind":"exact_curated","system_no":107,"guarantee":"3/3 · 4/4 · 5/6"},
+{"id":"649_sys105","game":"6/49","name":"Official System 105 — 20 numbers / 39 lines","status":"Official · budget exact","k":20,"lines":39,"kind":"exact_curated","system_no":105,"guarantee":"3/4"},
+{"id":"649_sys10","game":"6/49","name":"Official System 10 — 22 numbers / 77 lines","status":"Official · mid-cost exact","k":22,"lines":77,"kind":"exact_curated","system_no":10,"guarantee":"3/3"},
+{"id":"649_sys76","game":"6/49","name":"Official System 76 — 20 numbers / 100 lines","status":"Official · mid-cost exact","k":20,"lines":100,"kind":"exact_curated","system_no":76,"guarantee":"3/5 · 4/6"},
 {"id":"649_sys118","game":"6/49","name":"Official System 118 — 30 numbers / 131 lines","status":"V10 exact-system challenger","k":30,"lines":131,"kind":"exact","system_no":118,"guarantee":"3/5"},
 ]
 
@@ -34,8 +48,12 @@ def mode_by_id(mid):return next(m for m in MODE_REGISTRY if m["id"]==mid)
 def generate_mode(game,mode_id,draws,target_draw_no=None):
     m=mode_by_id(mode_id)
 
-    if m["kind"]=="exact":
-        layout=load_system104() if m["system_no"]==104 else load_system118()
+    if m["kind"] in ("exact","exact_curated"):
+        if m["kind"]=="exact_curated":
+            spec=load_curated_exact_system(m["system_no"])
+            layout=spec["layout"]
+        else:
+            layout=load_system104() if m["system_no"]==104 else load_system118()
         state=generate_exact_system(game,draws,layout,m["k"])
         state.update({
             "k":m["k"],
