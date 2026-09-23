@@ -1,23 +1,52 @@
 # Lottery Lab
 
-Streamlit app for the 6/42 lottery research workflow.
+Streamlit control panel for the Bulgarian Toto 2 6/42 and 6/49 research workflow.
 
-## Included
+## Current capabilities
 
-- Current **K28 production pool** generator.
-- Selection model: smooth frequency across 20/50/100/all-history windows + overdue adjustment + two-draw repeat rule.
-- Custom nested systems: **18 / 30 / 50 / 80 / 130 lines**.
-- Official **System 36** comparison.
-- Interactive past-draw map.
-- Fixed-position 1–42 frequency heatmap.
-- Gap / overdue visualization.
-- Rolling 20 / 50 / 100-draw frequency trends.
-- Pair co-occurrence matrix.
-- Selection-vs-conversion performance timeline.
-- Leakage-free walk-forward backtest page.
-- CSV/text ticket export.
+- **6/42 production:** K28 smooth + overdue λ=1 + two-draw repeat rule.
+- **6/49 production:** K22 ensemble + overdue λ=0.75 + two-draw repeat rule.
+- **6/49 K26:** shadow/challenger only.
+- Ticket modes:
+  - 6/42: 6 / 18 / 30 / 50 / 80 / 130 custom lines + official System 36 benchmark.
+  - 6/49: K22 and K26 families with 6 / 11 / 16 / 22 / 28 / 33 lines.
+- Budget filtering and visible Production / Benchmark / Shadow / High-spend labels.
+- Dynamic 6/49 special-draw pricing for the published 2026 special draws.
+- Interactive Draw Map with historical K28 and K22 pool overlays.
+- Frequency grid, gaps, rolling frequency and pair co-occurrence.
+- Leakage-free 6/42 backtesting.
+- Prospective play ledger: freeze an exact play before the result, then score it later.
+- Mode comparison screen.
+- Data-quality checks.
 
-The bundled 6/42 history is newest-first and currently includes the **20 Sep 2026** draw.
+## Official result syncing
+
+GitHub Actions runs after Thursday and Sunday draws and checks the official BST result pages at `info.toto.bg`.
+
+When a new official result is published it updates:
+
+- `data/draws_642.csv`
+- `data/draws_649.csv`
+- `data/results_meta_642.csv`
+- `data/results_meta_649.csv`
+- `data/sync_state.json`
+
+The workflow also performs a one-time 2026 backfill of draw numbers, dates, jackpots and 3/4/5/6 payout metadata when official result pages can be matched to the local history.
+
+Manual entry remains available inside the app as a fallback.
+
+## Prospective ledger
+
+The Generator can **Stage as prospective play**. This freezes the game, target draw, model version, mode, pool, repeat additions, tickets and stake before the result.
+
+For permanent in-app persistence, add these only to Streamlit Community Cloud **Secrets**:
+
+```toml
+ADMIN_PASSWORD = "choose-a-private-password"
+GITHUB_TOKEN = "github_pat_..."
+```
+
+The GitHub token should be fine-grained, restricted to this repository, with **Contents: Read and write**.
 
 ## Run locally
 
@@ -26,21 +55,12 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Deploy on Streamlit Community Cloud
+## Deploy
 
-1. Go to https://share.streamlit.io and sign in with GitHub.
-2. Click **Create app**.
-3. Choose repository `ogimitev-blip/lottery-lab`.
-4. Branch: `main`.
-5. Main file path: `app.py`.
-6. Click **Deploy**.
-
-Community Cloud watches GitHub, so future commits are reflected in the deployed app.
-
-## Updating draw history
-
-`data/draws_642.csv` is newest-first. Add a new draw as the first data row beneath the header.
+Repository: `ogimitev-blip/lottery-lab`  
+Branch: `main`  
+Main file: `app.py`
 
 ## Interpretation
 
-Historical charts and backtests describe past behavior. They do not establish that future lottery draws are predictable. Keep any gambling spend fixed and pre-committed.
+Historical patterns and backtests are descriptive research tools. They do not establish that future lottery draws are predictable. Keep gambling spend fixed and pre-committed.
