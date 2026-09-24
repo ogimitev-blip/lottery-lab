@@ -19,7 +19,7 @@ st.page_link('pages/1_Generator.py',label='Generator — game, budget, pool mode
 st.page_link('pages/2_Past_Draws.py',label='Past Draws — K28/K22 overlays, frequency, gaps and pairs',icon='🗺️')
 st.page_link('pages/3_Backtest.py',label='Backtest — 6/42 selection vs conversion',icon='📈')
 st.page_link('pages/4_Model_Info.py',label='Model Info — exact production rules',icon='🧠')
-st.page_link('pages/5_Update_Draws.py',label='Update Draws — official sync status + manual fallback',icon='➕')
+st.page_link('pages/5_Update_Draws.py',label='Draw Database — view, add, correct or delete stored draws',icon='🗃️')
 st.page_link('pages/6_Prospective_Ledger.py',label='Prospective Ledger — freeze plays before the draw',icon='🧾')
 st.page_link('pages/7_Mode_Comparison.py',label='Mode Comparison — cost and jackpot mechanics side by side',icon='⚖️')
 
