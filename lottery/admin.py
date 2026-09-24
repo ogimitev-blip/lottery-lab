@@ -36,3 +36,75 @@ def github_commit_draw(game,draw_no,date,numbers,token):
     return u.json()["commit"]["html_url"]
 
 def password_ok(given,expected):return hmac.compare_digest(str(given),str(expected))
+
+
+def normalize_history_frame(df,game):
+    cols=["draw_no","date","n1","n2","n3","n4","n5","n6"]
+    out=df.copy()
+    for c in cols:
+        if c not in out.columns:
+            out[c]=pd.NA
+    out=out[cols].copy()
+    out["draw_no"]=pd.to_numeric(out["draw_no"],errors="coerce").astype("Int64")
+    for c in [f"n{i}" for i in range(1,7)]:
+        out[c]=pd.to_numeric(out[c],errors="coerce").astype("Int64")
+    out["date"]=out["date"].astype("string")
+    out.loc[out["date"].isin(["","<NA>","nan","None"]),"date"]=pd.NA
+    return out
+
+def validate_history_frame(df,game):
+    out=normalize_history_frame(df,game)
+    maxn=42 if game=="6/42" else 49
+    cols=[f"n{i}" for i in range(1,7)]
+    errors=[]; warnings=[]
+    for idx,row in out.iterrows():
+        if any(pd.isna(row[c]) for c in cols):
+            errors.append(f"Row {idx+1}: all six number fields are required.")
+            continue
+        vals=[int(row[c]) for c in cols]
+        if len(set(vals))!=6:
+            errors.append(f"Row {idx+1}: the six numbers must be distinct.")
+        if min(vals)<1 or max(vals)>maxn:
+            errors.append(f"Row {idx+1}: numbers must be between 1 and {maxn}.")
+    known_draws=out["draw_no"].dropna().astype(int)
+    dup_draw=known_draws[known_draws.duplicated(keep=False)]
+    if len(dup_draw):
+        errors.append("Duplicate draw number(s): "+", ".join(map(str,sorted(set(dup_draw.tolist())))))
+    parsed=pd.to_datetime(out["date"],errors="coerce")
+    bad_date=out["date"].notna() & parsed.isna()
+    if bad_date.any():
+        errors.append("Invalid date format on row(s): "+", ".join(str(i+1) for i in out.index[bad_date]))
+    groups={}
+    for idx,row in out.iterrows():
+        if any(pd.isna(row[c]) for c in cols): continue
+        key=tuple(sorted(int(row[c]) for c in cols))
+        groups.setdefault(key,[]).append(idx)
+    duplicate_groups=[(nums,idxs) for nums,idxs in groups.items() if len(idxs)>1]
+    for nums,idxs in duplicate_groups:
+        warnings.append(
+            f"Repeated six-number result {' '.join(map(str,nums))} on table row(s) "
+            +", ".join(str(i+1) for i in idxs)
+            +". Review whether this is a genuine repeated draw or a duplicate data row."
+        )
+    return out,errors,warnings,duplicate_groups
+
+def history_csv(df,game):
+    out,errors,warnings,_=validate_history_frame(df,game)
+    if errors:
+        raise ValueError("; ".join(errors))
+    return out.to_csv(index=False)
+
+def github_replace_history(game,df,token,message=None):
+    path=PATHS[game]
+    headers={"Authorization":f"Bearer {token}","Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}
+    url=f"https://api.github.com/repos/{REPO}/contents/{path}"
+    r=requests.get(url,headers=headers,params={"ref":"main"},timeout=20); r.raise_for_status(); meta=r.json()
+    body=history_csv(df,game)
+    payload={
+        "message":message or f"Edit {game} draw history",
+        "content":base64.b64encode(body.encode()).decode(),
+        "sha":meta["sha"],
+        "branch":"main",
+    }
+    u=requests.put(url,headers=headers,json=payload,timeout=20); u.raise_for_status()
+    return u.json()["commit"]["html_url"]
