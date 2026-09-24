@@ -23,7 +23,7 @@ else:c4.info('Green = drawn inside historical K22 · Orange = drawn outside K22 
 
 st.plotly_chart(draw_map(draws,window,N,labels,overlay,show_model,show_repeat),use_container_width=True)
 
-t1,t2,t3,t4=st.tabs(['Frequency & gaps','Rolling trends','Pairs','Model performance'])
+t1,t2,t3,t4,t5=st.tabs(['Frequency & gaps','Rolling trends','Pairs','Model performance','Draw table'])
 with t1:
     a,b=st.columns(2)
     with a:st.plotly_chart(frequency_grid(draws,window,N),use_container_width=True)
@@ -43,3 +43,15 @@ with t4:
         st.line_chart(d[['pool_hits']],height=420)
         st.caption('6/49 currently shows K22 selection-pool capture. Ticket-conversion history is kept separate from the pool model.')
 caveat()
+
+with t5:
+    from lottery.data import load_draws_df
+    db=load_draws_df(game).copy()
+    numcols=[f"n{i}" for i in range(1,7)]
+    db.insert(0,"stored_row",range(1,len(db)+1))
+    keys=db[numcols].apply(lambda r:"-".join(map(str,sorted(map(int,r)))),axis=1)
+    dup=keys.duplicated(keep=False)
+    db.insert(1,"duplicate",dup)
+    st.caption("Newest-first stored history. Rows marked duplicate have the same six-number set as another stored row.")
+    st.dataframe(db,use_container_width=True,hide_index=True,height=650)
+    st.page_link("pages/5_Update_Draws.py",label="Open Draw Database to correct or add results",icon="🗃️")
