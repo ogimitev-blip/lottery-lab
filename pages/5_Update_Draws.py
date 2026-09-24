@@ -145,7 +145,7 @@ if has_admin:
     pwd=st.text_input('Admin password',type='password',key=f'admin_pwd_{game}')
     confirm=st.checkbox('I have reviewed the edited table and want to replace the stored history for this game.',key=f'confirm_history_{game}')
     if st.button('Save working table to GitHub',type='primary',disabled=not confirm,use_container_width=True):
-        working,save_errors,save_warnings,_=validate_history_frame(st.session_state[work_key],game)
+        working,save_errors,save_warnings,_=validate_history_frame(candidate,game)
         if save_errors:
             st.error('Cannot save: '+'; '.join(save_errors[:10]))
         elif not password_ok(pwd,st.secrets['ADMIN_PASSWORD']):
@@ -156,8 +156,10 @@ if has_admin:
                     game,working,st.secrets['GITHUB_TOKEN'],
                     message=f'Correct {game} draw database from Streamlit editor'
                 )
+                st.session_state[work_key]=working
+                st.session_state[version_key]+=1
                 load_draws_df.clear()
-                st.success('Saved to GitHub. Streamlit will refresh from the committed database.')
+                st.success('Saved the currently edited table to GitHub. Streamlit will refresh from the committed database.')
                 st.link_button('Open commit',url)
             except Exception as e:
                 st.error(f'GitHub save failed: {e}')
