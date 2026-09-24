@@ -1,6 +1,6 @@
 from .models import current_pool_642,current_pool_649
 from .data import load_custom_wheel,load_system36,load_system104,load_system118,load_curated_exact_system
-from .wheels import map_positions,build_broad_six,extend_sequence,cost
+from .wheels import map_positions,build_broad_four,build_broad_six,extend_sequence,cost
 from .exact_systems import generate_exact_system
 
 MODE_REGISTRY=[
@@ -20,6 +20,7 @@ MODE_REGISTRY=[
 {"id":"642_sys76","game":"6/42","name":"Official System 76 — 20 numbers / 100 lines","status":"Official · mid-cost exact","k":20,"lines":100,"kind":"exact_curated","system_no":76,"guarantee":"3/5 · 4/6"},
 {"id":"642_sys104","game":"6/42","name":"Official System 104 — 26 numbers / 130 lines","status":"V10 exact-system challenger","k":26,"lines":130,"kind":"exact","system_no":104,"guarantee":"3/3"},
 
+{"id":"649_k22_4","game":"6/49","name":"4 tickets — K22 broad coverage","status":"Production · low spend","k":22,"lines":4,"kind":"custom"},
 {"id":"649_k22_6","game":"6/49","name":"6 tickets — K22","status":"Production","k":22,"lines":6,"kind":"custom"},
 {"id":"649_k22_11","game":"6/49","name":"K22 system — 11 lines","status":"Production","k":22,"lines":11,"kind":"custom"},
 {"id":"649_k22_16","game":"6/49","name":"K22 system — 16 lines","status":"Production","k":22,"lines":16,"kind":"custom"},
@@ -73,6 +74,9 @@ def generate_mode(game,mode_id,draws,target_draw_no=None):
         return {"pool":pool,"additions":adds,"diagnostics":diag,"tickets":tickets,"k":28,"cost":cost(game,len(tickets),target_draw_no),"label":m["name"],"status":m["status"],"mode":m}
 
     k=m["k"];n=m["lines"];pool,adds,diag,score=current_pool_649(draws,k)
-    base=build_broad_six(pool,score,649)
-    tickets=base if n==6 else extend_sequence(base,pool,score,n,20260917+490000)
+    if n==4:
+        tickets=build_broad_four(pool,score)
+    else:
+        base=build_broad_six(pool,score,649)
+        tickets=base if n==6 else extend_sequence(base,pool,score,n,20260917+490000)
     return {"pool":pool,"additions":adds,"diagnostics":diag,"tickets":tickets,"k":k,"cost":cost(game,len(tickets),target_draw_no),"label":m["name"],"status":m["status"],"mode":m}
