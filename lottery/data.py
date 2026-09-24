@@ -57,8 +57,20 @@ def validate_history(game):
             errors.append(f"Row {idx+1}: non-integer or missing number"); continue
         if len(set(vals))!=6: errors.append(f"Row {idx+1}: numbers are not distinct")
         if min(vals)<1 or max(vals)>maxn: errors.append(f"Row {idx+1}: number outside 1–{maxn}")
-    dup=df.duplicated(subset=cols,keep=False)
-    if dup.any(): warnings.append(f"{int(dup.sum())} rows share an identical six-number result; review for genuine repeats vs duplicate data.")
+    groups={}
+    for idx,row in df.iterrows():
+        try:
+            key=tuple(sorted(int(row[c]) for c in cols))
+        except Exception:
+            continue
+        groups.setdefault(key,[]).append(int(idx)+1)
+    for key,rows in groups.items():
+        if len(rows)>1:
+            warnings.append(
+                f"Repeated result {' '.join(map(str,key))} appears on stored row(s) "
+                +", ".join(map(str,rows))
+                +". Open Draw Database to review/correct it."
+            )
     if "date" in df.columns:
         dates=pd.to_datetime(df.date,errors="coerce")
         known=dates.dropna()
