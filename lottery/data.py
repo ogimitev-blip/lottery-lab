@@ -37,11 +37,24 @@ def _next_thu_or_sun(d):
         if x.weekday() in (3,6): return x
     return d+timedelta(days=4)
 
-def next_draw_info(game):
+def latest_stored_info(game):
+    df=load_draws_df(game)
+    known=df.dropna(subset=["draw_no"]).copy() if "draw_no" in df.columns else pd.DataFrame()
+    if len(known):
+        known["draw_no"]=pd.to_numeric(known["draw_no"],errors="coerce")
+        known=known.dropna(subset=["draw_no"]).sort_values("draw_no",ascending=False)
+    if len(known):
+        r=known.iloc[0]
+        d=str(r["date"]) if "date" in known.columns and pd.notna(r["date"]) else None
+        return {"draw_no":int(r["draw_no"]),"date":d}
     s=load_sync_state()[game]
-    last=date.fromisoformat(s["latest_date"])
+    return {"draw_no":int(s["latest_draw_no"]),"date":s["latest_date"]}
+
+def next_draw_info(game):
+    latest=latest_stored_info(game)
+    last=date.fromisoformat(latest["date"]) if latest.get("date") else date.today()
     nxt=_next_thu_or_sun(last)
-    return {"draw_no":int(s["latest_draw_no"])+1,"date":nxt.isoformat()}
+    return {"draw_no":int(latest["draw_no"])+1,"date":nxt.isoformat()}
 
 @st.cache_data
 def load_results_meta(game):
