@@ -18,6 +18,43 @@ def ticket_frame(tickets):
 
 def cost(game,n_lines,draw_no=None,year=2026): return line_price(game,draw_no,year)*n_lines
 
+def build_broad_four(pool,score):
+    """Four-line K22 conversion: cover all 22 selected numbers once, then
+    repeat the two highest-scored pool numbers. Assignment is deterministic
+    and minimizes repeated within-ticket pair exposure while balancing score."""
+    if len(pool)>24:
+        raise ValueError("Four tickets have only 24 slots; broad-four requires K<=24.")
+    ranked=sorted([int(n) for n in pool],key=lambda n:(-float(score.loc[n]),n))
+    repeat_n=max(0,24-len(ranked))
+    repeated=ranked[:repeat_n]
+    items=ranked+repeated
+    items=sorted(items,key=lambda n:(-float(score.loc[n]),n))
+
+    tickets=[[] for _ in range(4)]
+    score_sums=[0.0]*4
+
+    def pair_seen_elsewhere(n,o,current_i):
+        pair={int(n),int(o)}
+        return sum(1 for j,t in enumerate(tickets) if j!=current_i and pair.issubset(set(t)))
+
+    for n in items:
+        candidates=[]
+        for i,t in enumerate(tickets):
+            if len(t)>=6 or n in t:
+                continue
+            pair_penalty=sum(pair_seen_elsewhere(n,o,i) for o in t)
+            candidates.append((pair_penalty,len(t),score_sums[i],i))
+        if not candidates:
+            raise RuntimeError("broad-four construction failed")
+        _,_,_,i=min(candidates)
+        tickets[i].append(int(n))
+        score_sums[i]+=float(score.loc[n])
+
+    out=[tuple(sorted(t)) for t in tickets]
+    if any(len(t)!=6 or len(set(t))!=6 for t in out):
+        raise RuntimeError("broad-four produced an invalid ticket")
+    return out
+
 def build_broad_six(pool,score,seed=649):
     k=len(pool); ranked=sorted(pool,key=lambda n:float(score.loc[n]),reverse=True)
     counts={int(n):1 for n in pool}
