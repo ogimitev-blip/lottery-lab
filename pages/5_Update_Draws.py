@@ -3,7 +3,7 @@ import streamlit as st
 from datetime import date
 
 from lottery.ui import setup_page,hero,caveat
-from lottery.data import load_draws_df,next_draw_info,load_sync_state
+from lottery.data import load_draws_df,next_draw_info,load_sync_state,latest_stored_info
 from lottery.admin import (
     parse_numbers,normalize_history_frame,validate_history_frame,history_csv,
     github_replace_history,password_ok,
@@ -15,6 +15,7 @@ hero('Draw Database','View every stored draw, inspect duplicate warnings, add ne
 game=st.segmented_control('Game',['6/42','6/49'],default='6/42')
 target=next_draw_info(game)
 state=load_sync_state()[game]
+stored=latest_stored_info(game)
 
 # Keep an editable working copy per game in this browser session.
 work_key=f'history_work_{game}'
@@ -24,10 +25,11 @@ if work_key not in st.session_state:
 if version_key not in st.session_state:
     st.session_state[version_key]=0
 
-c1,c2,c3=st.columns(3)
-c1.metric('Stored through draw',f"#{state['latest_draw_no']}")
-c2.metric('Stored through date',state['latest_date'])
-c3.metric('Expected next draw',f"#{target['draw_no']} · {target['date']}")
+c1,c2,c3,c4=st.columns(4)
+c1.metric('Stored through draw',f"#{stored['draw_no']}")
+c2.metric('Stored through date',stored['date'] or 'unknown')
+c3.metric('Officially verified through',f"#{state['latest_draw_no']} · {state['latest_date']}")
+c4.metric('Expected next draw',f"#{target['draw_no']} · {target['date']}")
 
 current=st.session_state[work_key].copy()
 normalized,errors,warnings,dup_groups=validate_history_frame(current,game)
