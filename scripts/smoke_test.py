@@ -31,3 +31,18 @@ assert line_price("6/49",75)==1.00
 assert line_price("6/49",74)==0.90
 assert line_price("6/42",75)==0.80
 print("SMOKE_OK")
+
+
+# 6/49 four-ticket production mode: 24 slots should cover all K22 numbers,
+# with exactly two numbers repeated once.
+draws=get_draws("6/49")
+target=next_draw_info("6/49")
+s=generate_mode("6/49","649_k22_4",draws,target["draw_no"])
+assert len(s["tickets"])==4
+flat=[n for t in s["tickets"] for n in t]
+assert len(flat)==24
+assert len(set(flat))==22
+counts={n:flat.count(n) for n in set(flat)}
+assert sorted(counts.values()).count(2)==2
+assert max(counts.values())==2
+print("K22_FOUR_OK",s["tickets"])
