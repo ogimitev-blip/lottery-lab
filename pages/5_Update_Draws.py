@@ -52,6 +52,60 @@ if dup_groups:
                 'numbers':' '.join(str(int(r[f'n{i}'])) for i in range(1,7)),
             })
     st.dataframe(pd.DataFrame(dup_rows),use_container_width=True,hide_index=True)
+
+    st.markdown('#### Quick duplicate correction')
+    st.caption('Edit one of the repeated rows here or tick Delete. Changes are applied to the working table only until you save them permanently.')
+    quick=[]
+    for group_no,(nums,idxs) in enumerate(dup_groups,1):
+        for idx in idxs:
+            r=normalized.loc[idx]
+            quick.append({
+                'Delete':False,
+                'duplicate_group':group_no,
+                'stored_row':int(idx)+1,
+                '_source_index':int(idx),
+                'draw_no':None if pd.isna(r['draw_no']) else int(r['draw_no']),
+                'date':None if pd.isna(r['date']) else str(r['date']),
+                **{f'n{i}':int(r[f'n{i}']) for i in range(1,7)},
+            })
+    quick_df=pd.DataFrame(quick)
+    quick_edit=st.data_editor(
+        quick_df,
+        key=f'quick_dup_{game}_{st.session_state[version_key]}',
+        use_container_width=True,
+        hide_index=True,
+        disabled=['duplicate_group','stored_row','_source_index'],
+        column_config={
+            'Delete':st.column_config.CheckboxColumn('Delete'),
+            'duplicate_group':st.column_config.NumberColumn('Group',format='%d'),
+            'stored_row':st.column_config.NumberColumn('Stored row',format='%d'),
+            '_source_index':None,
+            'draw_no':st.column_config.NumberColumn('Draw #',min_value=1,step=1,format='%d'),
+            'date':st.column_config.TextColumn('Date'),
+            **{f'n{i}':st.column_config.NumberColumn(f'N{i}',min_value=1,max_value=(42 if game=='6/42' else 49),step=1,format='%d') for i in range(1,7)},
+        },
+    )
+    if st.button('Apply duplicate corrections',use_container_width=True):
+        base=st.session_state[work_key].copy()
+        drop_idx=[]
+        for _,rr in quick_edit.iterrows():
+            src=int(rr['_source_index'])
+            if bool(rr.get('Delete',False)):
+                drop_idx.append(src)
+                continue
+            for col in ['draw_no','date','n1','n2','n3','n4','n5','n6']:
+                base.at[src,col]=rr[col]
+        if drop_idx:
+            base=base.drop(index=drop_idx)
+        base=base.reset_index(drop=True)
+        checked,qerr,qwarn,_=validate_history_frame(base,game)
+        if qerr:
+            st.error('Cannot apply duplicate correction: '+'; '.join(qerr[:10]))
+        else:
+            st.session_state[work_key]=checked
+            st.session_state[version_key]+=1
+            st.success('Duplicate correction applied to the working table.')
+            st.rerun()
 else:
     st.info('No repeated six-number results detected.')
 
