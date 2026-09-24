@@ -9,7 +9,7 @@ Streamlit control panel for the Bulgarian Toto 2 6/42 and 6/49 research workflow
 - **6/49 K26:** shadow/challenger only.
 - Ticket modes:
   - 6/42: 6 / 18 / 30 / 50 / 80 / 130 custom lines + System 36 benchmark + exact official Systems 46 / 28 / 30 / 107 / 105 / 10 / 76 / 104.
-  - 6/49: K22 and K26 families with 6 / 11 / 16 / 22 / 28 / 33 lines + exact official Systems 46 / 28 / 30 / 107 / 105 / 10 / 76 / 118.
+  - 6/49: K22 family with 4 / 6 / 11 / 16 / 22 / 28 / 33 lines, K26 shadow family with 6 / 11 / 16 / 22 / 28 / 33 lines, + exact official Systems 46 / 28 / 30 / 107 / 105 / 10 / 76 / 118.
 - Budget filtering and visible Production / Benchmark / Shadow / High-spend labels.
 - Dynamic 6/49 special-draw pricing for the published 2026 special draws.
 - Interactive Draw Map with historical K28 and K22 pool overlays.
