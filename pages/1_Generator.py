@@ -26,7 +26,8 @@ modes=modes_for_game(game)
 input_mode=st.radio('How do you want to choose?',['Choose mode','Filter by budget'],horizontal=True)
 eligible=modes
 if input_mode=='Filter by budget':
-    max_cost=st.number_input('Maximum total spend (€)',min_value=float(price*6),max_value=250.0,value=40.0,step=1.0)
+    min_lines=min(m['lines'] for m in modes)
+    max_cost=st.number_input('Maximum total spend (€)',min_value=float(price*min_lines),max_value=250.0,value=40.0,step=1.0)
     eligible=[m for m in modes if m['lines']*price<=max_cost+1e-9]
     if not eligible:
         st.warning('No configured mode fits that budget.'); st.stop()
