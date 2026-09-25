@@ -46,3 +46,36 @@ counts={n:flat.count(n) for n in set(flat)}
 assert sorted(counts.values()).count(2)==2
 assert max(counts.values())==2
 print("K22_FOUR_OK",s["tickets"])
+
+
+from lottery.crowd import latest_crowd_snapshot,score_ticket_frame,anti_crowd_remap,snapshot_summary
+from lottery.data import load_research_archive
+from lottery.historylab import compare_history_depth,summarize_depth
+
+for game in ["6/42","6/49"]:
+    crowd=latest_crowd_snapshot(game)
+    assert not crowd.empty
+    expected=42 if game=="6/42" else 49
+    assert len(crowd)==expected
+    assert crowd.number.nunique()==expected
+    s=snapshot_summary(crowd)
+    assert s["coverage_pct"]>0
+    draws=get_draws(game)
+    target=next_draw_info(game)
+    mode_id="642_18" if game=="6/42" else "649_k22_4"
+    state=generate_mode(game,mode_id,draws,target["draw_no"])
+    scored=score_ticket_frame(state["tickets"],crowd)
+    assert len(scored)==len(state["tickets"])
+    remap,mapping,meta=anti_crowd_remap(state["pool"],state["tickets"],crowd)
+    assert len(remap)==len(state["tickets"])
+    assert len(set(remap))==len(remap)
+    assert all(len(t)==6 and len(set(t))==6 for t in remap)
+print("CROWD_OK")
+
+for game in ["6/42","6/49"]:
+    current=get_draws(game)
+    _,archive=load_research_archive(game)
+    assert len(archive)==441
+    bt=compare_history_depth(game,current,archive,max_targets=150,min_history=50)
+    sm=summarize_depth(bt)
+    print("HISTORY_DEPTH",game,sm)
