@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "experiment": "prospective-shadow-draw-76",
+  "target_draw_no": 76,
+  "target_date": "2026-09-27",
+  "frozen_at_utc": "2026-09-25T07:52:22Z",
+  "source_freeze_commit": "12328f0faeae131c9e4e190855151e2e87ef8d5b",
+  "source_ledger_blob_sha_at_manifest_creation": "321c51652d347eea1d8d753a7dbceaf6235809df",
+  "frozen_app_version": "0.9.0",
+  "production_models": {
+    "6/42": "K28-SMOOTH-OD1-REP2 v1",
+    "6/49": "K22-ENSEMBLE-OD075-REP2 v1"
+  },
+  "crowd_snapshot": {
+    "draw_no": 62,
+    "date": "2026-08-09"
+  },
+  "actual_money_spent_eur": 0,
+  "expected_variants": {
+    "6/42": 6,
+    "6/49": 4,
+    "total": 10
+  },
+  "pools": {
+    "6/42": [
+      38,
+      20,
+      1,
+      30,
+      26,
+      12,
+      24,
+      5,
+      18,
+      4,
+      15,
+      7,
+      25,
+      14,
+      9,
+      37,
+      23,
+      40,
+      16,
+      2,
+      3,
+      21,
+      22,
+      33,
+      36,
+      41,
+      42,
+      19
+    ],
+    "6/49": [
+      38,
+      9,
+      8,
+      20,
+      16,
+      35,
+      17,
+      30,
+      48,
+      33,
+      13,
+      24,
+      26,
+      37,
+      27,
+      47,
+      39,
+      34,
+      2,
+      43,
+      19,
+      1
+    ]
+  },
+  "shadow_ids": [
+    "6131a9d121df5d05c5ca",
+    "7881c0b7fa6c89ea8ec0",
+    "87909d4015a7728b2e05",
+    "88b0f46f2b392e10482d",
+    "92f2982345454ab00a10",
+    "af61b7231baa872e5d07",
+    "ba254aabac424a9cfa43",
+    "ccbab62868d4c45e9049",
+    "dde2ab3eca6b2cad6339",
+    "ed04224013a039b607b9"
+  ],
+  "fingerprint": {
+    "algorithm": "SHA-256",
+    "value": "a4d723b9772621a14dc8a52152d56f5aaaf652c6539d939b334f65246b7d6293",
+    "scope": "All 10 draw-76 frozen rows, sorted by shadow_id; immutable fields include identity, target, label/mode/strength, model/app versions, pool, repeat additions, exact tickets, notional stake, crowd snapshot, created_at, and actual money spent.",
+    "canonicalization": "Pipe-delimited fields per row; pool/repeat additions comma-delimited; tickets comma-delimited with semicolon between tickets; strength fixed to 4 decimals; stake/spend fixed to 2 decimals; rows joined with LF."
+  },
+  "note": "Future shadow batches may append to data/shadow_experiments.jsonl without changing this batch fingerprint. Any mutation to draw-76 frozen experiment fields will change the fingerprint."
+}
