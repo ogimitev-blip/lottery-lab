@@ -27,6 +27,7 @@ st.page_link('pages/9_History_Depth.py',label='History Depth Lab — test older-
 st.page_link('pages/10_Research_Backtests.py',label='Research Backtests — modes, anti-crowd and history-depth tests',icon='🧪')
 st.page_link('pages/11_Crowd_Strength_Lab.py',label='Crowd Strength Lab — constrained 0–30% anti-crowd tests',icon='🎚️')
 st.page_link('pages/12_Payout_Backtests.py',label='Payout Backtests — stake, winnings, ROI and sharing effects',icon='💶')
+st.page_link('pages/13_Shadow_Experiments.py',label='Shadow Experiments — frozen no-cost prospective comparisons',icon='👤')
 
 issues=[]
 for g in ['6/42','6/49']:
