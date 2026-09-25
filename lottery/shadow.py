@@ -437,3 +437,38 @@ def shadow_cycle_health(scored_rows=None):
             "cycle_status":status,
         })
     return pd.DataFrame(out)
+
+
+def shadow_batch_fingerprint(target_draw_no,rows=None):
+    """Stable SHA-256 over immutable frozen fields for one target draw."""
+    rows=read_shadow_rows() if rows is None else rows
+    batch=sorted(
+        [r for r in rows if int(r.get("target_draw_no",-1))==int(target_draw_no)],
+        key=lambda r:str(r.get("shadow_id","")),
+    )
+    parts=[]
+    for r in batch:
+        tickets=";".join(",".join(str(int(x)) for x in t) for t in r.get("tickets",[]))
+        pool=",".join(str(int(x)) for x in r.get("pool",[]))
+        additions=",".join(str(int(x)) for x in r.get("repeat_additions",[]))
+        parts.append("|".join([
+            str(r.get("shadow_id","")),
+            str(r.get("game","")),
+            str(int(r.get("target_draw_no",-1))),
+            str(r.get("target_date","")),
+            str(r.get("label","")),
+            str(r.get("mode_id","")),
+            f'{float(r.get("crowd_strength",0.0)):.4f}',
+            str(r.get("model_version","")),
+            str(r.get("app_version","")),
+            pool,
+            additions,
+            tickets,
+            f'{float(r.get("notional_stake_eur",0.0)):.2f}',
+            "" if r.get("crowd_snapshot_draw") is None else str(int(r.get("crowd_snapshot_draw"))),
+            "" if r.get("crowd_snapshot_date") is None else str(r.get("crowd_snapshot_date")),
+            str(r.get("created_at","")),
+            f'{float(r.get("actual_money_spent_eur",0.0)):.2f}',
+        ]))
+    payload="\n".join(parts)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest(),len(batch)
