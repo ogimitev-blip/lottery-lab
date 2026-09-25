@@ -109,6 +109,20 @@ def append_shadow_batch(game,target,draws):
         write_shadow_rows(rows)
     return new
 
+def outcome_attribution(pool_hits,best_ticket_hits):
+    """Decompose the six winning numbers into selection and conversion loss."""
+    pool_hits=max(0,min(6,int(pool_hits)))
+    best_ticket_hits=max(0,min(pool_hits,int(best_ticket_hits)))
+    selection_misses=6-pool_hits
+    conversion_misses=pool_hits-best_ticket_hits
+    capture_pct=None if pool_hits==0 else 100.0*best_ticket_hits/pool_hits
+    return {
+        "selection_misses":selection_misses,
+        "conversion_misses":conversion_misses,
+        "conversion_capture_pct":capture_pct,
+        "full_pool_capture":bool(pool_hits>0 and best_ticket_hits==pool_hits),
+    }
+
 def score_shadow(row):
     game=row["game"]
     df=load_draws_df(game)
@@ -133,12 +147,16 @@ def score_shadow(row):
                 payout+=float(val)
 
     stake=float(row["notional_stake_eur"])
+    pool_hits=len(set(map(int,row["pool"])).intersection(actual))
+    best_ticket_hits=max(hits) if hits else 0
+    attribution=outcome_attribution(pool_hits,best_ticket_hits)
     return {
         **row,
         "status":"scored",
         "actual":sorted(actual),
-        "pool_hits":len(set(map(int,row["pool"])).intersection(actual)),
-        "best_ticket_hits":max(hits) if hits else 0,
+        "pool_hits":pool_hits,
+        "best_ticket_hits":best_ticket_hits,
+        **attribution,
         "winning_lines_3plus":sum(1 for h in hits if h>=3),
         "notional_payout_eur":payout,
         "notional_net_eur":None if payout is None else payout-stake,
@@ -358,3 +376,64 @@ def shadow_research_scoreboard(scored_rows=None):
     return pd.DataFrame(out).sort_values(
         ["game","mode_id","crowd_strength"]
     ).reset_index(drop=True)
+
+
+def shadow_cycle_health(scored_rows=None):
+    """Report whether each game's next complete prospective batch is frozen in time."""
+    rows=score_all_shadows() if scored_rows is None else scored_rows
+    if not rows:
+        return pd.DataFrame()
+    df=pd.DataFrame(rows)
+    out=[]
+    for game in sorted(df.game.dropna().unique()):
+        g=df[df.game==game].copy()
+        scored=g[g.status=="scored"] if "status" in g.columns else pd.DataFrame()
+        pending=g[g.status=="pending"] if "status" in g.columns else pd.DataFrame()
+        latest_scored=int(pd.to_numeric(scored.target_draw_no,errors="coerce").max()) if len(scored) else None
+
+        if latest_scored is not None:
+            pending=pending[pd.to_numeric(pending.target_draw_no,errors="coerce")>latest_scored]
+        if pending.empty:
+            out.append({
+                "game":game,
+                "latest_scored_draw":latest_scored,
+                "next_shadow_draw":None,
+                "target_date":None,
+                "frozen_variants":0,
+                "expected_variants":sum(1 for x in SHADOW_CONFIG if x["game"]==game),
+                "freeze_before_target":False,
+                "cycle_status":"NO_FUTURE_BATCH",
+            })
+            continue
+
+        next_draw=int(pd.to_numeric(pending.target_draw_no,errors="coerce").min())
+        batch=pending[pd.to_numeric(pending.target_draw_no,errors="coerce")==next_draw].copy()
+        expected=sum(1 for x in SHADOW_CONFIG if x["game"]==game)
+        frozen=int(batch.shadow_id.nunique()) if "shadow_id" in batch.columns else len(batch)
+        target_date=str(batch.target_date.iloc[0]) if "target_date" in batch.columns and len(batch) else None
+
+        created=pd.to_datetime(batch.created_at,errors="coerce",utc=True) if "created_at" in batch.columns else pd.Series(dtype="datetime64[ns, UTC]")
+        target=pd.to_datetime(target_date,errors="coerce",utc=True) if target_date else pd.NaT
+        before=False
+        if len(created) and created.notna().all() and pd.notna(target):
+            before=bool((created < target).all())
+
+        complete=frozen==expected
+        if complete and before:
+            status="READY"
+        elif not complete:
+            status="INCOMPLETE_BATCH"
+        else:
+            status="LATE_FREEZE"
+
+        out.append({
+            "game":game,
+            "latest_scored_draw":latest_scored,
+            "next_shadow_draw":next_draw,
+            "target_date":target_date,
+            "frozen_variants":frozen,
+            "expected_variants":expected,
+            "freeze_before_target":before,
+            "cycle_status":status,
+        })
+    return pd.DataFrame(out)
