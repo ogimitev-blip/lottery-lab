@@ -16,6 +16,7 @@ Streamlit control panel for the Bulgarian Toto 2 6/42 and 6/49 research workflow
 - Frequency grid, gaps, rolling frequency and pair co-occurrence.
 - Leakage-free 6/42 backtesting.
 - Prospective play ledger: freeze an exact play before the result, then score it later.
+- Prospective shadow promotion gate: paired baseline-vs-anti-crowd evidence accumulates forward-only; <30 draws is observation-only, 30–49 interim review, 50+ required before promotion review can even be considered.
 - Mode comparison screen.
 - Data-quality checks.
 - Crowd / sharing-risk dashboard using BST played-number counts and unique-combination coverage.
