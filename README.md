@@ -18,6 +18,9 @@ Streamlit control panel for the Bulgarian Toto 2 6/42 and 6/49 research workflow
 - Prospective play ledger: freeze an exact play before the result, then score it later.
 - Mode comparison screen.
 - Data-quality checks.
+- Crowd / sharing-risk dashboard using BST played-number counts and unique-combination coverage.
+- Experimental anti-crowd conversion that leaves selection and wheel incidence structure unchanged.
+- History Depth Lab with a separate 2020–2023 research archive; older draws are not fed into production unless they pass robustness testing.
 
 ## Official result syncing
 
