@@ -10,11 +10,13 @@ from lottery.research_backtests import (
     backtest_crowd_layer,summarize_crowd_backtest,
 )
 from lottery.historylab import compare_history_depth,summarize_depth
+from lottery.crowd import latest_crowd_snapshot
+from lottery.jackpot_crowd_backtest import historical_equalization_backtest,theoretical_equalization
 
 setup_page('Research Backtests · Lottery Lab','🧪')
 hero('Research Backtests','Leakage-free tests for ticket modes, the anti-crowd layer, and deeper history. Research results do not automatically change production.')
 
-tab1,tab2,tab3=st.tabs(['Mode backtest','Anti-crowd backtest','History depth'])
+tab1,tab2,tab3,tab4=st.tabs(['Mode backtest','Anti-crowd backtest','History depth','Jackpot equalization'])
 
 with tab1:
     game=st.segmented_control('Game',['6/42','6/49'],default='6/49',key='bt_game')
@@ -85,3 +87,58 @@ with tab3:
     st.warning('Older-history results remain research-only until they outperform robustly across multiple windows; they are not silently fed into production.')
 
 caveat()
+
+
+with tab4:
+    game=st.segmented_control('Game',['6/42','6/49'],default='6/49',key='jackpot_game')
+    draws=get_draws(game)
+    crowd=latest_crowd_snapshot(game)
+    if crowd.empty:
+        st.info('No complete BST played-number snapshot available.')
+    else:
+        bt,s=historical_equalization_backtest(game,draws,crowd)
+        t=theoretical_equalization(game,crowd)
+
+        st.caption(
+            'Assumption: each number has a fixed crowd-preference score across all historical draws. '
+            'The scores are calibrated to the BST played-number marginals using a maximum-entropy fixed-size combination model. '
+            'Ticket count is held constant at the BST snapshot total. Equalized means all number-preference scores are identical.'
+        )
+
+        m=st.columns(6)
+        m[0].metric('Assumed tickets / draw',f"{s['ticket_count_assumed']:,.0f}")
+        m[1].metric('Historical draws',s['draws'])
+        m[2].metric('Crowd avg P(jackpot won)',f"{s['historical_crowd_avg_jackpot_probability']:.3%}")
+        m[3].metric('Equalized P(jackpot won)',f"{s['historical_equalized_avg_jackpot_probability']:.3%}")
+        m[4].metric('Historical relative change',f"{s['historical_relative_change']:+.2%}")
+        m[5].metric('Ex-ante relative change',f"{t['relative_change_at_least_one']:+.2%}")
+
+        st.markdown('#### Ex-ante effect across the whole combination space')
+        e=st.columns(4)
+        e[0].metric('Crowd P(at least one)',f"{t['crowd_probability_at_least_one']:.3%}")
+        e[1].metric('Equalized P(at least one)',f"{t['equalized_probability_at_least_one']:.3%}")
+        e[2].metric('Crowd P(multiple winners)',f"{t['crowd_probability_multiple']:.3%}")
+        e[3].metric('Equalized P(multiple winners)',f"{t['equalized_probability_multiple']:.3%}")
+
+        st.info(
+            'The expected number of jackpot-winning tickets is unchanged by equalization. '
+            'Equalization instead reduces clustering/duplicate concentration, shifting probability mass from zero-winner and multi-winner outcomes toward exactly one jackpot-winning ticket.'
+        )
+
+        show=bt.copy()
+        show['crowd_jackpot_probability_pct']=100*show.crowd_jackpot_probability
+        show['equalized_jackpot_probability_pct']=100*show.equalized_jackpot_probability
+        show['ratio']=show.crowd_vs_uniform_combo_ratio
+        st.line_chart(
+            show[['crowd_jackpot_probability_pct','equalized_jackpot_probability_pct']],
+            height=360
+        )
+        with st.expander('Historical winning-combination detail'):
+            st.dataframe(
+                show[['draw_index_newest_first','actual','ratio','crowd_jackpot_probability_pct','equalized_jackpot_probability_pct']],
+                use_container_width=True,hide_index=True,height=500
+            )
+
+        st.warning(
+            'This is a crowd-choice counterfactual, not a draw-prediction model. It ignores exact six-number pattern preferences beyond the individual-number marginals and assumes ticket volume stays fixed.'
+        )
