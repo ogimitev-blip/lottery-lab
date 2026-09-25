@@ -41,3 +41,43 @@ def backtest_constrained_crowd_grid(game,mode_id,draws,crowd_history,latest_draw
         actual=draws[i]
         state=generate_mode(game,mode_id,hist,None)
         base=list(state["tickets"])
+
+        for strength in strengths:
+            strength=float(strength)
+            if strength<=0:
+                tickets=base
+                meta=None
+            else:
+                tickets,_,meta=constrained_anti_crowd_remap(
+                    state["pool"],base,crowd,state["diagnostics"],strength=strength
+                )
+
+            tm=_ticket_metrics(tickets,actual)
+            crowd_scores=score_ticket_frame(tickets,crowd)
+
+            if meta is None:
+                ratio=1.0
+                swaps=0
+            else:
+                base_u=float(meta.attrs.get("base_model_utility",0.0))
+                final_u=float(meta.attrs.get("final_model_utility",base_u))
+                ratio=(final_u/base_u) if abs(base_u)>1e-12 else np.nan
+                swaps=int(meta.attrs.get("swaps",0))
+
+            rows.append({
+                "target_draw":draw_no,
+                "snapshot_draw":snap_no,
+                "snapshot_date":snap_date,
+                "strength":strength,
+                "pool_hits":len(set(state["pool"]).intersection(set(actual))),
+                "best_hits":tm["best_hits"],
+                "n3plus":tm["n3plus"],
+                "n4plus":tm["n4plus"],
+                "n5plus":tm["n5plus"],
+                "n6":tm["n6"],
+                "crowd_index":float(crowd_scores.crowd_index.mean()),
+                "swaps":swaps,
+                "model_utility_ratio":ratio,
+            })
+
+    return pd.DataFrame(rows)
