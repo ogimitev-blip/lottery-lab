@@ -81,7 +81,7 @@ for game in ["6/42","6/49"]:
     print("HISTORY_DEPTH",game,sm)
 
 
-from lottery.shadow import summarize_shadow_pairs
+from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard
 
 synthetic=[]
 for draw_no in range(1,51):
@@ -101,3 +101,14 @@ assert int(gate.iloc[0].prospective_draws)==50
 assert gate.iloc[0].sample_gate=="ELIGIBLE_FOR_PROMOTION_REVIEW"
 assert round(float(gate.iloc[0].avg_crowd_reduction_pct),6)==5.0
 print("SHADOW_GATE_OK")
+
+score=shadow_research_scoreboard(synthetic)
+assert len(score)==1
+row=score.iloc[0]
+assert int(row.prospective_draws)==50
+assert row.evidence_maturity=="MATURE_REVIEW_SAMPLE"
+assert int(row.best_hit_wins)==0 and int(row.best_hit_losses)==0 and int(row.best_hit_ties)==50
+assert round(float(row.nondegradation_rate_pct),6)==100.0
+assert round(float(row.avg_crowd_reduction_pct),6)==5.0
+assert int(row.p3_net)==0
+print("SHADOW_SCOREBOARD_OK")
