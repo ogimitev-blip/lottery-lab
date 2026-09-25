@@ -1,0 +1,93 @@
+{
+  "run_date": "2026-09-25",
+  "task": "6/49 €499.50 / 555-line jackpot-versus-hedge frontier",
+  "methodology": {
+    "walk_forward_targets": 150,
+    "min_history": 100,
+    "latest_window": 50,
+    "stability_window": 150,
+    "line_price_eur": 0.9,
+    "spend_eur": 499.5,
+    "seed_robustness": 8,
+    "note": "Production K22 selection model used walk-forward. Conversion layouts were generated without target outcomes. Historical research is not an untouched validation set for the already-developed selection model."
+  },
+  "exact_theory": {
+    "unique_lines": 555,
+    "unconditional_jackpot_probability": "555 / C(49,6) = 0.0039689%",
+    "unconditional_jackpot_odds": "1 in 25,196",
+    "conditional_if_all_6_in_K22": {
+      "300_170_85": "300 / C(22,6) = 0.4021% (1 in 248.71)",
+      "400_100_55": "400 / C(22,6) = 0.5361% (1 in 186.53)",
+      "425_85_45": "425 / C(22,6) = 0.5696% (1 in 175.56)",
+      "450_70_35": "450 / C(22,6) = 0.6031% (1 in 165.81)",
+      "475_55_25": "475 / C(22,6) = 0.6366% (1 in 157.08)",
+      "K22_555": "555 / C(22,6) = 0.7438% (1 in 134.44)"
+    }
+  },
+  "seed_robustness_mean": {
+    "latest_50": {
+      "300_170_85": {
+        "p3plus": 0.885,
+        "p4plus": 0.335,
+        "best_mean": 3.2325
+      },
+      "400_100_55": {
+        "p3plus": 0.8125,
+        "p4plus": 0.3325,
+        "best_mean": 3.17
+      },
+      "425_85_45": {
+        "p3plus": 0.8,
+        "p4plus": 0.295,
+        "best_mean": 3.105
+      },
+      "450_70_35": {
+        "p3plus": 0.7525,
+        "p4plus": 0.2825,
+        "best_mean": 3.05
+      },
+      "475_55_25": {
+        "p3plus": 0.7175,
+        "p4plus": 0.2775,
+        "best_mean": 3.0025
+      }
+    },
+    "full_150": {
+      "300_170_85": {
+        "p3plus": 0.9008333333,
+        "p4plus": 0.33,
+        "best_mean": 3.2466666667
+      },
+      "400_100_55": {
+        "p3plus": 0.8383333333,
+        "p4plus": 0.3191666667,
+        "best_mean": 3.1775
+      },
+      "425_85_45": {
+        "p3plus": 0.8208333333,
+        "p4plus": 0.29,
+        "best_mean": 3.1316666667
+      },
+      "450_70_35": {
+        "p3plus": 0.7883333333,
+        "p4plus": 0.2958333333,
+        "best_mean": 3.0983333333
+      },
+      "475_55_25": {
+        "p3plus": 0.765,
+        "p4plus": 0.2775,
+        "best_mean": 3.055
+      }
+    }
+  },
+  "observed_jackpots_over_150": {
+    "all_tested_portfolios": 0,
+    "note": "No tested 555-line architecture produced an actual historical 6/6 ticket in the 150 target draws."
+  },
+  "interpretation": {
+    "balanced_candidate": "300/170/85",
+    "jackpot_tilt_candidate": "400/100/55",
+    "reason": "400/100/55 increases conditional jackpot conversion when K22 contains all six by one third versus 300/170/85 (0.5361% vs 0.4021%), while eight-seed mean P(4+) was nearly unchanged in the latest 50 (33.25% vs 33.5%) and only modestly lower over 150 draws (31.92% vs 33.0%). More aggressive pure-K22 allocations showed clearer degradation in 3+/4+ robustness.",
+    "caution": "All 555 distinct-line portfolios have the same unconditional lottery jackpot probability absent genuine predictive information in the selection model. The conditional figures describe conversion efficiency after a K22 pool-selection event, not a change in the lottery's base odds."
+  }
+}
