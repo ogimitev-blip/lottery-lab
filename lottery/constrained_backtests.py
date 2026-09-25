@@ -81,3 +81,28 @@ def backtest_constrained_crowd_grid(game,mode_id,draws,crowd_history,latest_draw
             })
 
     return pd.DataFrame(rows)
+
+
+def summarize_constrained_grid(bt):
+    if bt.empty:
+        return pd.DataFrame()
+
+    rows=[]
+    for strength,g in bt.groupby("strength"):
+        rows.append({
+            "strength":float(strength),
+            "draws":len(g),
+            "avg_crowd_index":float(g.crowd_index.mean()),
+            "mean_best_hits":float(g.best_hits.mean()),
+            "p3plus":float((g.best_hits>=3).mean()),
+            "p4plus":float((g.best_hits>=4).mean()),
+            "p5plus":float((g.best_hits>=5).mean()),
+            "p6":float((g.best_hits==6).mean()),
+            "avg_swaps":float(g.swaps.mean()),
+            "avg_model_utility_ratio":float(g.model_utility_ratio.mean()),
+        })
+
+    out=pd.DataFrame(rows).sort_values("strength").reset_index(drop=True)
+    base=float(out.iloc[0].avg_crowd_index)
+    out["crowd_reduction_pct"]=1-out.avg_crowd_index/base
+    return out
