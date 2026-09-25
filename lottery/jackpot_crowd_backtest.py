@@ -139,3 +139,59 @@ def theoretical_equalization(game,crowd,max_order=30):
         "crowd_probability_multiple":hit-one,
         "equalized_probability_multiple":equal_hit-equal_one,
     }
+
+
+def historical_lower_tier_equalization(game,draws,crowd,tiers=(3,4,5)):
+    n_numbers=42 if game=="6/42" else 49
+    total_combos=math.comb(n_numbers,6)
+    weights,m,_=calibrate_fixed_number_preferences(crowd,6)
+    z=_esym(weights,6)[6]
+
+    def tier_prob(actual,h):
+        aset=set(map(int,actual))
+        win=[weights[n-1] for n in range(1,n_numbers+1) if n in aset]
+        out=[weights[n-1] for n in range(1,n_numbers+1) if n not in aset]
+        return _esym(win,h)[h]*_esym(out,6-h)[6-h]/z
+
+    rows=[]
+    summary=[]
+    for h in tiers:
+        uniform_p=(
+            math.comb(6,h)*
+            math.comb(n_numbers-6,6-h)/
+            total_combos
+        )
+        equalized_count=m*uniform_p
+        vals=[]
+        for i,d in enumerate(draws):
+            crowd_count=m*tier_prob(d,h)
+            vals.append(crowd_count)
+            rows.append({
+                "draw_index_newest_first":i,
+                "tier":h,
+                "actual":tuple(sorted(map(int,d))),
+                "crowd_expected_winners":crowd_count,
+                "equalized_expected_winners":equalized_count,
+                "crowd_vs_equalized_ratio":crowd_count/equalized_count,
+            })
+
+        arr=np.asarray(vals,dtype=float)
+        crowd_mean=float(arr.mean())
+        summary.append({
+            "tier":h,
+            "ticket_count_assumed":m,
+            "uniform_ticket_probability":uniform_p,
+            "equalized_expected_winners_per_draw":equalized_count,
+            "historical_crowd_expected_winners_per_draw":crowd_mean,
+            "equalization_change_winner_count":equalized_count/crowd_mean-1,
+            "implied_equalization_change_payout_per_winner":crowd_mean/equalized_count-1,
+            "crowd_sd":float(arr.std()),
+            "crowd_cv":float(arr.std()/crowd_mean),
+            "crowd_p10":float(np.quantile(arr,0.10)),
+            "crowd_median":float(np.quantile(arr,0.50)),
+            "crowd_p90":float(np.quantile(arr,0.90)),
+            "crowd_min":float(arr.min()),
+            "crowd_max":float(arr.max()),
+        })
+
+    return pd.DataFrame(rows),pd.DataFrame(summary)
