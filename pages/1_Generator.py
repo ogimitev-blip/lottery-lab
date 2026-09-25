@@ -6,7 +6,7 @@ from lottery.data import get_draws,next_draw_info,validate_history
 from lottery.modes import modes_for_game,generate_mode
 from lottery.wheels import ticket_frame,line_price
 from lottery.ledger import make_play,append_session
-from lottery.crowd import latest_crowd_snapshot,score_ticket_frame,anti_crowd_remap,snapshot_summary
+from lottery.crowd import latest_crowd_snapshot,score_ticket_frame,anti_crowd_remap,constrained_anti_crowd_remap,snapshot_summary
 from lottery.version import APP_VERSION,MODEL_642,MODEL_649,WHEEL_642,WHEEL_649
 
 setup_page('Generator · Lottery Lab','🎟️')
