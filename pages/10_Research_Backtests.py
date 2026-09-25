@@ -11,7 +11,7 @@ from lottery.research_backtests import (
 )
 from lottery.historylab import compare_history_depth,summarize_depth
 from lottery.crowd import latest_crowd_snapshot
-from lottery.jackpot_crowd_backtest import historical_equalization_backtest,theoretical_equalization
+from lottery.jackpot_crowd_backtest import historical_equalization_backtest,theoretical_equalization,historical_lower_tier_equalization
 
 setup_page('Research Backtests · Lottery Lab','🧪')
 hero('Research Backtests','Leakage-free tests for ticket modes, the anti-crowd layer, and deeper history. Research results do not automatically change production.')
@@ -123,6 +123,36 @@ with tab4:
         st.info(
             'The expected number of jackpot-winning tickets is unchanged by equalization. '
             'Equalization instead reduces clustering/duplicate concentration, shifting probability mass from zero-winner and multi-winner outcomes toward exactly one jackpot-winning ticket.'
+        )
+
+        st.markdown('#### 3 / 4 / 5-match prize groups under the same assumption')
+        tier_bt,tier_summary=historical_lower_tier_equalization(game,draws,crowd)
+        tier_show=tier_summary.copy()
+        tier_show['winner_count_change_pct']=100*tier_show.equalization_change_winner_count
+        tier_show['implied_payout_change_pct']=100*tier_show.implied_equalization_change_payout_per_winner
+        tier_show['crowd_cv_pct']=100*tier_show.crowd_cv
+        st.dataframe(
+            tier_show[[
+                'tier','historical_crowd_expected_winners_per_draw','equalized_expected_winners_per_draw',
+                'winner_count_change_pct','implied_payout_change_pct','crowd_cv_pct',
+                'crowd_p10','crowd_median','crowd_p90'
+            ]].rename(columns={
+                'tier':'Guessed',
+                'historical_crowd_expected_winners_per_draw':'Crowd expected winners',
+                'equalized_expected_winners_per_draw':'Equalized expected winners',
+                'winner_count_change_pct':'Winner-count change %',
+                'implied_payout_change_pct':'Implied payout / winner change %',
+                'crowd_cv_pct':'Crowd winner-count CV %',
+                'crowd_p10':'Crowd p10',
+                'crowd_median':'Crowd median',
+                'crowd_p90':'Crowd p90',
+            }),
+            use_container_width=True,hide_index=True
+        )
+        st.caption(
+            'The payout column assumes the amount allocated to that prize group is unchanged. '
+            'Then payout per winning ticket moves inversely with the number of winners. '
+            'Ex ante, equalizing player preferences does not change the expected number of 3/4/5-match tickets; it mainly reduces draw-to-draw crowd clustering.'
         )
 
         show=bt.copy()
