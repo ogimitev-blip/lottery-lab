@@ -13,6 +13,7 @@ class DummyState(dict):
 
 data.st.session_state=DummyState()
 
+# Workflow trigger marker: freeze immediately after draw-data updates.
 created=0
 for game in ("6/42","6/49"):
     target=next_draw_info(game)
