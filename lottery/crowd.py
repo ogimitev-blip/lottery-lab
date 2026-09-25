@@ -96,3 +96,97 @@ def snapshot_summary(crowd):
         "mean_played":float(crowd.played_count.mean()),
         "birthday_ratio":float(lo/hi) if pd.notna(hi) and hi else np.nan,
     }
+
+
+def constrained_anti_crowd_remap(pool,tickets,crowd,diagnostics,strength=0.10):
+    """Constrained anti-crowd relabeling.
+
+    Strength is the maximum allowed model-score gap, expressed as a fraction
+    of the selected pool's score range, for assigning a number to a ticket
+    position. A strength of 0.10 permits only near-score substitutions; 0.30
+    gives the crowd layer more freedom. The selected pool, line count, and
+    incidence structure remain unchanged.
+    """
+    strength=float(strength)
+    if strength<=0 or crowd is None or crowd.empty:
+        return list(tickets),{int(n):int(n) for n in pool},None
+
+    pset=[int(n) for n in pool]
+    exposure=Counter(int(n) for t in tickets for n in t)
+    pop=dict(zip(crowd.number.astype(int),crowd.played_count.astype(float)))
+    rel=dict(zip(crowd.number.astype(int),crowd.played_vs_mean.astype(float)))
+    score_df=diagnostics.set_index("number")
+    score={n:float(score_df.loc[n,"score"]) for n in pset}
+
+    vals=np.array([score[n] for n in pset],dtype=float)
+    score_range=float(vals.max()-vals.min())
+    threshold=max(0.0,strength*score_range)
+    mapping={n:n for n in pset}
+
+    def lp(n):
+        return math.log(max(float(pop.get(int(n),1.0)),1e-12))
+
+    def crowd_obj(mp):
+        return sum(exposure.get(label,0)*lp(num) for label,num in mp.items())
+
+    def model_utility(mp):
+        return sum(exposure.get(label,0)*score[num] for label,num in mp.items())
+
+    base_model=model_utility(mapping)
+    swaps=0
+    while True:
+        best=None
+        best_key=None
+        labels=list(pset)
+        for ia in range(len(labels)):
+            a=labels[ia]; na=mapping[a]
+            for ib in range(ia+1,len(labels)):
+                b=labels[ib]; nb=mapping[b]
+                # Every assigned number must remain close to the model score of
+                # the position it is replacing. This prevents crowd drift.
+                if abs(score[nb]-score[a])>threshold+1e-12:
+                    continue
+                if abs(score[na]-score[b])>threshold+1e-12:
+                    continue
+                before=exposure.get(a,0)*lp(na)+exposure.get(b,0)*lp(nb)
+                after=exposure.get(a,0)*lp(nb)+exposure.get(b,0)*lp(na)
+                delta=after-before
+                if delta>=-1e-12:
+                    continue
+                old_u=exposure.get(a,0)*score[na]+exposure.get(b,0)*score[nb]
+                new_u=exposure.get(a,0)*score[nb]+exposure.get(b,0)*score[na]
+                utility_loss=old_u-new_u
+                key=(delta,utility_loss,a,b)
+                if best_key is None or key<best_key:
+                    best_key=key; best=(a,b)
+        if best is None:
+            break
+        a,b=best
+        mapping[a],mapping[b]=mapping[b],mapping[a]
+        swaps+=1
+        if swaps>1000:
+            raise RuntimeError("Constrained anti-crowd optimizer did not converge")
+
+    remapped=[tuple(sorted(mapping.get(int(n),int(n)) for n in t)) for t in tickets]
+    if len(set(remapped))!=len(remapped):
+        raise RuntimeError("Constrained anti-crowd relabeling created duplicate tickets")
+
+    meta=pd.DataFrame({
+        "original_position":pset,
+        "ticket_exposure":[exposure.get(n,0) for n in pset],
+        "original_number":pset,
+        "assigned_number":[mapping[n] for n in pset],
+        "position_model_score":[score[n] for n in pset],
+        "assigned_model_score":[score[mapping[n]] for n in pset],
+        "score_gap":[abs(score[mapping[n]]-score[n]) for n in pset],
+        "played_count":[pop.get(mapping[n],np.nan) for n in pset],
+        "played_vs_mean":[rel.get(mapping[n],np.nan) for n in pset],
+    })
+    meta.attrs["strength"]=strength
+    meta.attrs["score_threshold"]=threshold
+    meta.attrs["swaps"]=swaps
+    meta.attrs["base_model_utility"]=base_model
+    meta.attrs["final_model_utility"]=model_utility(mapping)
+    meta.attrs["base_crowd_objective"]=crowd_obj({n:n for n in pset})
+    meta.attrs["final_crowd_objective"]=crowd_obj(mapping)
+    return remapped,mapping,meta
