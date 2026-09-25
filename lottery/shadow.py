@@ -472,3 +472,29 @@ def shadow_batch_fingerprint(target_draw_no,rows=None):
         ]))
     payload="\n".join(parts)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest(),len(batch)
+
+
+def shadow_manifest_status(target_draw_no):
+    p=ROOT/"data"/f"shadow_manifest_draw{int(target_draw_no)}.json"
+    if not p.exists():
+        return {
+            "target_draw_no":int(target_draw_no),
+            "status":"NO_MANIFEST",
+            "expected_fingerprint":None,
+            "actual_fingerprint":None,
+            "rows":0,
+        }
+    manifest=json.loads(p.read_text())
+    expected=manifest.get("fingerprint",{}).get("value")
+    actual,count=shadow_batch_fingerprint(target_draw_no)
+    expected_count=int(manifest.get("expected_variants",{}).get("total",0) or 0)
+    ok=bool(expected and actual==expected and (expected_count==0 or count==expected_count))
+    return {
+        "target_draw_no":int(target_draw_no),
+        "status":"VERIFIED" if ok else "MISMATCH",
+        "expected_fingerprint":expected,
+        "actual_fingerprint":actual,
+        "rows":count,
+        "expected_rows":expected_count,
+        "source_freeze_commit":manifest.get("source_freeze_commit"),
+    }
