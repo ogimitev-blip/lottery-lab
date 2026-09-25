@@ -79,3 +79,25 @@ for game in ["6/42","6/49"]:
     bt=compare_history_depth(game,current,archive,max_targets=150,min_history=50)
     sm=summarize_depth(bt)
     print("HISTORY_DEPTH",game,sm)
+
+
+from lottery.shadow import summarize_shadow_pairs
+
+synthetic=[]
+for draw_no in range(1,51):
+    synthetic.append({
+        "status":"scored","game":"6/49","target_draw_no":draw_no,"mode_id":"649_k22_6",
+        "label":"K22-6 base","crowd_strength":0.0,"best_ticket_hits":3,
+        "winning_lines_3plus":1,"notional_payout_eur":10.0,"avg_crowd_index":100.0,
+    })
+    synthetic.append({
+        "status":"scored","game":"6/49","target_draw_no":draw_no,"mode_id":"649_k22_6",
+        "label":"K22-6 crowd 30%","crowd_strength":0.30,"best_ticket_hits":3,
+        "winning_lines_3plus":1,"notional_payout_eur":10.0,"avg_crowd_index":95.0,
+    })
+gate=summarize_shadow_pairs(synthetic)
+assert len(gate)==1
+assert int(gate.iloc[0].prospective_draws)==50
+assert gate.iloc[0].sample_gate=="ELIGIBLE_FOR_PROMOTION_REVIEW"
+assert round(float(gate.iloc[0].avg_crowd_reduction_pct),6)==5.0
+print("SHADOW_GATE_OK")
