@@ -25,6 +25,7 @@ st.page_link('pages/7_Mode_Comparison.py',label='Mode Comparison — cost and ja
 st.page_link('pages/8_Crowd_Stats.py',label='Crowd & Sharing Risk — BST player-choice statistics',icon='👥')
 st.page_link('pages/9_History_Depth.py',label='History Depth Lab — test older-draw extensions before promotion',icon='🕰️')
 st.page_link('pages/10_Research_Backtests.py',label='Research Backtests — modes, anti-crowd and history-depth tests',icon='🧪')
+st.page_link('pages/11_Crowd_Strength_Lab.py',label='Crowd Strength Lab — constrained 0–30% anti-crowd tests',icon='🎚️')
 
 issues=[]
 for g in ['6/42','6/49']:
