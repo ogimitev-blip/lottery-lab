@@ -1,0 +1,37 @@
+name: Freeze Shadow Experiments
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/draws_642.csv"
+      - "data/draws_649.csv"
+      - "scripts/generate_shadow_experiments.py"
+  schedule:
+    - cron: "15 22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python scripts/generate_shadow_experiments.py
+      - name: Commit newly frozen shadow rows
+        run: |
+          if git diff --quiet -- data/shadow_experiments.jsonl; then
+            echo "No new future shadow batch."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/shadow_experiments.jsonl
+          git commit -m "Freeze prospective lottery shadow batch"
+          git push
