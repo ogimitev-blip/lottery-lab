@@ -212,6 +212,43 @@ def _conditional(df):
     return out
 
 
+
+def _sign_test_p(wins, losses):
+    n = int(wins) + int(losses)
+    if n == 0:
+        return 1.0
+    k = min(int(wins), int(losses))
+    tail = sum(math.comb(n, i) for i in range(k + 1)) / (2 ** n)
+    return min(1.0, 2.0 * tail)
+
+
+def _pairwise(bt, a, b, lo, hi):
+    aa = bt[(bt.portfolio == a) & (bt.target_index_newest_first >= lo) & (bt.target_index_newest_first < hi)]
+    bb = bt[(bt.portfolio == b) & (bt.target_index_newest_first >= lo) & (bt.target_index_newest_first < hi)]
+    m = aa.merge(bb, on="target_index_newest_first", suffixes=("_a", "_b"))
+    d = m.best_hits_a - m.best_hits_b
+    wins = int((d > 0).sum())
+    losses = int((d < 0).sum())
+    ties = int((d == 0).sum())
+    a4 = (m.best_hits_a >= 4).astype(int)
+    b4 = (m.best_hits_b >= 4).astype(int)
+    a5 = (m.best_hits_a >= 5).astype(int)
+    b5 = (m.best_hits_b >= 5).astype(int)
+    return {
+        "draws": int(len(m)),
+        "a": a,
+        "b": b,
+        "best_hit_wins": wins,
+        "best_hit_ties": ties,
+        "best_hit_losses": losses,
+        "mean_best_hit_delta": float(d.mean()),
+        "sign_test_p_two_sided": float(_sign_test_p(wins, losses)),
+        "p4plus_delta_pp": float(100.0 * (a4.mean() - b4.mean())),
+        "p5plus_delta_pp": float(100.0 * (a5.mean() - b5.mean())),
+        "mean_4plus_lines_delta": float((m.n4plus_a - m.n4plus_b).mean()),
+        "mean_5plus_lines_delta": float((m.n5plus_a - m.n5plus_b).mean()),
+    }
+
 def _theory():
     den = math.comb(49, 6)
     probs = {}
@@ -298,6 +335,22 @@ def main():
             "k26_p6": float((x.k26_hits == 6).mean()),
         }
 
+    pairwise = {}
+    comparisons = [
+        ("MIX_300_170_85", "K22_ONLY_555"),
+        ("MIX_200_220_135", "K22_ONLY_555"),
+        ("K26_ONLY_555", "K22_ONLY_555"),
+        ("MIX_300_170_85", "MIX_200_220_135"),
+        ("MIX_300_170_85", "K26_ONLY_555"),
+    ]
+    for w, (lo, hi) in windows.items():
+        if hi <= lo:
+            continue
+        pairwise[w] = {
+            f"{a}_VS_{b}": _pairwise(bt, a, b, lo, hi)
+            for a, b in comparisons
+        }
+
     result = {
         "design": {
             "lines": N_LINES,
@@ -312,6 +365,7 @@ def main():
         "pool_selection": pool_summary,
         "summary": summaries,
         "conditional_on_k22_hits": conditionals,
+        "pairwise": pairwise,
     }
 
     print("BACKTEST_649_500_JSON_BEGIN")
