@@ -81,7 +81,7 @@ for game in ["6/42","6/49"]:
     print("HISTORY_DEPTH",game,sm)
 
 
-from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard
+from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard,outcome_attribution,shadow_cycle_health
 
 synthetic=[]
 for draw_no in range(1,51):
@@ -112,3 +112,25 @@ assert round(float(row.nondegradation_rate_pct),6)==100.0
 assert round(float(row.avg_crowd_reduction_pct),6)==5.0
 assert int(row.p3_net)==0
 print("SHADOW_SCOREBOARD_OK")
+
+
+a=outcome_attribution(5,3)
+assert a["selection_misses"]==1
+assert a["conversion_misses"]==2
+assert round(float(a["conversion_capture_pct"]),6)==60.0
+assert 6==a["selection_misses"]+a["conversion_misses"]+3
+print("SHADOW_ATTRIBUTION_OK")
+
+cycle_rows=[]
+for i in range(4):
+    cycle_rows.append({
+        "status":"pending","game":"6/49","target_draw_no":76,
+        "shadow_id":f"pending-{i}","target_date":"2099-09-27",
+        "created_at":"2099-09-25T08:00:00+00:00",
+    })
+cycle=shadow_cycle_health(cycle_rows)
+assert len(cycle)==1
+assert cycle.iloc[0].cycle_status=="READY"
+assert int(cycle.iloc[0].frozen_variants)==4
+assert bool(cycle.iloc[0].freeze_before_target)
+print("SHADOW_CYCLE_OK")
