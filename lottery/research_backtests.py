@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 from .modes import generate_mode
-from .crowd import anti_crowd_remap,score_ticket_frame
+from .crowd import anti_crowd_remap,constrained_anti_crowd_remap,score_ticket_frame
 
 def _ticket_metrics(tickets,actual):
     aset=set(map(int,actual))
