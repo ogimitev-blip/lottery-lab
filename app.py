@@ -22,6 +22,8 @@ st.page_link('pages/4_Model_Info.py',label='Model Info — exact production rule
 st.page_link('pages/5_Update_Draws.py',label='Draw Database — view, add, correct or delete stored draws',icon='🗃️')
 st.page_link('pages/6_Prospective_Ledger.py',label='Prospective Ledger — freeze plays before the draw',icon='🧾')
 st.page_link('pages/7_Mode_Comparison.py',label='Mode Comparison — cost and jackpot mechanics side by side',icon='⚖️')
+st.page_link('pages/8_Crowd_Stats.py',label='Crowd & Sharing Risk — BST player-choice statistics',icon='👥')
+st.page_link('pages/9_History_Depth.py',label='History Depth Lab — test older-draw extensions before promotion',icon='🕰️')
 
 issues=[]
 for g in ['6/42','6/49']:
