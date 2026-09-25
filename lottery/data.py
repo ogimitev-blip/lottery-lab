@@ -124,3 +124,12 @@ def load_curated_exact_system(system_no):
         "guarantees":[tuple(map(int,g)) for g in spec["guarantees"]],
         "layout":[tuple(map(int,row)) for row in spec["layout"]],
     }
+
+@st.cache_data
+def load_research_archive(game):
+    suffix="642" if game=="6/42" else "649"
+    p=ROOT/"data"/f"research_archive_{suffix}_2020_2023.csv"
+    df=pd.read_csv(p)
+    df=df.sort_values(["year","sequence_in_year"],ascending=[False,False]).reset_index(drop=True)
+    draws=[list(map(int,row)) for row in df[[f"n{i}" for i in range(1,7)]].to_numpy().tolist()]
+    return df,draws
