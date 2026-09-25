@@ -1,0 +1,20 @@
+name: Research Backtest 6/49 500
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/backtest_649_500.py"
+      - ".github/workflows/backtest_649_500.yml"
+  workflow_dispatch:
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python scripts/backtest_649_500.py
