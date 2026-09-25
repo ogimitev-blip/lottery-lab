@@ -26,6 +26,12 @@ A wheel answers: *given that pool, how effectively do the purchased six-number t
 
 At fixed **L distinct six-number tickets**, rearranging the wheel cannot change raw jackpot probability: it remains **L / C(N,6)**. Wheel design mainly changes lower-tier coverage and where coverage is concentrated.
 
+### Crowd / sharing-risk layer
+BST player-choice counts are kept outside the draw-selection model. Lottery Lab uses them only as a prize-sharing proxy. The experimental anti-crowd conversion keeps the selected pool and wheel incidence structure but can relabel number exposure toward less-played selected numbers. This does not change raw draw probabilities.
+
+### Historical-depth research
+The production models remain frozen on the existing history. A separate History Depth Lab appends a 2020–2023 research archive and evaluates the deeper-history variant leakage-free before any possible promotion.
+
 ### Data and prospective testing
 Official BST draw syncing, draw numbers, dates and payout metadata are handled separately from the models. Prospective plays can be frozen before the draw so later scoring cannot benefit from hindsight.
 
