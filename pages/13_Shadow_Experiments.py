@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 from lottery.ui import setup_page,hero,caveat
-from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,shadow_research_scoreboard,shadow_cycle_health,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
+from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,shadow_research_scoreboard,shadow_cycle_health,shadow_manifest_status,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
 
 setup_page('Shadow Experiments · Lottery Lab','👤')
 hero('Prospective Shadow Experiments','Frozen research variants are scored after each draw. Actual money spent is always zero.')
@@ -23,6 +23,22 @@ b.metric('Scored variants',finished)
 c.metric('Pending variants',pending)
 d.metric('Actual money spent','€0.00')
 
+
+st.markdown('### Reproducibility integrity')
+manifest=shadow_manifest_status(76)
+m1,m2,m3=st.columns(3)
+m1.metric('Draw #76 manifest',manifest['status'])
+m2.metric('Frozen rows',f"{manifest.get('rows',0)}/{manifest.get('expected_rows',0)}")
+m3.metric('Source freeze commit',str(manifest.get('source_freeze_commit') or '')[:8] or '—')
+if manifest['status']=='VERIFIED':
+    st.success('Draw #76 frozen experiment matches its stored SHA-256 manifest.')
+elif manifest['status']=='MISMATCH':
+    st.error('Draw #76 frozen experiment no longer matches its stored manifest.')
+else:
+    st.warning('No stored reproducibility manifest was found for draw #76.')
+with st.expander('Draw #76 fingerprint'):
+    st.code(str(manifest.get('actual_fingerprint') or ''))
+    st.caption('The fingerprint covers the frozen pool, repeat additions, exact tickets, mode/strength, versions, crowd snapshot, stake, creation time and zero actual spend.')
 
 st.markdown('### Shadow cycle health')
 cycle=shadow_cycle_health(df.to_dict('records'))
