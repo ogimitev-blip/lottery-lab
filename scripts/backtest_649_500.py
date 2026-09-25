@@ -22,8 +22,14 @@ PROPOSALS = 96
 
 PORTFOLIOS = {
     "K22_ONLY_555": {"kind": "pure", "k": 22},
+    "MIX_500_40_15": {"kind": "mix", "q": (500, 40, 15)},
+    "MIX_475_55_25": {"kind": "mix", "q": (475, 55, 25)},
+    "MIX_450_70_35": {"kind": "mix", "q": (450, 70, 35)},
+    "MIX_425_85_45": {"kind": "mix", "q": (425, 85, 45)},
     "MIX_400_100_55": {"kind": "mix", "q": (400, 100, 55)},
+    "MIX_350_135_70": {"kind": "mix", "q": (350, 135, 70)},
     "MIX_300_170_85": {"kind": "mix", "q": (300, 170, 85)},
+    "MIX_250_195_110": {"kind": "mix", "q": (250, 195, 110)},
     "MIX_200_220_135": {"kind": "mix", "q": (200, 220, 135)},
     "K26_ONLY_555": {"kind": "pure", "k": 26},
 }
@@ -130,6 +136,29 @@ def _greedy_layout(name, spec, seed=20260925):
         raise AssertionError(f"{name}: layout uniqueness failure")
 
     return selected
+
+
+def _jackpot_conversion(name, spec):
+    # Conditional probability that the wheel contains the exact six winners
+    # given that all six are inside the relevant pure pool.
+    if spec["kind"] == "pure":
+        k=int(spec["k"])
+        pure=N_LINES
+        denom=math.comb(k,6)
+        return {
+            "pure_lines":pure,
+            "conditional_jackpot_probability":pure/denom,
+            "conditional_jackpot_odds_1_in":denom/pure,
+            "conditioning_pool":f"K{k}",
+        }
+    pure=int(spec["q"][0])
+    denom=math.comb(22,6)
+    return {
+        "pure_lines":pure,
+        "conditional_jackpot_probability":pure/denom,
+        "conditional_jackpot_odds_1_in":denom/pure if pure else None,
+        "conditioning_pool":"K22",
+    }
 
 
 def _coverage(layout):
@@ -271,6 +300,10 @@ def main():
 
     layouts = {name: _greedy_layout(name, spec) for name, spec in PORTFOLIOS.items()}
     coverage = {name: _coverage(layout) for name, layout in layouts.items()}
+    jackpot_conversion = {
+        name:_jackpot_conversion(name, spec)
+        for name,spec in PORTFOLIOS.items()
+    }
 
     rows = []
     for i in range(limit):
@@ -337,11 +370,19 @@ def main():
 
     pairwise = {}
     comparisons = [
+        ("MIX_500_40_15", "K22_ONLY_555"),
+        ("MIX_475_55_25", "K22_ONLY_555"),
+        ("MIX_450_70_35", "K22_ONLY_555"),
+        ("MIX_425_85_45", "K22_ONLY_555"),
+        ("MIX_400_100_55", "K22_ONLY_555"),
+        ("MIX_350_135_70", "K22_ONLY_555"),
         ("MIX_300_170_85", "K22_ONLY_555"),
+        ("MIX_250_195_110", "K22_ONLY_555"),
         ("MIX_200_220_135", "K22_ONLY_555"),
         ("K26_ONLY_555", "K22_ONLY_555"),
         ("MIX_300_170_85", "MIX_200_220_135"),
-        ("MIX_300_170_85", "K26_ONLY_555"),
+        ("MIX_400_100_55", "MIX_300_170_85"),
+        ("MIX_450_70_35", "MIX_300_170_85"),
     ]
     for w, (lo, hi) in windows.items():
         if hi <= lo:
@@ -350,6 +391,26 @@ def main():
             f"{a}_VS_{b}": _pairwise(bt, a, b, lo, hi)
             for a, b in comparisons
         }
+
+    frontier={}
+    for w,(lo,hi) in windows.items():
+        rows_f=[]
+        if hi<=lo:
+            continue
+        for name,spec in PORTFOLIOS.items():
+            sm=summaries[w][name]
+            jc=jackpot_conversion[name]
+            rows_f.append({
+                "portfolio":name,
+                "pure_lines":jc["pure_lines"],
+                "conditional_jackpot_probability":jc["conditional_jackpot_probability"],
+                "conditional_jackpot_odds_1_in":jc["conditional_jackpot_odds_1_in"],
+                "p3plus":sm["p3plus"],
+                "p4plus":sm["p4plus"],
+                "p5plus":sm["p5plus"],
+                "best_mean":sm["best_mean"],
+            })
+        frontier[w]=rows_f
 
     result = {
         "design": {
@@ -362,10 +423,12 @@ def main():
         },
         "theory": _theory(),
         "coverage": coverage,
+        "jackpot_conversion": jackpot_conversion,
         "pool_selection": pool_summary,
         "summary": summaries,
         "conditional_on_k22_hits": conditionals,
         "pairwise": pairwise,
+        "frontier": frontier,
     }
 
     print("BACKTEST_649_500_JSON_BEGIN")
