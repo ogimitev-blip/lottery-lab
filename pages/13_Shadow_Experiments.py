@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 from lottery.ui import setup_page,hero,caveat
-from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,shadow_research_scoreboard,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
+from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,shadow_research_scoreboard,shadow_cycle_health,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
 
 setup_page('Shadow Experiments · Lottery Lab','👤')
 hero('Prospective Shadow Experiments','Frozen research variants are scored after each draw. Actual money spent is always zero.')
@@ -23,10 +23,33 @@ b.metric('Scored variants',finished)
 c.metric('Pending variants',pending)
 d.metric('Actual money spent','€0.00')
 
+
+st.markdown('### Shadow cycle health')
+cycle=shadow_cycle_health(df.to_dict('records'))
+if len(cycle):
+    st.dataframe(
+        cycle.rename(columns={
+            'latest_scored_draw':'Latest scored draw',
+            'next_shadow_draw':'Next frozen draw',
+            'target_date':'Target date',
+            'frozen_variants':'Frozen variants',
+            'expected_variants':'Expected variants',
+            'freeze_before_target':'Frozen before target',
+            'cycle_status':'Cycle status',
+        }),
+        use_container_width=True,hide_index=True
+    )
+    bad=cycle[cycle.cycle_status!='READY']
+    if len(bad):
+        st.warning('At least one game does not currently have a complete, timely next shadow batch.')
+    else:
+        st.success('Both games have a complete prospective batch frozen before the target draw.')
+
+
 st.markdown('### Frozen ledger')
 show_cols=[
     'game','target_draw_no','target_date','label','mode_id','crowd_strength',
-    'notional_stake_eur','status','pool_hits','best_ticket_hits',
+    'notional_stake_eur','status','pool_hits','best_ticket_hits','selection_misses','conversion_misses','conversion_capture_pct',
     'winning_lines_3plus','notional_payout_eur','notional_net_eur',
     'notional_roi','avg_crowd_index','optimizer_swaps'
 ]
@@ -61,6 +84,34 @@ if len(scored):
     if pairs:
         pair_df=pd.DataFrame(pairs)
         st.dataframe(pair_df,use_container_width=True,hide_index=True)
+
+if len(scored):
+    st.markdown('### Selection vs conversion attribution')
+    latest_scored=int(pd.to_numeric(scored.target_draw_no,errors='coerce').max())
+    attr=scored[pd.to_numeric(scored.target_draw_no,errors='coerce')==latest_scored].copy()
+    attr['conversion_capture_pct']=pd.to_numeric(attr['conversion_capture_pct'],errors='coerce').round(1)
+    st.dataframe(
+        attr[[
+            'game','target_draw_no','label','mode_id','crowd_strength',
+            'pool_hits','selection_misses','best_ticket_hits','conversion_misses',
+            'conversion_capture_pct','winning_lines_3plus'
+        ]].rename(columns={
+            'target_draw_no':'Draw',
+            'crowd_strength':'Crowd strength',
+            'pool_hits':'Pool hits',
+            'selection_misses':'Selection misses',
+            'best_ticket_hits':'Best ticket hits',
+            'conversion_misses':'Conversion misses',
+            'conversion_capture_pct':'Pool-hit capture %',
+            'winning_lines_3plus':'3+ lines',
+        }),
+        use_container_width=True,hide_index=True
+    )
+    st.caption(
+        'Attribution identity: 6 winning numbers = selection misses + conversion misses + best-ticket hits. '
+        'For baseline and anti-crowd variants of the same mode the pool is identical, so any same-draw difference '
+        'between them is conversion-layer behavior, not selection.'
+    )
 
 st.markdown('### Research scoreboard')
 scoreboard=shadow_research_scoreboard(df.to_dict('records'))
