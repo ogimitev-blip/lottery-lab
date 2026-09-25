@@ -57,6 +57,14 @@ w1.metric('Extended better',s.get('extended_wins',0))
 w2.metric('Tie',s.get('ties',0))
 w3.metric('Baseline better',s.get('baseline_wins',0))
 
+if s:
+    if s.get('extended_mean',0)>s.get('baseline_mean',0) and s.get('extended_wins',0)>s.get('baseline_wins',0):
+        st.info('In this window the deeper-history variant is directionally stronger. That is not sufficient by itself for production promotion; it still needs robustness/multiple-testing checks.')
+    elif s.get('extended_mean',0)<s.get('baseline_mean',0):
+        st.success('Current result: the deeper-history variant does not improve the frozen model in this window. Production therefore remains on the existing history depth.')
+    else:
+        st.info('Current result: no meaningful directional advantage from the deeper-history variant in this window.')
+
 if not bt.empty:
     chart=bt[['draw_index_newest_first','baseline_hits','extended_hits']].sort_values('draw_index_newest_first',ascending=False)
     st.line_chart(chart.set_index('draw_index_newest_first'),height=360)
