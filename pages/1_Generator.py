@@ -156,13 +156,15 @@ model_version=MODEL_642 if game=='6/42' else MODEL_649
 default_wheel=WHEEL_642 if game=='6/42' else WHEEL_649
 conversion_version=state.get('conversion_version',default_wheel)
 if anti_crowd:
-    conversion_version += ' + anti-crowd relabel v1'
+    conversion_version += ' + ' + crowd_choice.lower()
 
 if c.button('Stage as prospective play',use_container_width=True):
     play=make_play(game,mode_id,target,state['pool'],state['additions'],tickets,state['cost'],model_version,APP_VERSION)
     play['wheel_version']=conversion_version
     play['mode_status']=state['status']
     play['anti_crowd']=bool(anti_crowd)
+    play['crowd_mode']=crowd_choice
+    play['crowd_strength']=float(crowd_strength)
     if not crowd.empty:
         play['crowd_snapshot_draw']=crowd_summary['draw']
         play['crowd_snapshot_date']=crowd_summary['date']
