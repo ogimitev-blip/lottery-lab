@@ -52,20 +52,37 @@ crowd=latest_crowd_snapshot(game)
 crowd_summary=snapshot_summary(crowd)
 anti_crowd=False
 anti_meta=None
+crowd_choice='Off'
+crowd_strength=0.0
 
 if not crowd.empty:
-    anti_crowd=st.toggle(
-        'Experimental anti-crowd conversion',
-        value=False,
-        help='Keeps the selected K-number pool and the wheel incidence structure, but relabels positions so less-played BST numbers receive more ticket exposure. This targets prize-sharing risk, not draw probability.'
+    crowd_choice=st.selectbox(
+        'Crowd / sharing-risk layer',
+        ['Off','Constrained 10%','Constrained 20%','Constrained 30%','Full remap (experimental)'],
+        index=0,
+        help='Constrained modes only swap numbers whose model scores are close. The percentage is the maximum model-score gap as a share of the current pool score range. Full remap ignores that constraint.'
     )
-    if anti_crowd:
+    anti_crowd=crowd_choice!='Off'
+    if crowd_choice.startswith('Constrained'):
+        crowd_strength=float(crowd_choice.split()[1].replace('%',''))/100.0
+        tickets,anti_map,anti_meta=constrained_anti_crowd_remap(
+            state['pool'],base_tickets,crowd,state['diagnostics'],strength=crowd_strength
+        )
+    elif crowd_choice.startswith('Full'):
+        crowd_strength=1.0
         tickets,anti_map,anti_meta=anti_crowd_remap(state['pool'],base_tickets,crowd)
+
+    if anti_crowd:
         state['tickets']=tickets
         st.info(
-            f"Anti-crowd remap is ON using BST played-number snapshot draw #{crowd_summary['draw']} "
-            f"({crowd_summary['date']}). The selected pool, line count and combinatorial coverage structure are unchanged."
+            f"{crowd_choice} is ON using BST played-number snapshot draw #{crowd_summary['draw']} "
+            f"({crowd_summary['date']}). The selected pool, line count and incidence structure are unchanged."
         )
+        if anti_meta is not None and crowd_choice.startswith('Constrained'):
+            st.caption(
+                f"Constrained optimizer made {anti_meta.attrs.get('swaps',0)} swap(s); "
+                f"max allowed model-score gap {anti_meta.attrs.get('score_threshold',0):.3f}."
+            )
 
 base_crowd=score_ticket_frame(base_tickets,crowd) if not crowd.empty else pd.DataFrame()
 ticket_crowd=score_ticket_frame(tickets,crowd) if not crowd.empty else pd.DataFrame()
