@@ -147,3 +147,127 @@ def score_shadow(row):
 
 def score_all_shadows():
     return [score_shadow(r) for r in read_shadow_rows()]
+
+
+PROMOTION_MIN_DRAWS=30
+PROMOTION_PREFERRED_DRAWS=50
+
+def shadow_pair_frame(scored_rows=None):
+    """Build one paired baseline-vs-variant observation per mode and target draw."""
+    rows=score_all_shadows() if scored_rows is None else scored_rows
+    if not rows:
+        return pd.DataFrame()
+    df=pd.DataFrame(rows)
+    if "status" not in df.columns:
+        return pd.DataFrame()
+    df=df[df.status=="scored"].copy()
+    if df.empty:
+        return pd.DataFrame()
+
+    pairs=[]
+    for (game,draw_no,mode),g in df.groupby(["game","target_draw_no","mode_id"]):
+        base=g[pd.to_numeric(g.crowd_strength,errors="coerce")==0]
+        variants=g[pd.to_numeric(g.crowd_strength,errors="coerce")>0]
+        if base.empty or variants.empty:
+            continue
+        b=base.iloc[0]
+        for _,v in variants.iterrows():
+            bp=b.get("notional_payout_eur")
+            vp=v.get("notional_payout_eur")
+            payout_delta=None
+            if pd.notna(bp) and pd.notna(vp):
+                payout_delta=float(vp)-float(bp)
+            base_ci=b.get("avg_crowd_index")
+            var_ci=v.get("avg_crowd_index")
+            crowd_delta=None
+            crowd_reduction_pct=None
+            if pd.notna(base_ci) and pd.notna(var_ci):
+                crowd_delta=float(var_ci)-float(base_ci)
+                if float(base_ci)!=0:
+                    crowd_reduction_pct=100.0*(float(base_ci)-float(var_ci))/float(base_ci)
+            base_best=int(b.get("best_ticket_hits",0) or 0)
+            var_best=int(v.get("best_ticket_hits",0) or 0)
+            pairs.append({
+                "game":game,
+                "target_draw_no":int(draw_no),
+                "mode_id":mode,
+                "variant_label":v.get("label"),
+                "crowd_strength":float(v.get("crowd_strength",0.0)),
+                "base_best_ticket_hits":base_best,
+                "variant_best_ticket_hits":var_best,
+                "best_ticket_delta":var_best-base_best,
+                "base_3plus":int(base_best>=3),
+                "variant_3plus":int(var_best>=3),
+                "base_winning_lines_3plus":int(b.get("winning_lines_3plus",0) or 0),
+                "variant_winning_lines_3plus":int(v.get("winning_lines_3plus",0) or 0),
+                "winning_lines_delta":int(v.get("winning_lines_3plus",0) or 0)-int(b.get("winning_lines_3plus",0) or 0),
+                "base_payout_eur":None if pd.isna(bp) else float(bp),
+                "variant_payout_eur":None if pd.isna(vp) else float(vp),
+                "payout_delta_eur":payout_delta,
+                "base_crowd_index":None if pd.isna(base_ci) else float(base_ci),
+                "variant_crowd_index":None if pd.isna(var_ci) else float(var_ci),
+                "crowd_index_delta":crowd_delta,
+                "crowd_reduction_pct":crowd_reduction_pct,
+            })
+    return pd.DataFrame(pairs)
+
+def summarize_shadow_pairs(scored_rows=None,min_review_draws=PROMOTION_MIN_DRAWS,preferred_draws=PROMOTION_PREFERRED_DRAWS):
+    """
+    Summarize genuinely prospective paired evidence.
+
+    The gate is intentionally structural, not payout-led:
+    - < min_review_draws: ACCUMULATING
+    - min_review_draws..preferred_draws-1: INTERIM_REVIEW_ONLY
+    - >= preferred_draws: ELIGIBLE_FOR_PROMOTION_REVIEW only when the
+      variant reduces crowd exposure and does not degrade paired best-ticket
+      hits or 3+ draw frequency. Otherwise HOLD.
+    A gate result never changes production automatically.
+    """
+    pairs=shadow_pair_frame(scored_rows)
+    if pairs.empty:
+        return pd.DataFrame()
+
+    out=[]
+    for (game,mode,strength,label),g in pairs.groupby(["game","mode_id","crowd_strength","variant_label"],dropna=False):
+        n=int(len(g))
+        base_p3=float(g.base_3plus.mean())
+        var_p3=float(g.variant_3plus.mean())
+        mean_best_delta=float(g.best_ticket_delta.mean())
+        mean_lines_delta=float(g.winning_lines_delta.mean())
+
+        crowd_valid=pd.to_numeric(g.crowd_reduction_pct,errors="coerce").dropna()
+        crowd_reduction=float(crowd_valid.mean()) if len(crowd_valid) else None
+
+        payout_delta_series=pd.to_numeric(g.payout_delta_eur,errors="coerce").dropna()
+        payout_delta=float(payout_delta_series.sum()) if len(payout_delta_series) else None
+
+        if n < int(min_review_draws):
+            gate="ACCUMULATING"
+        elif n < int(preferred_draws):
+            gate="INTERIM_REVIEW_ONLY"
+        else:
+            structure_ok=(
+                crowd_reduction is not None and crowd_reduction>0
+                and mean_best_delta>=0
+                and (var_p3-base_p3)>=0
+            )
+            gate="ELIGIBLE_FOR_PROMOTION_REVIEW" if structure_ok else "HOLD"
+
+        out.append({
+            "game":game,
+            "mode_id":mode,
+            "variant_label":label,
+            "crowd_strength":float(strength),
+            "prospective_draws":n,
+            "sample_gate":gate,
+            "draws_to_min_review":max(0,int(min_review_draws)-n),
+            "draws_to_preferred":max(0,int(preferred_draws)-n),
+            "avg_crowd_reduction_pct":crowd_reduction,
+            "base_3plus_rate_pct":100.0*base_p3,
+            "variant_3plus_rate_pct":100.0*var_p3,
+            "delta_3plus_pp":100.0*(var_p3-base_p3),
+            "mean_best_ticket_hit_delta":mean_best_delta,
+            "mean_winning_lines_delta":mean_lines_delta,
+            "cumulative_payout_delta_eur":payout_delta,
+        })
+    return pd.DataFrame(out).sort_values(["game","mode_id","crowd_strength"]).reset_index(drop=True)
