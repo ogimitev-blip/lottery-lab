@@ -271,3 +271,90 @@ def summarize_shadow_pairs(scored_rows=None,min_review_draws=PROMOTION_MIN_DRAWS
             "cumulative_payout_delta_eur":payout_delta,
         })
     return pd.DataFrame(out).sort_values(["game","mode_id","crowd_strength"]).reset_index(drop=True)
+
+
+def _wilson_interval(successes,total,z=1.959963984540054):
+    """95% Wilson score interval for a binomial proportion."""
+    total=int(total)
+    successes=int(successes)
+    if total<=0:
+        return (None,None)
+    p=successes/total
+    z2=z*z
+    den=1.0+z2/total
+    center=(p+z2/(2.0*total))/den
+    half=(z*((p*(1.0-p)/total+z2/(4.0*total*total))**0.5))/den
+    return (max(0.0,center-half),min(1.0,center+half))
+
+def shadow_research_scoreboard(scored_rows=None):
+    """
+    Descriptive paired prospective scoreboard. It never ranks or promotes variants.
+
+    Main stability measure is the share of draws where the variant does not
+    reduce best-ticket hits versus its same-draw baseline, with a Wilson 95% CI.
+    """
+    pairs=shadow_pair_frame(scored_rows)
+    if pairs.empty:
+        return pd.DataFrame()
+
+    out=[]
+    for (game,mode,strength,label),g in pairs.groupby(
+        ["game","mode_id","crowd_strength","variant_label"],dropna=False
+    ):
+        n=int(len(g))
+        best=pd.to_numeric(g.best_ticket_delta,errors="coerce").dropna()
+        wins=int((best>0).sum())
+        ties=int((best==0).sum())
+        losses=int((best<0).sum())
+        nondeg=int((best>=0).sum())
+        lo,hi=_wilson_interval(nondeg,len(best))
+
+        p3_gain=int(((g.base_3plus==0)&(g.variant_3plus==1)).sum())
+        p3_loss=int(((g.base_3plus==1)&(g.variant_3plus==0)).sum())
+        p3_same=n-p3_gain-p3_loss
+
+        crowd=pd.to_numeric(g.crowd_reduction_pct,errors="coerce").dropna()
+        crowd_positive=int((crowd>0).sum()) if len(crowd) else 0
+
+        payout=pd.to_numeric(g.payout_delta_eur,errors="coerce").dropna()
+        payout_up=int((payout>0).sum()) if len(payout) else 0
+        payout_down=int((payout<0).sum()) if len(payout) else 0
+
+        if n<10:
+            maturity="VERY_EARLY"
+        elif n<PROMOTION_MIN_DRAWS:
+            maturity="EARLY"
+        elif n<PROMOTION_PREFERRED_DRAWS:
+            maturity="INTERIM"
+        else:
+            maturity="MATURE_REVIEW_SAMPLE"
+
+        out.append({
+            "game":game,
+            "mode_id":mode,
+            "variant_label":label,
+            "crowd_strength":float(strength),
+            "prospective_draws":n,
+            "evidence_maturity":maturity,
+            "best_hit_wins":wins,
+            "best_hit_ties":ties,
+            "best_hit_losses":losses,
+            "best_hit_net":wins-losses,
+            "nondegradation_rate_pct":100.0*nondeg/len(best) if len(best) else None,
+            "nondegradation_ci95_lo_pct":None if lo is None else 100.0*lo,
+            "nondegradation_ci95_hi_pct":None if hi is None else 100.0*hi,
+            "p3_gains":p3_gain,
+            "p3_same":p3_same,
+            "p3_losses":p3_loss,
+            "p3_net":p3_gain-p3_loss,
+            "crowd_reduction_positive_draws":crowd_positive,
+            "crowd_reduction_positive_pct":100.0*crowd_positive/len(crowd) if len(crowd) else None,
+            "avg_crowd_reduction_pct":float(crowd.mean()) if len(crowd) else None,
+            "median_crowd_reduction_pct":float(crowd.median()) if len(crowd) else None,
+            "payout_up_draws":payout_up,
+            "payout_down_draws":payout_down,
+            "cumulative_payout_delta_eur":float(payout.sum()) if len(payout) else None,
+        })
+    return pd.DataFrame(out).sort_values(
+        ["game","mode_id","crowd_strength"]
+    ).reset_index(drop=True)
