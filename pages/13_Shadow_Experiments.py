@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 from lottery.ui import setup_page,hero,caveat
-from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
+from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,shadow_research_scoreboard,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
 
 setup_page('Shadow Experiments · Lottery Lab','👤')
 hero('Prospective Shadow Experiments','Frozen research variants are scored after each draw. Actual money spent is always zero.')
@@ -61,6 +61,54 @@ if len(scored):
     if pairs:
         pair_df=pd.DataFrame(pairs)
         st.dataframe(pair_df,use_container_width=True,hide_index=True)
+
+st.markdown('### Research scoreboard')
+scoreboard=shadow_research_scoreboard(df.to_dict('records'))
+if scoreboard.empty:
+    st.info('The scoreboard will populate after the first completed prospective baseline-vs-variant draw.')
+else:
+    sb=scoreboard.copy()
+    sb['crowd_strength_pct']=(100*sb.pop('crowd_strength')).round().astype(int)
+    for col in [
+        'nondegradation_rate_pct','nondegradation_ci95_lo_pct','nondegradation_ci95_hi_pct',
+        'crowd_reduction_positive_pct','avg_crowd_reduction_pct','median_crowd_reduction_pct'
+    ]:
+        sb[col]=pd.to_numeric(sb[col],errors='coerce').round(1)
+    sb['cumulative_payout_delta_eur']=pd.to_numeric(sb['cumulative_payout_delta_eur'],errors='coerce').round(2)
+    st.dataframe(
+        sb[[
+            'game','mode_id','variant_label','crowd_strength_pct','prospective_draws','evidence_maturity',
+            'best_hit_wins','best_hit_ties','best_hit_losses','best_hit_net',
+            'nondegradation_rate_pct','nondegradation_ci95_lo_pct','nondegradation_ci95_hi_pct',
+            'p3_gains','p3_same','p3_losses','p3_net',
+            'crowd_reduction_positive_pct','avg_crowd_reduction_pct',
+            'cumulative_payout_delta_eur'
+        ]].rename(columns={
+            'crowd_strength_pct':'Crowd strength %',
+            'prospective_draws':'Draws',
+            'evidence_maturity':'Evidence maturity',
+            'best_hit_wins':'Best-hit wins',
+            'best_hit_ties':'Best-hit ties',
+            'best_hit_losses':'Best-hit losses',
+            'best_hit_net':'Best-hit net',
+            'nondegradation_rate_pct':'Non-degradation %',
+            'nondegradation_ci95_lo_pct':'95% CI low',
+            'nondegradation_ci95_hi_pct':'95% CI high',
+            'p3_gains':'3+ gains',
+            'p3_same':'3+ same',
+            'p3_losses':'3+ losses',
+            'p3_net':'3+ net',
+            'crowd_reduction_positive_pct':'Crowd reduction draws %',
+            'avg_crowd_reduction_pct':'Avg crowd reduction %',
+            'cumulative_payout_delta_eur':'Cumulative payout Δ €',
+        }),
+        use_container_width=True,hide_index=True
+    )
+    st.caption(
+        'Wins/ties/losses are same-draw paired comparisons against the baseline. '
+        'The 95% interval is for the non-degradation rate of best-ticket hits; it is descriptive, '
+        'not a claim that lottery outcomes are predictable.'
+    )
 
 st.markdown('### Forward promotion gate')
 gate=summarize_shadow_pairs(df.to_dict('records'))
