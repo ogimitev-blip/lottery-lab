@@ -81,7 +81,7 @@ for game in ["6/42","6/49"]:
     print("HISTORY_DEPTH",game,sm)
 
 
-from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard,outcome_attribution,shadow_cycle_health
+from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard,outcome_attribution,shadow_cycle_health,shadow_manifest_status
 
 synthetic=[]
 for draw_no in range(1,51):
@@ -134,3 +134,11 @@ assert cycle.iloc[0].cycle_status=="READY"
 assert int(cycle.iloc[0].frozen_variants)==4
 assert bool(cycle.iloc[0].freeze_before_target)
 print("SHADOW_CYCLE_OK")
+
+
+manifest=shadow_manifest_status(76)
+assert manifest["status"]=="VERIFIED",manifest
+assert manifest["rows"]==10
+assert manifest["expected_rows"]==10
+assert manifest["actual_fingerprint"]=="a4d723b9772621a14dc8a52152d56f5aaaf652c6539d939b334f65246b7d6293"
+print("SHADOW_MANIFEST_OK")
