@@ -1,0 +1,33 @@
+name: Sync Toto After Draw
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/sync-toto-after-draw.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas requests beautifulsoup4
+      - run: python scripts/sync_toto.py
+      - name: Commit verified official data
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "No verified new official data retrieved."
+            exit 0
+          fi
+          git config user.name "lottery-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "Sync verified official Toto data"
+          git push
