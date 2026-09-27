@@ -1,0 +1,20 @@
+name: Score Draw 76 K22 55
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/score_draw76_k22_55.py"
+      - ".github/workflows/score_draw76_k22_55.yml"
+  workflow_dispatch:
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: PYTHONPATH=. python scripts/score_draw76_k22_55.py
