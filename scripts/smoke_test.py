@@ -122,7 +122,7 @@ assert 6==a["selection_misses"]+a["conversion_misses"]+3
 print("SHADOW_ATTRIBUTION_OK")
 
 cycle_rows=[]
-for i in range(4):
+for i in range(6):
     cycle_rows.append({
         "status":"pending","game":"6/49","target_draw_no":76,
         "shadow_id":f"pending-{i}","target_date":"2099-09-27",
@@ -131,7 +131,7 @@ for i in range(4):
 cycle=shadow_cycle_health(cycle_rows)
 assert len(cycle)==1
 assert cycle.iloc[0].cycle_status=="READY"
-assert int(cycle.iloc[0].frozen_variants)==4
+assert int(cycle.iloc[0].frozen_variants)==6
 assert bool(cycle.iloc[0].freeze_before_target)
 print("SHADOW_CYCLE_OK")
 
