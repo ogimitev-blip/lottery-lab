@@ -14,7 +14,7 @@ from lottery.wheels import build_broad_six,extend_sequence
 
 ROOT=Path(__file__).resolve().parents[1]
 SIZES=(6,11,22,33,55)
-N_SEEDS=96
+N_SEEDS=128
 PROPOSALS=160
 BASE_SEED=20260927
 
@@ -24,13 +24,18 @@ def combo_counter_add(counter,line,r):
         counter[x]+=1
 
 
-def structural_sequence(seed):
+def structural_sequence(seed,fixed_prefix=None):
     rng=np.random.default_rng(seed)
     universe=np.arange(1,23,dtype=int)
-    selected=[]
-    selected_set=set()
+    selected=[tuple(map(int,t)) for t in (fixed_prefix or [])]
+    selected_set=set(selected)
     c4,c3,c2=Counter(),Counter(),Counter()
     exp=Counter()
+    for t in selected:
+        combo_counter_add(c4,t,4)
+        combo_counter_add(c3,t,3)
+        combo_counter_add(c2,t,2)
+        for n in t: exp[n]+=1
 
     while len(selected)<max(SIZES):
         step=len(selected)
@@ -182,7 +187,7 @@ def main():
     candidates=[]
     for i in range(N_SEEDS):
         seed=BASE_SEED+i
-        seq=structural_sequence(seed)
+        seq=structural_sequence(seed,fixed_prefix=baseline[:6])
         met=exact_prefix_metrics(seq)
         candidates.append((utility(met),seed,seq,met))
     candidates.sort(key=lambda x:x[0],reverse=True)
@@ -209,7 +214,7 @@ def main():
             "winning_numbers":[8,9,17,27,37,48],
             "pool":pool,
         },
-        "note":"Candidate generation and selection are outcome-blind. Exact metrics enumerate all C(22,6)=74,613 possible winning sextets. Draw 76 is scored only after the candidate is selected.",
+        "note":"Candidate generation and selection are outcome-blind. The current production first 6 lines are held fixed; only lines 7-55 are redesigned. Exact metrics enumerate all C(22,6)=74,613 possible winning sextets. Draw 76 is scored only after the candidate is selected.",
     }
     print("K22_CONVERSION_V4_BEGIN")
     print(json.dumps(result,indent=2))
