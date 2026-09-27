@@ -91,8 +91,9 @@ def baseline_sequence():
     pool,adds,diag,score=current_pool_649(draws,22)
     base=build_broad_six(pool,score,649)
     tickets=extend_sequence(base,pool,score,55,20260917+490000)
-    pos={int(n):i+1 for i,n in enumerate(pool)}
-    return [tuple(sorted(pos[int(n)] for n in t)) for t in tickets],list(map(int,pool))
+    ranked=sorted([int(n) for n in pool],key=lambda n:(-float(score.loc[n]),n))
+    pos={int(n):i+1 for i,n in enumerate(ranked)}
+    return [tuple(sorted(pos[int(n)] for n in t)) for t in tickets],ranked
 
 
 TARGETS=list(itertools.combinations(range(1,23),6))
