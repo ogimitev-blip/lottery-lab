@@ -81,7 +81,7 @@ for game in ["6/42","6/49"]:
     print("HISTORY_DEPTH",game,sm)
 
 
-from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard,outcome_attribution,shadow_cycle_health,shadow_manifest_status
+from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard,conversion_research_scoreboard,outcome_attribution,shadow_cycle_health,shadow_manifest_status
 
 synthetic=[]
 for draw_no in range(1,51):
@@ -142,3 +142,28 @@ assert manifest["rows"]==10
 assert manifest["expected_rows"]==10
 assert manifest["actual_fingerprint"]=="a4d723b9772621a14dc8a52152d56f5aaaf652c6539d939b334f65246b7d6293"
 print("SHADOW_MANIFEST_OK")
+
+
+conversion_synthetic=[]
+for draw_no in range(1,11):
+    conversion_synthetic.append({
+        "status":"scored","game":"6/49","target_draw_no":draw_no,"mode_id":"649_k22_11",
+        "label":"K22-11 base","conversion_variant":"production","best_ticket_hits":3,
+        "winning_lines_3plus":1,"notional_payout_eur":10.0,"pool_hits":4,
+    })
+    conversion_synthetic.append({
+        "status":"scored","game":"6/49","target_draw_no":draw_no,"mode_id":"649_k22_11",
+        "label":"K22-11 conversion v4","conversion_variant":"v4_structural",
+        "best_ticket_hits":4 if draw_no==10 else 3,
+        "winning_lines_3plus":1,"notional_payout_eur":20.0 if draw_no==10 else 10.0,
+        "pool_hits":6 if draw_no==10 else 4,
+    })
+conv=conversion_research_scoreboard(conversion_synthetic)
+assert len(conv)==1
+crow=conv.iloc[0]
+assert int(crow.prospective_draws)==10
+assert int(crow.best_hit_wins)==1 and int(crow.best_hit_losses)==0
+assert int(crow.p4_gains)==1 and int(crow.p4_losses)==0
+assert int(crow.perfect_pool_draws)==1
+assert round(float(crow.cumulative_payout_delta_eur),6)==10.0
+print("CONVERSION_SCOREBOARD_OK")
