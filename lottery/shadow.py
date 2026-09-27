@@ -513,3 +513,112 @@ def shadow_manifest_status(target_draw_no):
         "expected_rows":expected_count,
         "source_freeze_commit":manifest.get("source_freeze_commit"),
     }
+
+
+def conversion_pair_frame(scored_rows=None):
+    """Build paired production-vs-conversion-challenger observations."""
+    rows=score_all_shadows() if scored_rows is None else scored_rows
+    if not rows:
+        return pd.DataFrame()
+    df=pd.DataFrame(rows)
+    if "status" not in df.columns or "conversion_variant" not in df.columns:
+        return pd.DataFrame()
+    df=df[df.status=="scored"].copy()
+    if df.empty:
+        return pd.DataFrame()
+
+    pairs=[]
+    for (game,draw_no,mode),g in df.groupby(["game","target_draw_no","mode_id"]):
+        base=g[g.conversion_variant=="production"]
+        variants=g[g.conversion_variant=="v4_structural"]
+        if base.empty or variants.empty:
+            continue
+        b=base.iloc[0]
+        for _,v in variants.iterrows():
+            bp=b.get("notional_payout_eur")
+            vp=v.get("notional_payout_eur")
+            payout_delta=None
+            if pd.notna(bp) and pd.notna(vp):
+                payout_delta=float(vp)-float(bp)
+            bb=int(b.get("best_ticket_hits",0) or 0)
+            vb=int(v.get("best_ticket_hits",0) or 0)
+            pairs.append({
+                "game":game,
+                "target_draw_no":int(draw_no),
+                "mode_id":mode,
+                "variant_label":v.get("label"),
+                "base_best_ticket_hits":bb,
+                "variant_best_ticket_hits":vb,
+                "best_ticket_delta":vb-bb,
+                "base_3plus":int(bb>=3),
+                "variant_3plus":int(vb>=3),
+                "base_4plus":int(bb>=4),
+                "variant_4plus":int(vb>=4),
+                "base_5plus":int(bb>=5),
+                "variant_5plus":int(vb>=5),
+                "base_winning_lines_3plus":int(b.get("winning_lines_3plus",0) or 0),
+                "variant_winning_lines_3plus":int(v.get("winning_lines_3plus",0) or 0),
+                "winning_lines_delta":int(v.get("winning_lines_3plus",0) or 0)-int(b.get("winning_lines_3plus",0) or 0),
+                "base_payout_eur":None if pd.isna(bp) else float(bp),
+                "variant_payout_eur":None if pd.isna(vp) else float(vp),
+                "payout_delta_eur":payout_delta,
+                "pool_hits":int(v.get("pool_hits",b.get("pool_hits",0)) or 0),
+            })
+    return pd.DataFrame(pairs)
+
+
+def conversion_research_scoreboard(scored_rows=None):
+    """Descriptive prospective scoreboard for conversion challengers."""
+    pairs=conversion_pair_frame(scored_rows)
+    if pairs.empty:
+        return pd.DataFrame()
+
+    out=[]
+    for (game,mode,label),g in pairs.groupby(
+        ["game","mode_id","variant_label"],dropna=False
+    ):
+        n=int(len(g))
+        best=pd.to_numeric(g.best_ticket_delta,errors="coerce").dropna()
+        wins=int((best>0).sum())
+        ties=int((best==0).sum())
+        losses=int((best<0).sum())
+
+        def _binary_net(base_col,var_col):
+            gain=int(((g[base_col]==0)&(g[var_col]==1)).sum())
+            loss=int(((g[base_col]==1)&(g[var_col]==0)).sum())
+            same=n-gain-loss
+            return gain,same,loss
+
+        p3g,p3s,p3l=_binary_net("base_3plus","variant_3plus")
+        p4g,p4s,p4l=_binary_net("base_4plus","variant_4plus")
+        p5g,p5s,p5l=_binary_net("base_5plus","variant_5plus")
+
+        payout=pd.to_numeric(g.payout_delta_eur,errors="coerce").dropna()
+        if n<10:
+            maturity="VERY_EARLY"
+        elif n<PROMOTION_MIN_DRAWS:
+            maturity="EARLY"
+        elif n<PROMOTION_PREFERRED_DRAWS:
+            maturity="INTERIM"
+        else:
+            maturity="MATURE_REVIEW_SAMPLE"
+
+        out.append({
+            "game":game,
+            "mode_id":mode,
+            "variant_label":label,
+            "prospective_draws":n,
+            "evidence_maturity":maturity,
+            "best_hit_wins":wins,
+            "best_hit_ties":ties,
+            "best_hit_losses":losses,
+            "best_hit_net":wins-losses,
+            "mean_best_ticket_hit_delta":float(best.mean()) if len(best) else None,
+            "p3_gains":p3g,"p3_same":p3s,"p3_losses":p3l,"p3_net":p3g-p3l,
+            "p4_gains":p4g,"p4_same":p4s,"p4_losses":p4l,"p4_net":p4g-p4l,
+            "p5_gains":p5g,"p5_same":p5s,"p5_losses":p5l,"p5_net":p5g-p5l,
+            "mean_winning_lines_delta":float(pd.to_numeric(g.winning_lines_delta,errors="coerce").mean()),
+            "cumulative_payout_delta_eur":float(payout.sum()) if len(payout) else None,
+            "perfect_pool_draws":int((pd.to_numeric(g.pool_hits,errors="coerce")==6).sum()),
+        })
+    return pd.DataFrame(out).sort_values(["game","mode_id"]).reset_index(drop=True)
