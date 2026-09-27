@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 
 from lottery.ui import setup_page,hero,caveat
-from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,shadow_research_scoreboard,shadow_cycle_health,shadow_manifest_status,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
+from lottery.shadow import score_all_shadows,read_shadow_rows,summarize_shadow_pairs,shadow_research_scoreboard,conversion_research_scoreboard,shadow_cycle_health,shadow_manifest_status,PROMOTION_MIN_DRAWS,PROMOTION_PREFERRED_DRAWS
 
 setup_page('Shadow Experiments · Lottery Lab','👤')
 hero('Prospective Shadow Experiments','Frozen research variants are scored after each draw. Actual money spent is always zero.')
@@ -129,6 +129,46 @@ if len(scored):
         'between them is conversion-layer behavior, not selection.'
     )
 
+st.markdown('### K22 conversion challenger')
+conv=conversion_research_scoreboard(df.to_dict('records'))
+if conv.empty:
+    st.info('The production-vs-v4 conversion scoreboard will populate after draw #77 is scored.')
+else:
+    cc=conv.copy()
+    for col in ['mean_best_ticket_hit_delta','mean_winning_lines_delta','cumulative_payout_delta_eur']:
+        cc[col]=pd.to_numeric(cc[col],errors='coerce').round(3)
+    st.dataframe(
+        cc[[
+            'game','mode_id','variant_label','prospective_draws','evidence_maturity',
+            'best_hit_wins','best_hit_ties','best_hit_losses','best_hit_net',
+            'mean_best_ticket_hit_delta',
+            'p3_gains','p3_same','p3_losses','p3_net',
+            'p4_gains','p4_same','p4_losses','p4_net',
+            'p5_gains','p5_same','p5_losses','p5_net',
+            'mean_winning_lines_delta','perfect_pool_draws','cumulative_payout_delta_eur'
+        ]].rename(columns={
+            'prospective_draws':'Draws',
+            'evidence_maturity':'Evidence maturity',
+            'best_hit_wins':'Best-hit wins',
+            'best_hit_ties':'Best-hit ties',
+            'best_hit_losses':'Best-hit losses',
+            'best_hit_net':'Best-hit net',
+            'mean_best_ticket_hit_delta':'Mean Δ best hits',
+            'p3_gains':'3+ gains','p3_same':'3+ same','p3_losses':'3+ losses','p3_net':'3+ net',
+            'p4_gains':'4+ gains','p4_same':'4+ same','p4_losses':'4+ losses','p4_net':'4+ net',
+            'p5_gains':'5+ gains','p5_same':'5+ same','p5_losses':'5+ losses','p5_net':'5+ net',
+            'mean_winning_lines_delta':'Mean Δ 3+ lines',
+            'perfect_pool_draws':'Perfect-pool draws',
+            'cumulative_payout_delta_eur':'Cumulative payout Δ €',
+        }),
+        use_container_width=True,hide_index=True
+    )
+    st.caption(
+        'This is a forward-only production-vs-v4 conversion comparison. '
+        'The v4 wheel keeps the production 6-line core unchanged and changes only extension lines. '
+        'It is descriptive and has no automatic promotion rule.'
+    )
+
 st.markdown('### Research scoreboard')
 scoreboard=shadow_research_scoreboard(df.to_dict('records'))
 if scoreboard.empty:
@@ -228,6 +268,7 @@ st.caption(
 with st.expander('Pre-registered design'):
     st.write('6/49 K22-4: baseline vs constrained 10%.')
     st.write('6/49 K22-6: baseline vs constrained 30%.')
+    st.write('6/49 K22-11: production conversion vs outcome-blind structural v4 challenger; the first 6 lines are identical.')
     st.write('6/42 K28-18, K28-30 and K28-50: baseline vs constrained 10%.')
     st.write('Exact tickets, pools, versions and crowd snapshot are frozen before the target draw.')
 
