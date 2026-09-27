@@ -1,6 +1,6 @@
 from __future__ import annotations
 import json
-from lottery.data import load_draws
+from lottery.data import load_draws_df
 from lottery.modes import generate_mode
 
 ACTUAL={
@@ -13,7 +13,7 @@ MODES={
 }
 
 def score(game,mid):
-    draws=load_draws(game)
+    df=load_draws_df(game)\n    draws=[list(map(int,row)) for row in df[[f"n{i}" for i in range(1,7)]].to_numpy().tolist()]
     st=generate_mode(game,mid,draws,target_draw_no=76)
     actual=ACTUAL[game]
     hits=[len(set(map(int,t)) & actual) for t in st["tickets"]]
