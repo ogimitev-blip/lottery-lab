@@ -1,0 +1,224 @@
+{
+  "run_date": "2026-09-27",
+  "research": "K22 conversion v4",
+  "objective": "Improve K22 ticket conversion without changing the K22 selection model or fitting draw #76.",
+  "invariant": {
+    "k22_winner_sextets": 74613,
+    "production_first_6_lines_unchanged": true,
+    "outcome_blind_candidate_generation": true,
+    "draw76_used_only_after_candidate_selection": true
+  },
+  "exact_uniform_k22": {
+    "baseline": {
+      "6": {
+        "p4plus": 0.15254714325921756,
+        "p5plus": 0.007800249286317398,
+        "p6": 0.00008041494109605565
+      },
+      "11": {
+        "p4plus": 0.2689075630252101,
+        "p5plus": 0.014300457024915229,
+        "p6": 0.00014742739200943535
+      },
+      "22": {
+        "p4plus": 0.48120300751879697,
+        "p5plus": 0.028600914049830457,
+        "p6": 0.0002948547840188707
+      },
+      "33": {
+        "p4plus": 0.6449144251001836,
+        "p5plus": 0.04290137107474569,
+        "p6": 0.0004422821760283061
+      },
+      "55": {
+        "p4plus": 0.8384195783576589,
+        "p5plus": 0.07150228512457614,
+        "p6": 0.0007371369600471767
+      }
+    },
+    "v4": {
+      "6": {
+        "p4plus": 0.15254714325921756,
+        "p5plus": 0.007800249286317398,
+        "p6": 0.00008041494109605565
+      },
+      "11": {
+        "p4plus": 0.2709849490035249,
+        "p5plus": 0.014300457024915229,
+        "p6": 0.00014742739200943535
+      },
+      "22": {
+        "p4plus": 0.49787570530604586,
+        "p5plus": 0.028600914049830457,
+        "p6": 0.0002948547840188707
+      },
+      "33": {
+        "p4plus": 0.6671625588034257,
+        "p5plus": 0.04290137107474569,
+        "p6": 0.0004422821760283061
+      },
+      "55": {
+        "p4plus": 0.867449372093335,
+        "p5plus": 0.07150228512457614,
+        "p6": 0.0007371369600471767
+      }
+    },
+    "interpretation": "The production 6-line core already attains the uniform maximum for 4+ and 5+ coverage. v4 improves 4+ coverage only in extension lines; 5+ and 6/6 coverage cannot improve at fixed line count without changing the number of unique tickets."
+  },
+  "walk_forward_150": {
+    "latest_50": {
+      "11": {
+        "baseline_p3plus": 0.2,
+        "v4_p3plus": 0.26,
+        "baseline_p4plus": 0.02,
+        "v4_p4plus": 0.04,
+        "paired_wins": 7,
+        "ties": 38,
+        "losses": 5
+      },
+      "22": {
+        "baseline_p3plus": 0.3,
+        "v4_p3plus": 0.36,
+        "baseline_p4plus": 0.02,
+        "v4_p4plus": 0.04,
+        "paired_wins": 4,
+        "ties": 45,
+        "losses": 1
+      },
+      "33": {
+        "baseline_p3plus": 0.38,
+        "v4_p3plus": 0.4,
+        "baseline_p4plus": 0.06,
+        "v4_p4plus": 0.08,
+        "paired_wins": 4,
+        "ties": 44,
+        "losses": 2
+      },
+      "55": {
+        "baseline_p3plus": 0.46,
+        "v4_p3plus": 0.42,
+        "baseline_p4plus": 0.1,
+        "v4_p4plus": 0.08,
+        "baseline_p5plus": 0.02,
+        "v4_p5plus": 0,
+        "paired_wins": 3,
+        "ties": 41,
+        "losses": 6
+      }
+    },
+    "prior_100": {
+      "11": {
+        "baseline_p3plus": 0.26,
+        "v4_p3plus": 0.25,
+        "baseline_p4plus": 0.01,
+        "v4_p4plus": 0,
+        "paired_wins": 8,
+        "ties": 82,
+        "losses": 10
+      },
+      "22": {
+        "baseline_p3plus": 0.35,
+        "v4_p3plus": 0.3,
+        "baseline_p4plus": 0.03,
+        "v4_p4plus": 0.01,
+        "paired_wins": 2,
+        "ties": 88,
+        "losses": 10
+      },
+      "33": {
+        "baseline_p3plus": 0.42,
+        "v4_p3plus": 0.38,
+        "baseline_p4plus": 0.05,
+        "v4_p4plus": 0.02,
+        "paired_wins": 6,
+        "ties": 81,
+        "losses": 13
+      },
+      "55": {
+        "baseline_p3plus": 0.49,
+        "v4_p3plus": 0.45,
+        "baseline_p4plus": 0.05,
+        "v4_p4plus": 0.05,
+        "paired_wins": 9,
+        "ties": 78,
+        "losses": 13
+      }
+    },
+    "full_150": {
+      "11": {
+        "baseline_p3plus": 0.24,
+        "v4_p3plus": 0.25333333333333335,
+        "baseline_p4plus": 0.013333333333333334,
+        "v4_p4plus": 0.013333333333333334,
+        "paired_wins": 15,
+        "ties": 120,
+        "losses": 15
+      },
+      "22": {
+        "baseline_p3plus": 0.3333333333333333,
+        "v4_p3plus": 0.32,
+        "baseline_p4plus": 0.02666666666666667,
+        "v4_p4plus": 0.02,
+        "paired_wins": 6,
+        "ties": 133,
+        "losses": 11
+      },
+      "33": {
+        "baseline_p3plus": 0.4066666666666667,
+        "v4_p3plus": 0.38666666666666666,
+        "baseline_p4plus": 0.05333333333333334,
+        "v4_p4plus": 0.04,
+        "paired_wins": 10,
+        "ties": 125,
+        "losses": 15
+      },
+      "55": {
+        "baseline_p3plus": 0.48,
+        "v4_p3plus": 0.44,
+        "baseline_p4plus": 0.06666666666666667,
+        "v4_p4plus": 0.06,
+        "baseline_p5plus": 0.006666666666666667,
+        "v4_p5plus": 0,
+        "paired_wins": 12,
+        "ties": 119,
+        "losses": 19
+      }
+    }
+  },
+  "draw76_retrospective": {
+    "winners": [
+      8,
+      9,
+      17,
+      27,
+      37,
+      48
+    ],
+    "pool_hits": 6,
+    "production": {
+      "6": 3,
+      "11": 3,
+      "22": 3,
+      "33": 3,
+      "55": 3
+    },
+    "v4": {
+      "6": 3,
+      "11": 4,
+      "22": 4,
+      "33": 4,
+      "55": 4
+    },
+    "caution": "This is retrospective only and is not evidence for promotion."
+  },
+  "decision": {
+    "production_6": "KEEP",
+    "production_11": "KEEP; test v4 prospectively as shadow challenger",
+    "production_22": "KEEP",
+    "production_33": "KEEP",
+    "production_55": "KEEP",
+    "rationale": "Uniform structural gains at 22/33/55 did not survive historical walk-forward validation. The 11-line candidate is structurally better and essentially neutral over the full 150 draws, so forward-only shadow testing is appropriate.",
+    "prospective_target": "Draw #77, 2026-10-01",
+    "prospective_actual_spend_eur": 0
+  }
+}
