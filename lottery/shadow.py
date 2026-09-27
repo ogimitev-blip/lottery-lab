@@ -18,6 +18,8 @@ SHADOW_CONFIG=[
     {"game":"6/49","mode_id":"649_k22_4","strength":0.10,"label":"K22-4 crowd 10%"},
     {"game":"6/49","mode_id":"649_k22_6","strength":0.00,"label":"K22-6 base"},
     {"game":"6/49","mode_id":"649_k22_6","strength":0.30,"label":"K22-6 crowd 30%"},
+    {"game":"6/49","mode_id":"649_k22_11","strength":0.00,"label":"K22-11 base","conversion_variant":"production"},
+    {"game":"6/49","mode_id":"649_k22_11","strength":0.00,"label":"K22-11 conversion v4","conversion_variant":"v4_structural"},
     {"game":"6/42","mode_id":"642_18","strength":0.00,"label":"K28-18 base"},
     {"game":"6/42","mode_id":"642_18","strength":0.10,"label":"K28-18 crowd 10%"},
     {"game":"6/42","mode_id":"642_30","strength":0.00,"label":"K28-30 base"},
@@ -29,8 +31,8 @@ SHADOW_CONFIG=[
 def _model_version(game):
     return MODEL_642 if game=="6/42" else MODEL_649
 
-def _shadow_id(game,target_draw_no,mode_id,strength):
-    raw=f"{game}|{int(target_draw_no)}|{mode_id}|{float(strength):.4f}|{_model_version(game)}"
+def _shadow_id(game,target_draw_no,mode_id,strength,conversion_variant="standard"):
+    raw=f"{game}|{int(target_draw_no)}|{mode_id}|{float(strength):.4f}|{conversion_variant}|{_model_version(game)}"
     return hashlib.sha256(raw.encode()).hexdigest()[:20]
 
 def read_shadow_rows():
@@ -59,8 +61,20 @@ def build_shadow_batch(game,target,draws):
         state=generate_mode(game,cfg["mode_id"],draws,target["draw_no"])
         base=list(state["tickets"])
         strength=float(cfg["strength"])
+        conversion_variant=str(cfg.get("conversion_variant","standard"))
         tickets=base
         meta=None
+        if conversion_variant=="v4_structural":
+            spec=pd.read_csv(ROOT/"systems"/"k22_conversion_v4_candidate.csv")
+            cols=[f"pos{i}" for i in range(1,7)]
+            layout=[tuple(map(int,row)) for row in spec[cols].to_numpy().tolist()[:len(base)]]
+            diag=state["diagnostics"]
+            ranked_pool=[
+                int(n) for n in diag[diag.in_pool].sort_values("rank").number.tolist()
+            ]
+            if len(ranked_pool)!=22:
+                raise RuntimeError("K22 conversion challenger requires a 22-number ranked pool")
+            tickets=[tuple(ranked_pool[p-1] for p in line) for line in layout]
         if strength>0:
             if crowd.empty:
                 continue
@@ -76,7 +90,7 @@ def build_shadow_batch(game,target,draws):
             snapshot_date=str(crowd.iloc[0].snapshot_date)
 
         out.append({
-            "shadow_id":_shadow_id(game,target["draw_no"],cfg["mode_id"],strength),
+            "shadow_id":_shadow_id(game,target["draw_no"],cfg["mode_id"],strength,conversion_variant),
             "created_at":created,
             "game":game,
             "target_draw_no":int(target["draw_no"]),
@@ -84,6 +98,7 @@ def build_shadow_batch(game,target,draws):
             "label":cfg["label"],
             "mode_id":cfg["mode_id"],
             "crowd_strength":strength,
+            "conversion_variant":conversion_variant,
             "model_version":_model_version(game),
             "app_version":APP_VERSION,
             "pool":list(map(int,state["pool"])),
