@@ -9,6 +9,7 @@ from .crowd import latest_crowd_snapshot,constrained_anti_crowd_remap,score_tick
 from .data import load_draws_df,load_results_meta
 from .modes import generate_mode
 from .version import APP_VERSION,MODEL_642,MODEL_649
+from .conversion_v5 import build_rank_aware_v5
 
 ROOT=Path(__file__).resolve().parents[1]
 SHADOW_PATH=ROOT/"data"/"shadow_experiments.jsonl"
@@ -20,6 +21,8 @@ SHADOW_CONFIG=[
     {"game":"6/49","mode_id":"649_k22_6","strength":0.30,"label":"K22-6 crowd 30%"},
     {"game":"6/49","mode_id":"649_k22_11","strength":0.00,"label":"K22-11 base","conversion_variant":"production"},
     {"game":"6/49","mode_id":"649_k22_11","strength":0.00,"label":"K22-11 conversion v4","conversion_variant":"v4_structural"},
+    {"game":"6/49","mode_id":"649_k22_22","strength":0.00,"label":"K22-22 base","conversion_variant":"production"},
+    {"game":"6/49","mode_id":"649_k22_22","strength":0.00,"label":"K22-22 conversion v5","conversion_variant":"v5_rank_aware"},
     {"game":"6/42","mode_id":"642_18","strength":0.00,"label":"K28-18 base"},
     {"game":"6/42","mode_id":"642_18","strength":0.10,"label":"K28-18 crowd 10%"},
     {"game":"6/42","mode_id":"642_30","strength":0.00,"label":"K28-30 base"},
@@ -75,6 +78,10 @@ def build_shadow_batch(game,target,draws):
             if len(ranked_pool)!=22:
                 raise RuntimeError("K22 conversion challenger requires a 22-number ranked pool")
             tickets=[tuple(ranked_pool[p-1] for p in line) for line in layout]
+        if conversion_variant=="v5_rank_aware":
+            tickets=build_rank_aware_v5(
+                base[:6],state["pool"],state["diagnostics"],len(base),target["draw_no"]
+            )
         if strength>0:
             if crowd.empty:
                 continue
@@ -530,7 +537,7 @@ def conversion_pair_frame(scored_rows=None):
     pairs=[]
     for (game,draw_no,mode),g in df.groupby(["game","target_draw_no","mode_id"]):
         base=g[g.conversion_variant=="production"]
-        variants=g[g.conversion_variant=="v4_structural"]
+        variants=g[g.conversion_variant.isin(["v4_structural","v5_rank_aware"])]
         if base.empty or variants.empty:
             continue
         b=base.iloc[0]
