@@ -1,0 +1,79 @@
+{
+  "date": "2026-09-28",
+  "candidate": "K22 conversion v4",
+  "status": "RESEARCH_ONLY_NOT_PROMOTED",
+  "frozen_candidate_file": "systems/k22_conversion_v4_candidate.csv",
+  "exhaustive": {
+    "universe_sextets": 74613,
+    "first_6_unchanged": true,
+    "structural_p4plus": {
+      "11": {
+        "baseline": 0.268907563,
+        "candidate": 0.270984949
+      },
+      "22": {
+        "baseline": 0.4812030075,
+        "candidate": 0.4978757053
+      },
+      "33": {
+        "baseline": 0.6449144251,
+        "candidate": 0.6671625588
+      },
+      "55": {
+        "baseline": 0.8384195784,
+        "candidate": 0.8674493721
+      }
+    },
+    "p5plus_unchanged": true,
+    "p6_unchanged": true
+  },
+  "walk_forward": {
+    "latest50": {
+      "11": {
+        "p4plus_baseline": 0.02,
+        "p4plus_candidate": 0.06
+      },
+      "22": {
+        "p4plus_baseline": 0.02,
+        "p4plus_candidate": 0.06
+      },
+      "33": {
+        "p4plus_baseline": 0.06,
+        "p4plus_candidate": 0.1
+      },
+      "55": {
+        "p4plus_baseline": 0.1,
+        "p4plus_candidate": 0.1,
+        "p5plus_baseline": 0.02,
+        "p5plus_candidate": 0
+      }
+    },
+    "prior100": {
+      "11": {
+        "p4plus_baseline": 0.01,
+        "p4plus_candidate": 0
+      },
+      "22": {
+        "p4plus_baseline": 0.03,
+        "p4plus_candidate": 0.01
+      },
+      "33": {
+        "p4plus_baseline": 0.05,
+        "p4plus_candidate": 0.02
+      },
+      "55": {
+        "p4plus_baseline": 0.05,
+        "p4plus_candidate": 0.05
+      }
+    },
+    "pool_hits_ge4_draws": 45,
+    "interpretation": "Uniform structural coverage improves exact K22-space 4+ conversion, but historical winner positions within K22 are not uniform by score rank. The current score-aware extension preserved the only observed historical 5+ at 55 lines. Do not promote v4."
+  },
+  "draw76_posthoc": {
+    "actual_first6_unchanged": true,
+    "baseline_best_55": 3,
+    "candidate_best_55": 4,
+    "caution": "Draw 76 was not used to choose the candidate, but one draw is not sufficient for promotion."
+  },
+  "next_step": "Develop rank-aware v5 using older 100 draws only, freeze it, then evaluate on latest 50 holdout."
+}
