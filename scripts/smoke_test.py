@@ -122,7 +122,7 @@ assert 6==a["selection_misses"]+a["conversion_misses"]+3
 print("SHADOW_ATTRIBUTION_OK")
 
 cycle_rows=[]
-for i in range(6):
+for i in range(8):
     cycle_rows.append({
         "status":"pending","game":"6/49","target_draw_no":76,
         "shadow_id":f"pending-{i}","target_date":"2099-09-27",
@@ -131,7 +131,7 @@ for i in range(6):
 cycle=shadow_cycle_health(cycle_rows)
 assert len(cycle)==1
 assert cycle.iloc[0].cycle_status=="READY"
-assert int(cycle.iloc[0].frozen_variants)==6
+assert int(cycle.iloc[0].frozen_variants)==8
 assert bool(cycle.iloc[0].freeze_before_target)
 print("SHADOW_CYCLE_OK")
 
@@ -167,3 +167,20 @@ assert int(crow.p4_gains)==1 and int(crow.p4_losses)==0
 assert int(crow.perfect_pool_draws)==1
 assert round(float(crow.cumulative_payout_delta_eur),6)==10.0
 print("CONVERSION_SCOREBOARD_OK")
+
+
+from lottery.conversion_v5 import build_rank_aware_v5
+
+draws=get_draws("6/49")
+target=next_draw_info("6/49")
+state=generate_mode("6/49","649_k22_22",draws,target["draw_no"])
+v5=build_rank_aware_v5(
+    state["tickets"][:6],state["pool"],state["diagnostics"],22,target["draw_no"]
+)
+assert len(v5)==22
+assert len(set(v5))==22
+assert v5[:6]==state["tickets"][:6]
+for i in range(len(v5)):
+    for j in range(i):
+        assert len(set(v5[i]) & set(v5[j]))<=3
+print("K22_V5_INVARIANTS_OK")
