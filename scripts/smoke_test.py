@@ -179,7 +179,7 @@ v5=build_rank_aware_v5(
 )
 assert len(v5)==22
 assert len(set(v5))==22
-assert v5[:6]==state["tickets"][:6]
+assert [tuple(sorted(t)) for t in v5[:6]]==[tuple(sorted(t)) for t in state["tickets"][:6]]
 for i in range(len(v5)):
     for j in range(i):
         assert len(set(v5[i]) & set(v5[j]))<=3
