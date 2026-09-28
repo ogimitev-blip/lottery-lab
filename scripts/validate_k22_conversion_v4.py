@@ -74,13 +74,14 @@ def main():
         actual=draws[i]
         hist=draws[i+1:]
         pool,adds,diag,score=current_pool_649(hist,22)
+        pool_hits=len(set(map(int,pool)) & set(map(int,actual)))
         base6=build_broad_six(pool,score,649)
         base55=extend_sequence(base6,pool,score,55,20260917+490000)
         cand55=map_candidate(cand_seq,pool,score)
         for size in SIZES:
             for kind,tickets in [("baseline",base55[:size]),("candidate",cand55[:size])]:
                 m=score_tickets(tickets,actual)
-                rows.append({"target_index":i,"size":size,"kind":kind,**m})
+                rows.append({"target_index":i,"size":size,"kind":kind,"pool_hits":pool_hits,**m})
     df=pd.DataFrame(rows)
     windows={"LATEST_50":(0,50),"PRIOR_100":(50,min(150,limit)),"FULL_150":(0,min(150,limit))}
     out={}
@@ -96,10 +97,41 @@ def main():
                 "candidate":summarize(cand),
                 "pairwise":pairwise(cand,base),
             }
+    conditional={}
+    for ph in [4,5,6]:
+        conditional[str(ph)]={}
+        for size in SIZES:
+            sub=df[(df.pool_hits==ph)&(df["size"]==size)]
+            if sub.empty:
+                conditional[str(ph)][str(size)]={"draws":0}
+                continue
+            base=sub[sub.kind=="baseline"]
+            cand=sub[sub.kind=="candidate"]
+            conditional[str(ph)][str(size)]={
+                "draws":int(len(base)),
+                "baseline":summarize(base),
+                "candidate":summarize(cand),
+                "pairwise":pairwise(cand,base),
+            }
+    high=df[(df.pool_hits>=4)]
+    conditional_ge4={}
+    for size in SIZES:
+        sub=high[high["size"]==size]
+        base=sub[sub.kind=="baseline"]
+        cand=sub[sub.kind=="candidate"]
+        conditional_ge4[str(size)]={
+            "draws":int(len(base)),
+            "baseline":summarize(base),
+            "candidate":summarize(cand),
+            "pairwise":pairwise(cand,base),
+        }
+
     print("K22_V4_WALKFORWARD_BEGIN")
     print(json.dumps({
         "targets":limit,
         "windows":out,
+        "conditional_by_pool_hits":conditional,
+        "conditional_pool_hits_ge4":conditional_ge4,
         "note":"Strict target-by-target walk-forward. Candidate conversion layout was frozen before this historical validation and mapped only by score rank within each pre-draw K22 pool."
     },indent=2))
     print("K22_V4_WALKFORWARD_END")
