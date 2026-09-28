@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-28",
+  "candidate": "K22 conversion v5 rank-aware",
+  "status": "PROSPECTIVE_SHADOW_ONLY",
+  "production_changed": false,
+  "first_six_policy": "Existing production broad-six preserved exactly",
+  "training": {
+    "source": "2026 older 100 walk-forward targets only",
+    "mean_k22_pool_hits": 2.92,
+    "rank_calibration": "Beta-shrunk then monotonic/isotonic",
+    "observation": "Calibration was weakly rank-informative: ranks 1-12 received only modestly higher weight than ranks 13-22."
+  },
+  "latest50_validation": {
+    "11_lines": {
+      "p4plus_base": 0.02,
+      "p4plus_v5": 0.02,
+      "p5plus_base": 0,
+      "p5plus_v5": 0,
+      "mean_best_delta": -0.06
+    },
+    "22_lines": {
+      "p4plus_base": 0.02,
+      "p4plus_v5": 0.04,
+      "p5plus_base": 0,
+      "p5plus_v5": 0.02,
+      "mean_best_delta": -0.02
+    },
+    "33_lines": {
+      "p4plus_base": 0.06,
+      "p4plus_v5": 0.04,
+      "p5plus_base": 0,
+      "p5plus_v5": 0.02,
+      "mean_best_delta": -0.12
+    },
+    "55_lines": {
+      "p4plus_base": 0.1,
+      "p4plus_v5": 0.08,
+      "p5plus_base": 0.02,
+      "p5plus_v5": 0.02,
+      "mean_best_delta": -0.06
+    }
+  },
+  "archive_2020_2023_validation": {
+    "draws": 250,
+    "22_lines": {
+      "p4plus_base": 0.016,
+      "p4plus_v5": 0.02,
+      "p5plus_base": 0,
+      "p5plus_v5": 0
+    },
+    "33_lines": {
+      "p4plus_base": 0.024,
+      "p4plus_v5": 0.032,
+      "p5plus_base": 0,
+      "p5plus_v5": 0.004
+    },
+    "55_lines": {
+      "p4plus_base": 0.04,
+      "p4plus_v5": 0.052,
+      "p5plus_base": 0,
+      "p5plus_v5": 0.004
+    }
+  },
+  "decision": {
+    "promote": false,
+    "reason": "Rare-prize conversion improved in some windows, especially archive 33/55 and latest-50 22, but performance was not consistently better across spend levels and mean best-hit performance sometimes declined.",
+    "prospective_test": "Draw 77: K22-22 production vs K22-22 conversion v5, frozen before 2026-10-01, actual spend EUR 0."
+  },
+  "warning": "The standalone v5 draw-76 posthoc block in the original research run was invalid because draw 76 had already been synced into history; it is excluded from the decision. Walk-forward target validation remained leakage-free."
+}
