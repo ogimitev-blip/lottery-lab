@@ -18,11 +18,17 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: freeze-shadow-experiments
+  cancel-in-progress: false
+
 jobs:
   freeze:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Refresh main before freezing
+        run: git pull --ff-only origin main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
