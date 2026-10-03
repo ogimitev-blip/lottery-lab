@@ -1,0 +1,99 @@
+{
+  "draw_no": 77,
+  "date": "2026-10-01",
+  "official_results": {
+    "6/49": {
+      "numbers": [
+        16,
+        26,
+        36,
+        41,
+        45,
+        48
+      ],
+      "jackpot_eur": 4849337.75,
+      "payout3_eur": 8,
+      "payout4_eur": 72.9,
+      "payout5_eur": 2494.1,
+      "winners6": 0
+    },
+    "6/42": {
+      "numbers": [
+        4,
+        5,
+        12,
+        18,
+        25,
+        32
+      ],
+      "jackpot_eur": 1303985.99,
+      "payout3_eur": 3.1,
+      "payout4_eur": 21.8,
+      "payout5_eur": 607.3,
+      "winners6": 0
+    }
+  },
+  "recommended_allocation_counterfactual": {
+    "note": "This records the recommended 16-line 6/49 + 6-line 6/42 setup; it is not marked as actually played because the user did not explicitly confirm purchase.",
+    "total_stake_eur": 19.2,
+    "6/49": {
+      "lines": 16,
+      "stake_eur": 14.4,
+      "pool_hits": 3,
+      "best_ticket_hits": 2,
+      "payout_eur": 0,
+      "net_eur": -14.4
+    },
+    "6/42": {
+      "lines": 6,
+      "stake_eur": 4.8,
+      "pool_hits": 5,
+      "best_ticket_hits": 2,
+      "payout_eur": 0,
+      "net_eur": -4.8
+    },
+    "combined_payout_eur": 0,
+    "combined_net_eur": -19.2
+  },
+  "previous_allocation_counterfactual": {
+    "note": "Counterfactual old 6-line 6/49 + 18-line 6/42 allocation.",
+    "total_stake_eur": 19.8,
+    "6/49": {
+      "lines": 6,
+      "stake_eur": 5.4,
+      "pool_hits": 3,
+      "best_ticket_hits": 2,
+      "payout_eur": 0
+    },
+    "6/42": {
+      "lines": 18,
+      "stake_eur": 14.4,
+      "pool_hits": 5,
+      "best_ticket_hits": 3,
+      "winning_3_lines": 2,
+      "payout_eur": 6.2
+    },
+    "combined_payout_eur": 6.2,
+    "combined_net_eur": -13.6
+  },
+  "shadow_findings": {
+    "6/49": {
+      "selection": "K22 captured 3/6 (16,26,48); missed 36,41,45.",
+      "v4_11": "best 2/6; no prize",
+      "production_22": "best 2/6; no prize",
+      "v5_22": "best 2/6; no prize",
+      "interpretation": "Conversion variants could not help materially because the pool itself contained only 3 winners."
+    },
+    "6/42": {
+      "selection": "K28 captured 5/6 (4,5,12,18,25); missed only 32.",
+      "base18": "2 lines at 3/6; notional payout €6.20",
+      "crowd18": "2 lines at 3/6; same notional payout €6.20",
+      "base30": "3 lines at 3/6; notional payout €9.30",
+      "crowd30": "one 4/6 plus one 3/6; notional payout €24.90 on €24 stake",
+      "base50": "5 lines at 3/6; notional payout €15.50",
+      "crowd50": "1 line at 3/6; notional payout €3.10",
+      "interpretation": "Strong selection event; anti-crowd 30-line conversion happened to outperform on this one draw, but sample is far too small for promotion."
+    }
+  },
+  "decision": "Do not change production or v4/v5 status based on draw 77. Allocation policy needs multi-draw evaluation; one draw favored the old 6+18 split, while draw 76 favored 6/49 selection strongly."
+}
