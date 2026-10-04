@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-04",
+  "status": "RESEARCH_COMPLETE_NO_PRODUCTION_MODEL_CHANGE",
+  "budget_eur": 20,
+  "current_reference_jackpots_eur": {
+    "6/49": 4849337.75,
+    "6/42": 1303985.99
+  },
+  "current_jackpot_value_per_staked_eur": {
+    "6/49": 0.3853134978,
+    "6/42": 0.3107222612,
+    "ratio_649_to_642": 1.240052
+  },
+  "primary_150_draw_walkforward": {
+    "6+18": {
+      "p3plus": 0.5466666667,
+      "p4plus": 0.0466666667,
+      "p5plus": 0,
+      "mean_34_proxy_eur": 4.502,
+      "raw_jackpot_ev_eur": 6.5550934489,
+      "raw_jackpot_odds": 259041.46
+    },
+    "8+16": {
+      "p3plus": 0.56,
+      "p4plus": 0.0466666667,
+      "p5plus": 0,
+      "mean_34_proxy_eur": 4.803,
+      "raw_jackpot_ev_eur": 6.7515021271,
+      "raw_jackpot_odds": 276079.06
+    },
+    "14+9": {
+      "p3plus": 0.44,
+      "p4plus": 0.04,
+      "p5plus": 0,
+      "mean_34_proxy_eur": 4.5413333333,
+      "raw_jackpot_ev_eur": 7.0921503527,
+      "raw_jackpot_odds": 368077.84
+    },
+    "16+6": {
+      "p3plus": 0.38,
+      "p4plus": 0.0266666667,
+      "p5plus": 0,
+      "mean_34_proxy_eur": 3.964,
+      "raw_jackpot_ev_eur": 7.0399812219,
+      "raw_jackpot_odds": 437072
+    }
+  },
+  "stability": {
+    "latest50": {
+      "6+18": {
+        "p3plus": 0.64,
+        "p4plus": 0.06
+      },
+      "8+16": {
+        "p3plus": 0.66,
+        "p4plus": 0.06
+      },
+      "14+9": {
+        "p3plus": 0.5,
+        "p4plus": 0.02
+      },
+      "16+6": {
+        "p3plus": 0.42,
+        "p4plus": 0.02
+      }
+    },
+    "prior100": {
+      "6+18": {
+        "p3plus": 0.5,
+        "p4plus": 0.04
+      },
+      "8+16": {
+        "p3plus": 0.51,
+        "p4plus": 0.04
+      },
+      "14+9": {
+        "p3plus": 0.41,
+        "p4plus": 0.05
+      },
+      "16+6": {
+        "p3plus": 0.36,
+        "p4plus": 0.03
+      }
+    },
+    "archive_2020_2023_300": {
+      "6+18": {
+        "p3plus": 0.48,
+        "p4plus": 0.0333333333,
+        "p5plus": 0
+      },
+      "8+16": {
+        "p3plus": 0.4566666667,
+        "p4plus": 0.0333333333,
+        "p5plus": 0.0033333333
+      },
+      "14+9": {
+        "p3plus": 0.3666666667,
+        "p4plus": 0.0366666667,
+        "p5plus": 0.0033333333
+      },
+      "16+6": {
+        "p3plus": 0.3466666667,
+        "p4plus": 0.03,
+        "p5plus": 0.0033333333
+      }
+    }
+  },
+  "official_payout_sample": {
+    "draws": 13,
+    "warning": "Too small to optimize on; secondary only.",
+    "6+18": {
+      "roi": -0.7614075793,
+      "payout_eur": 61.7
+    },
+    "8+16": {
+      "roi": -0.7618501529,
+      "payout_eur": 62.3
+    },
+    "16+6": {
+      "roi": -0.7693829114,
+      "payout_eur": 58.3
+    }
+  },
+  "decision": {
+    "default_allocation_now": "8+16",
+    "rationale": "Best current compromise: preserves the 4+ rate of 6+18 in the 150-draw test, slightly improves 3+ and stable 3/4 payout proxy, increases jackpot-value exposure to 6/49, and avoids the large hit-frequency deterioration of 16+6.",
+    "jackpot_tilt_candidate": "14+9",
+    "not_recommended_now": "16+6",
+    "production_models_unchanged": true
+  },
+  "caveat": "Lottery draws remain random; these backtests are descriptive and do not establish predictive advantage. Keep total spend fixed."
+}
