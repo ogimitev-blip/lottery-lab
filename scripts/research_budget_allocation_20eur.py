@@ -37,9 +37,12 @@ def main():
     df49=load_draws_df("6/49").reset_index(drop=True)
     df42=load_draws_df("6/42").reset_index(drop=True)
     cols=[f"n{i}" for i in range(1,7)]
-    d49n=pd.to_numeric(df49.draw_no,errors="coerce")
-    d42n=pd.to_numeric(df42.draw_no,errors="coerce")
-    common=sorted(set(map(int,d49n.dropna())) & set(map(int,d42n.dropna())), reverse=True)
+    df49["date_key"]=pd.to_datetime(df49.date,errors="coerce").dt.strftime("%Y-%m-%d")
+    df42["date_key"]=pd.to_datetime(df42.date,errors="coerce").dt.strftime("%Y-%m-%d")
+    common=sorted(
+        (set(df49.date_key.dropna()) & set(df42.date_key.dropna())),
+        reverse=True
+    )
 
     # Candidate allocations at ordinary-draw prices. Both games retain at least six lines.
     candidates=[]
@@ -51,9 +54,9 @@ def main():
 
     rows=[]
     used=0
-    for draw_no in common:
-        r49i=df49.index[d49n==draw_no]
-        r42i=df42.index[d42n==draw_no]
+    for date_key in common:
+        r49i=df49.index[df49.date_key==date_key]
+        r42i=df42.index[df42.date_key==date_key]
         if len(r49i)==0 or len(r42i)==0: continue
         i49=int(r49i[0]); i42=int(r42i[0])
         hist49=[list(map(int,row)) for row in df49.loc[i49+1:,cols].to_numpy().tolist()]
@@ -61,6 +64,7 @@ def main():
         if len(hist49)<MIN_HISTORY or len(hist42)<MIN_HISTORY: continue
         actual49=list(map(int,df49.loc[i49,cols].tolist()))
         actual42=list(map(int,df42.loc[i42,cols].tolist()))
+        draw_no=int(pd.to_numeric(df49.loc[i49,"draw_no"]))
 
         pool49,adds49,diag49,score49=current_pool_649(hist49,22)
         base49=build_broad_six(pool49,score49,649)
@@ -73,7 +77,7 @@ def main():
             s42=score(seq42[:n42],actual42)
             actual_cost=n49*line_price("6/49",draw_no)+n42*line_price("6/42",draw_no)
             rows.append({
-                "draw_no":draw_no,"n49":n49,"n42":n42,
+                "date":date_key,"draw_no":draw_no,"n49":n49,"n42":n42,
                 "ordinary_cost":ordinary_cost,"actual_cost":actual_cost,
                 "pool49":len(set(pool49)&set(actual49)),"pool42":len(set(pool42)&set(actual42)),
                 **{f"g49_{k}":v for k,v in s49.items()},
@@ -106,26 +110,28 @@ def main():
 
     # Official payout evaluation on draws where both games have metadata.
     m49=load_results_meta("6/49");m42=load_results_meta("6/42")
-    m49n=pd.to_numeric(m49.draw_no,errors="coerce")
-    m42n=pd.to_numeric(m42.draw_no,errors="coerce")
-    pcommon=sorted(set(map(int,m49n.dropna())) & set(map(int,m42n.dropna())), reverse=True)
+    m49=m49.copy(); m42=m42.copy()
+    m49["date_key"]=pd.to_datetime(m49.date,errors="coerce").dt.strftime("%Y-%m-%d")
+    m42["date_key"]=pd.to_datetime(m42.date,errors="coerce").dt.strftime("%Y-%m-%d")
+    pcommon=sorted(set(m49.date_key.dropna()) & set(m42.date_key.dropna()), reverse=True)
     payout_rows=[]
-    for draw_no in pcommon:
-        target=res[res.draw_no==draw_no]
+    for date_key in pcommon:
+        target=res[res.date==date_key]
         if target.empty: continue
-        r49=df49[pd.to_numeric(df49.draw_no)==draw_no].iloc[0]
-        r42=df42[pd.to_numeric(df42.draw_no)==draw_no].iloc[0]
+        r49=df49[df49.date_key==date_key].iloc[0]
+        r42=df42[df42.date_key==date_key].iloc[0]
+        draw_no=int(pd.to_numeric(r49.draw_no))
         actual49=list(map(int,r49[cols].tolist()));actual42=list(map(int,r42[cols].tolist()))
-        i49=int(df49.index[pd.to_numeric(df49.draw_no)==draw_no][0])
-        i42=int(df42.index[pd.to_numeric(df42.draw_no)==draw_no][0])
+        i49=int(df49.index[df49.date_key==date_key][0])
+        i42=int(df42.index[df42.date_key==date_key][0])
         hist49=[list(map(int,row)) for row in df49.loc[i49+1:,cols].to_numpy().tolist()]
         hist42=[list(map(int,row)) for row in df42.loc[i42+1:,cols].to_numpy().tolist()]
         pool49,_,_,score49=current_pool_649(hist49,22)
         seq49=extend_sequence(build_broad_six(pool49,score49,649),pool49,score49,N49_MAX,20260917+490000)
         pool42,_,_=current_pool_642(hist42,28)
         seq42=map_positions(pool42,load_custom_wheel()[:N42_MAX])
-        meta49=m49[pd.to_numeric(m49.draw_no)==draw_no].iloc[0]
-        meta42=m42[pd.to_numeric(m42.draw_no)==draw_no].iloc[0]
+        meta49=m49[m49.date_key==date_key].iloc[0]
+        meta42=m42[m42.date_key==date_key].iloc[0]
         for n49,n42,ordinary_cost in candidates:
             h49=[len(set(t)&set(actual49)) for t in seq49[:n49]]
             h42=[len(set(t)&set(actual42)) for t in seq42[:n42]]
@@ -133,7 +139,7 @@ def main():
             p49=payout_for(h49,meta49);p42=payout_for(h42,meta42)
             jackpot_ev=n49*float(meta49.jackpot_eur)/math.comb(49,6)+n42*float(meta42.jackpot_eur)/math.comb(42,6)
             payout_rows.append({
-                "draw_no":draw_no,"n49":n49,"n42":n42,"cost":cost,
+                "date":date_key,"draw_no":draw_no,"n49":n49,"n42":n42,"cost":cost,
                 "p49":p49,"p42":p42,"payout":p49+p42,"net":p49+p42-cost,
                 "jackpot_ev":jackpot_ev,
             })
@@ -169,8 +175,8 @@ def main():
     print("ALLOC_BEGIN")
     print(json.dumps({
         "method":{
-            "structural_window_draws":int(res.draw_no.nunique()),
-            "official_payout_common_draws":int(pay.draw_no.nunique()) if not pay.empty else 0,
+            "structural_window_draws":int(res.date.nunique()),
+            "official_payout_common_draws":int(pay.date.nunique()) if not pay.empty else 0,
             "budget_eur":[BUDGET_MIN,BUDGET_MAX],
             "candidate_count":len(candidates),
             "note":"Strict walk-forward production pools/wheels. Structural metrics use up to 150 common draws. Official payout/ROI uses only draws with metadata for both games and is therefore a small-sample secondary metric. Jackpot EV is raw theoretical jackpot component and ignores jackpot splitting."
