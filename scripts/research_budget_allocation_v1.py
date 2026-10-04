@@ -143,7 +143,7 @@ def main():
 
     results=[]
     for n49,n42,current_cost in candidate_allocations():
-        proxy=[]
+        proxy=[];proxy34=[]
         any3=[];any4=[];any5=[];any6=[]
         best49=[];best42=[]
         n3tot=[];n4tot=[];n5tot=[]
@@ -152,6 +152,10 @@ def main():
             h49,h42=tickets_hits(row,n49,n42)
             allh=h49+h42
             proxy.append(proxy_payout(h49,refs49)+proxy_payout(h42,refs42))
+            proxy34.append(
+                proxy_payout(h49,{3:refs49[3],4:refs49[4]})+
+                proxy_payout(h42,{3:refs42[3],4:refs42[4]})
+            )
             any3.append(any(h>=3 for h in allh))
             any4.append(any(h>=4 for h in allh))
             any5.append(any(h>=5 for h in allh))
@@ -189,6 +193,7 @@ def main():
             "mean_4plus_lines":float(np.mean(n4tot)),
             "mean_5plus_lines":float(np.mean(n5tot)),
             "lower_tier_proxy_eur_per_draw":proxy_lower,
+            "lower_34_proxy_eur_per_draw":float(np.mean(proxy34)),
             "current_raw_jackpot_ev_eur":jackpot_ev,
             "current_raw_jackpot_prob":jackpot_prob,
             "current_raw_jackpot_odds":1/jackpot_prob if jackpot_prob else None,
@@ -231,6 +236,34 @@ def main():
     selected=df[df.apply(lambda r:(int(r.n49),int(r.n42)) in keys,axis=1)].copy()
     top=df.sort_values("balanced_rank").head(8)
 
+    # Stability windows for the most policy-relevant allocations.
+    window_keys=[(4,20),(6,18),(8,16),(10,13),(12,11),(14,9),(16,6),(22,0),(0,25)]
+    windowed={}
+    for n49,n42 in window_keys:
+        if not any((a==n49 and b==n42) for a,b,_ in candidate_allocations()):
+            continue
+        rec={}
+        for wname,lo,hi in [("LATEST_50",0,50),("PRIOR_100",50,150),("FULL_150",0,150)]:
+            p3=[];p4=[];p5=[];pr34=[]
+            for row in hist[lo:hi]:
+                h49,h42=tickets_hits(row,n49,n42)
+                allh=h49+h42
+                p3.append(any(h>=3 for h in allh))
+                p4.append(any(h>=4 for h in allh))
+                p5.append(any(h>=5 for h in allh))
+                pr34.append(
+                    proxy_payout(h49,{3:refs49[3],4:refs49[4]})+
+                    proxy_payout(h42,{3:refs42[3],4:refs42[4]})
+                )
+            rec[wname]={
+                "draws":len(p3),
+                "p_any_3plus":float(np.mean(p3)),
+                "p_any_4plus":float(np.mean(p4)),
+                "p_any_5plus":float(np.mean(p5)),
+                "mean_34_proxy_eur":float(np.mean(pr34)),
+            }
+        windowed[f"{n49}+{n42}"]=rec
+
     out={
         "method":{
             "budget_eur":BUDGET,
@@ -244,6 +277,7 @@ def main():
         "median_tier_payouts":{"6/49":refs49,"6/42":refs42},
         "jackpot_value":jackpot_value,
         "selected_allocations":selected.to_dict(orient="records"),
+        "windowed_selected":windowed,
         "top_balanced":top.to_dict(orient="records"),
         "all_allocations":df.to_dict(orient="records"),
     }
