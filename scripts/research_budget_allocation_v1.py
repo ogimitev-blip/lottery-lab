@@ -56,28 +56,21 @@ def proxy_payout(hits,refs):
 
 
 def build_target_rows():
-    d49=load_draws_df("6/49")
-    d42=load_draws_df("6/42")
-    by49={int(r.draw_no):[int(r[f"n{i}"]) for i in range(1,7)] for _,r in d49.iterrows()}
-    by42={int(r.draw_no):[int(r[f"n{i}"]) for i in range(1,7)] for _,r in d42.iterrows()}
-    common=sorted(set(by49)&set(by42),reverse=True)
-    # Each game's history is independently sliced by draw number to avoid leakage.
-    all49=numbers(d49)
-    all42=numbers(d42)
-    nos49=[int(x) for x in d49.draw_no.tolist()]
-    nos42=[int(x) for x in d42.draw_no.tolist()]
-    idx49={n:i for i,n in enumerate(nos49)}
-    idx42={n:i for i,n in enumerate(nos42)}
+    d49=load_draws_df("6/49").copy()
+    d42=load_draws_df("6/42").copy()
+    cols=[f"n{i}" for i in range(1,7)]
+    d49=d49.dropna(subset=cols).reset_index(drop=True)
+    d42=d42.dropna(subset=cols).reset_index(drop=True)
+    all49=[list(map(int,row)) for row in d49[cols].to_numpy().tolist()]
+    all42=[list(map(int,row)) for row in d42[cols].to_numpy().tolist()]
 
     rows=[]
     wheel42=load_custom_wheel()
-    for draw_no in common:
-        i49=idx49[draw_no]; i42=idx42[draw_no]
-        hist49=all49[i49+1:]
-        hist42=all42[i42+1:]
-        if len(hist49)<MIN_HISTORY or len(hist42)<MIN_HISTORY:
-            continue
-        actual49=by49[draw_no]; actual42=by42[draw_no]
+    limit=min(MAX_TARGETS,len(all49)-MIN_HISTORY,len(all42)-MIN_HISTORY)
+    for i in range(max(0,limit)):
+        actual49=all49[i]; actual42=all42[i]
+        hist49=all49[i+1:]
+        hist42=all42[i+1:]
 
         pool49,adds49,diag49,score49=current_pool_649(hist49,22)
         broad4=build_broad_four(pool49,score49)
@@ -91,7 +84,13 @@ def build_target_rows():
         hit4=[len(set(t)&aset49) for t in broad4]
         hit49=[len(set(t)&aset49) for t in seq49]
         hit42=[len(set(t)&aset42) for t in seq42]
+
+        dn49=pd.to_numeric(pd.Series([d49.loc[i,"draw_no"]]),errors="coerce").iloc[0] if "draw_no" in d49.columns else np.nan
+        dn42=pd.to_numeric(pd.Series([d42.loc[i,"draw_no"]]),errors="coerce").iloc[0] if "draw_no" in d42.columns else np.nan
+        draw_no=int(dn49) if pd.notna(dn49) and pd.notna(dn42) and int(dn49)==int(dn42) else None
+
         rows.append({
+            "target_index":i,
             "draw_no":draw_no,
             "hit4":hit4,
             "hit49":hit49,
@@ -99,10 +98,7 @@ def build_target_rows():
             "pool49_hits":len(set(pool49)&aset49),
             "pool42_hits":len(set(pool42)&aset42),
         })
-        if len(rows)>=MAX_TARGETS:
-            break
     return rows
-
 
 def tickets_hits(row,n49,n42):
     if n49==0:
@@ -167,7 +163,7 @@ def main():
             n5tot.append(sum(h>=5 for h in allh))
 
             dn=row["draw_no"]
-            if dn in mi49.index and dn in mi42.index:
+            if dn is not None and dn in mi49.index and dn in mi42.index:
                 r49=mi49.loc[dn];r42=mi42.loc[dn]
                 if isinstance(r49,pd.DataFrame):r49=r49.iloc[0]
                 if isinstance(r42,pd.DataFrame):r42=r42.iloc[0]
