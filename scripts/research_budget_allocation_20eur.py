@@ -37,7 +37,9 @@ def main():
     df49=load_draws_df("6/49").reset_index(drop=True)
     df42=load_draws_df("6/42").reset_index(drop=True)
     cols=[f"n{i}" for i in range(1,7)]
-    common=sorted(set(map(int,df49.draw_no)) & set(map(int,df42.draw_no)), reverse=True)
+    d49n=pd.to_numeric(df49.draw_no,errors="coerce")
+    d42n=pd.to_numeric(df42.draw_no,errors="coerce")
+    common=sorted(set(map(int,d49n.dropna())) & set(map(int,d42n.dropna())), reverse=True)
 
     # Candidate allocations at ordinary-draw prices. Both games retain at least six lines.
     candidates=[]
@@ -50,8 +52,8 @@ def main():
     rows=[]
     used=0
     for draw_no in common:
-        r49i=df49.index[pd.to_numeric(df49.draw_no)==draw_no]
-        r42i=df42.index[pd.to_numeric(df42.draw_no)==draw_no]
+        r49i=df49.index[d49n==draw_no]
+        r42i=df42.index[d42n==draw_no]
         if len(r49i)==0 or len(r42i)==0: continue
         i49=int(r49i[0]); i42=int(r42i[0])
         hist49=[list(map(int,row)) for row in df49.loc[i49+1:,cols].to_numpy().tolist()]
@@ -104,7 +106,9 @@ def main():
 
     # Official payout evaluation on draws where both games have metadata.
     m49=load_results_meta("6/49");m42=load_results_meta("6/42")
-    pcommon=sorted(set(map(int,m49.draw_no)) & set(map(int,m42.draw_no)), reverse=True)
+    m49n=pd.to_numeric(m49.draw_no,errors="coerce")
+    m42n=pd.to_numeric(m42.draw_no,errors="coerce")
+    pcommon=sorted(set(map(int,m49n.dropna())) & set(map(int,m42n.dropna())), reverse=True)
     payout_rows=[]
     for draw_no in pcommon:
         target=res[res.draw_no==draw_no]
