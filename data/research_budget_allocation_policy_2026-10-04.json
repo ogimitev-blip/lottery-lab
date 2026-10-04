@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-04",
+  "status": "RESEARCH_POLICY_V1",
+  "production_models_changed": false,
+  "evidence": {
+    "archive_walkforward_draws": 300,
+    "current_2026_walkforward_draws": 150,
+    "official_payout_common_draws": 13,
+    "current_confirmed_jackpots_eur": {
+      "6/49": 4849337.75,
+      "6/42": 1303985.99
+    },
+    "jackpot_ev_per_staked_eur": {
+      "6/49": 0.3853134978,
+      "6/42": 0.3107222612
+    }
+  },
+  "allocations": {
+    "balanced_default": {
+      "n49": 8,
+      "n42": 16,
+      "cost_eur": 20,
+      "archive": {
+        "p_any3": 0.4566666667,
+        "p_any4": 0.0333333333,
+        "p_any5": 0.0033333333,
+        "mean_best": 2.4833333333,
+        "jackpot_ev_per_euro": 0.3375751064
+      },
+      "current150": {
+        "p_any3": 0.56,
+        "p_any4": 0.0466666667
+      },
+      "rationale": "Best robust compromise across hit frequency, 4+ coverage and current jackpot tilt."
+    },
+    "hit_frequency": {
+      "n49": 6,
+      "n42": 18,
+      "cost_eur": 19.8,
+      "archive": {
+        "p_any3": 0.48,
+        "p_any4": 0.0333333333,
+        "p_any5": 0,
+        "mean_best": 2.4966666667,
+        "jackpot_ev_per_euro": 0.3310653257
+      },
+      "rationale": "Highest archive 3+ frequency / mean best among tested mixed allocations."
+    },
+    "jackpot_tilt": {
+      "n49": 14,
+      "n42": 9,
+      "cost_eur": 19.8,
+      "archive": {
+        "p_any3": 0.3666666667,
+        "p_any4": 0.0366666667,
+        "p_any5": 0.0033333333,
+        "mean_best": 2.3866666667,
+        "jackpot_ev_per_euro": 0.3581894118
+      },
+      "rationale": "Higher 6/49 exposure while retaining 6/42; best archive 4+ rate among tested allocations."
+    },
+    "rejected_as_default": {
+      "n49": 16,
+      "n42": 6,
+      "cost_eur": 19.2,
+      "archive": {
+        "p_any3": 0.3466666667,
+        "p_any4": 0.03,
+        "p_any5": 0.0033333333,
+        "mean_best": 2.3466666667,
+        "jackpot_ev_per_euro": 0.3666656886
+      },
+      "rationale": "Maximizes jackpot-value tilt but materially gives up hit frequency and mean best-hit performance."
+    }
+  },
+  "decision": "Use 8+16 as the default ~€20 allocation while the confirmed 6/49 jackpot-value advantage is moderate (~24%). Use 14+9 only as an explicit jackpot-tilt choice; do not default to 16+6.",
+  "caveats": [
+    "Lottery draws remain unpredictable; historical hit-rate differences do not imply future predictability.",
+    "Official payout sample is only 13 common draws and is secondary evidence.",
+    "Jackpot EV ignores sharing with other jackpot winners.",
+    "Do not increase the precommitted budget in response to recent draws."
+  ]
+}
