@@ -41,10 +41,12 @@ def random_threshold():
         pairs.append((a,t))
     scores=np.asarray(scores,dtype=int)
     q95=int(np.quantile(scores,0.95,method="higher"))
-    trigger_rate=float((scores>=q95).mean())
+    trigger_min=q95+1
+    trigger_rate=float((scores>=trigger_min).mean())
     return {
         "score_formula":"adjacent_pairs + 2*consecutive_triples",
         "q95_score":q95,
+        "trigger_score_min":trigger_min,
         "random_trigger_rate":trigger_rate,
         "samples":RANDOM_POOLS,
         "adj_mean":float(np.mean([a for a,t in pairs])),
@@ -226,7 +228,7 @@ def summarize(df):
 
 def main():
     threshold_meta=random_threshold()
-    threshold=int(threshold_meta["q95_score"])
+    threshold=int(threshold_meta["trigger_score_min"])
 
     cur=load_draws_df("6/49")
     cols=[f"n{i}" for i in range(1,7)]
@@ -239,7 +241,7 @@ def main():
     print("K22_EXTREME_GUARD_BEGIN")
     print(json.dumps({
         "design":{
-            "trigger":"cluster_score >= random K22 95th-percentile threshold",
+            "trigger":"cluster_score > random K22 95th-percentile value (integer trigger_score_min)",
             "threshold":threshold_meta,
             "max_swaps":MAX_SWAPS,
             "protected":"repeat additions",
