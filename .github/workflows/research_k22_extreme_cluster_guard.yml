@@ -1,0 +1,20 @@
+name: Research K22 Extreme Cluster Guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/research_k22_extreme_cluster_guard.py"
+      - ".github/workflows/research_k22_extreme_cluster_guard.yml"
+  workflow_dispatch:
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: PYTHONPATH=. python scripts/research_k22_extreme_cluster_guard.py
