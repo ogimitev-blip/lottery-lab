@@ -139,10 +139,12 @@ def evaluate(draws,max_targets,label,threshold):
         pool_base=len(set(base)&set(actual))
         pool_cand=len(set(cand)&set(actual))
         bseq=sequence(base,score,max(SIZES))
-        cseq=sequence(cand,score,max(SIZES))
+        # If the guard did not trigger, candidate == production by definition.
+        # Avoid rebuilding an identical wheel on the ~95% non-extreme draws.
+        cseq=bseq if not meta["triggered"] else sequence(cand,score,max(SIZES))
         for n in SIZES:
             bm=hit_metrics(bseq[:n],actual)
-            cm=hit_metrics(cseq[:n],actual)
+            cm=bm if not meta["triggered"] else hit_metrics(cseq[:n],actual)
             rows.append({
                 "dataset":label,"target_index":i,"size":n,
                 "pool_hits_base":pool_base,"pool_hits_cand":pool_cand,
