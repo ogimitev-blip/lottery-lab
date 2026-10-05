@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-05",
+  "test": "K22-RZPLUS-LZPROTECT v1",
+  "status": "PROSPECTIVE_SHADOW_ONLY",
+  "design": {
+    "ps": "lz .40 unchanged; rz .20→.25; ch .15→.10; rp .15; dh .10",
+    "momentum": "rz .35→.40; tz .25→.20; rp .15; dh .15; ch .10",
+    "unchanged": [
+      "FM outer weights",
+      "ensemble outer weights",
+      "smooth",
+      "overdue lambda 0.75",
+      "repeat/flex overlay",
+      "production wheel algorithm"
+    ],
+    "grid_search": false
+  },
+  "retrospective": {
+    "current150": {
+      "pool_base_mean": 2.9,
+      "pool_candidate_mean": 2.8933333333,
+      "pool_p4plus_base": 0.3,
+      "pool_p4plus_candidate": 0.28,
+      "pool_p5plus_base": 0.1066666667,
+      "pool_p5plus_candidate": 0.1066666667,
+      "pool_p6_base": 0.02,
+      "pool_p6_candidate": 0.0266666667,
+      "lines10_p3plus_base": 0.24,
+      "lines10_p3plus_candidate": 0.1733333333,
+      "lines10_p4plus_base": 0.0133333333,
+      "lines10_p4plus_candidate": 0.0066666667
+    },
+    "latest50": {
+      "pool_base_mean": 2.88,
+      "pool_candidate_mean": 2.86,
+      "pool_p5plus_base": 0.12,
+      "pool_p5plus_candidate": 0.12,
+      "pool_p6_base": 0.02,
+      "pool_p6_candidate": 0.04,
+      "lines22_p4plus_base": 0.02,
+      "lines22_p4plus_candidate": 0.06,
+      "lines10_p3plus_base": 0.24,
+      "lines10_p3plus_candidate": 0.22
+    },
+    "archive300": {
+      "pool_base_mean": 2.72,
+      "pool_candidate_mean": 2.73,
+      "pool_p4plus_base": 0.24,
+      "pool_p4plus_candidate": 0.2533333333,
+      "pool_p5plus_base": 0.0633333333,
+      "pool_p5plus_candidate": 0.0633333333,
+      "pool_p6_base": 0.0066666667,
+      "pool_p6_candidate": 0.0066666667,
+      "lines10_p3plus_base": 0.1366666667,
+      "lines10_p3plus_candidate": 0.1666666667,
+      "lines10_p4plus_base": 0.0166666667,
+      "lines10_p4plus_candidate": 0.01,
+      "lines10_p5plus_base": 0.0033333333,
+      "lines10_p5plus_candidate": 0
+    },
+    "draws76_78": {
+      "76": "Pool 6/6 for both; 10-line best 3/6 for both.",
+      "77": "Pool 3/6 for both; 10-line best 2/6 for both.",
+      "78": "Pool 5/6 for both; 10-line best 3/6 for both, but production had 2×3+ vs challenger 1×3+."
+    }
+  },
+  "draw79": {
+    "target_date": "2026-10-08",
+    "shadow_id": "7ee1fe99c7a021a0f802",
+    "actual_money_spent_eur": 0,
+    "base_and_challenger_pool_membership_identical": true,
+    "implication": "Draw 79 isolates ranking/wheel-conversion effects because the K22 membership is unchanged while ticket construction differs."
+  },
+  "decision": {
+    "production_change": false,
+    "promote": false,
+    "freeze_shadow": true,
+    "rationale": "Pool-level tail capture is preserved retrospectively, but 10-line conversion is mixed and loses one archive 5+ event. Prospective evidence is required.",
+    "review_gate": "Do not consider promotion from a single draw. Accumulate prospective paired evidence; diagnostic review after 10-15 draws, promotion review only after 30+."
+  },
+  "caveat": "Lottery outcomes are random. Historical differences are descriptive and do not establish future predictive power."
+}
