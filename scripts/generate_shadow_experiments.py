@@ -8,6 +8,7 @@ import lottery.data as data
 from lottery.data import get_draws,next_draw_info
 from lottery.shadow import append_shadow_batch,read_shadow_rows
 from lottery.allocation_shadow import append_allocation_batch,read_allocation_rows
+from lottery.k22_score_shadow import append_row as append_k22_score_shadow,read_rows as read_k22_score_rows
 
 class DummyState(dict):
     pass
@@ -49,5 +50,16 @@ if (
 
 print("SHADOW_TOTAL_CREATED",created)
 print("SHADOW_LEDGER_ROWS",len(read_shadow_rows()))
+score_shadow_created=0
+t49=targets.get("6/49")
+if t49 and date.fromisoformat(str(t49["date"])) > date.today():
+    snew=append_k22_score_shadow(t49,get_draws("6/49"))
+    score_shadow_created=len(snew)
+    print("K22_SCORE_SHADOW_BATCH",t49["draw_no"],t49["date"],score_shadow_created)
+    for row in snew:
+        print("K22_SCORE_SHADOW_ROW",row["score_shadow_id"],row["label"])
+
 print("ALLOCATION_SHADOW_TOTAL_CREATED",allocation_created)
 print("ALLOCATION_SHADOW_LEDGER_ROWS",len(read_allocation_rows()))
+print("K22_SCORE_SHADOW_TOTAL_CREATED",score_shadow_created)
+print("K22_SCORE_SHADOW_LEDGER_ROWS",len(read_k22_score_rows()))
