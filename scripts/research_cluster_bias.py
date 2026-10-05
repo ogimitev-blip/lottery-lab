@@ -14,7 +14,8 @@ from lottery.wheels import build_broad_six, extend_sequence, map_positions
 
 MIN_HISTORY=100
 MAX_TARGETS=150
-SAMPLE_PER_POOL=6000
+SAMPLE_PER_POOL=4000
+GAME_RANDOM_SAMPLES=250000
 SEED=20261005
 
 MODES={
@@ -44,12 +45,15 @@ def features(nums):
     }
 
 
-def exact_game_benchmark(maxn):
-    sums=defaultdict(float); n=0
-    for c in itertools.combinations(range(1,maxn+1),6):
-        f=features(c);n+=1
-        for k,v in f.items(): sums[k]+=v
-    return {k:sums[k]/n for k in sums}|{"universe":n}
+def sampled_game_benchmark(maxn,rng,n=GAME_RANDOM_SAMPLES):
+    sums=defaultdict(float)
+    universe=np.arange(1,maxn+1,dtype=int)
+    for _ in range(n):
+        c=tuple(sorted(map(int,rng.choice(universe,6,replace=False))))
+        f=features(c)
+        for k,v in f.items():
+            sums[k]+=v
+    return {k:sums[k]/n for k in sums}|{"samples":n}
 
 
 def sampled_pool_benchmark(pool,rng,n=SAMPLE_PER_POOL):
@@ -86,18 +90,17 @@ def build_tickets(game,hist,n,target_no):
 
 
 def main():
-    bench={"6/42":exact_game_benchmark(42),"6/49":exact_game_benchmark(49)}
     rng=np.random.default_rng(SEED)
+    bench={"6/42":sampled_game_benchmark(42,rng),"6/49":sampled_game_benchmark(49,rng)}
     rows=[]
 
     for game in ("6/42","6/49"):
         df=load_draws_df(game)
         cols=[f"n{i}" for i in range(1,7)]
-        df=df[pd.to_numeric(df.draw_no,errors="coerce").notna()].copy()
-        df["draw_no"]=pd.to_numeric(df.draw_no,errors="coerce").astype(int)
         draws=[list(map(int,r)) for r in df[cols].to_numpy().tolist()]
-        drawnos=[int(x) for x in df.draw_no]
-        limit=min(MAX_TARGETS,len(draws)-MIN_HISTORY)
+        raw_drawnos=pd.to_numeric(df.draw_no,errors="coerce") if "draw_no" in df.columns else pd.Series([np.nan]*len(df))
+        drawnos=[int(x) if pd.notna(x) else -(i+1) for i,x in enumerate(raw_drawnos)]
+        limit=max(0,min(MAX_TARGETS,len(draws)-MIN_HISTORY))
 
         for i in range(limit):
             hist=draws[i+1:]
@@ -156,10 +159,11 @@ def main():
             "walkforward_targets_per_game":MAX_TARGETS,
             "min_history":MIN_HISTORY,
             "same_pool_random_samples_per_target":SAMPLE_PER_POOL,
-            "game_benchmark":"exact enumeration of all 6-number combinations",
+            "game_random_samples":GAME_RANDOM_SAMPLES,
+            "game_benchmark":"deterministic Monte Carlo of uniform 6-number lines",
             "note":"Separates selection-pool composition from wheel conversion bias."
         },
-        "exact_game_benchmarks":bench,
+        "game_random_benchmarks":bench,
         "results":out,
     },indent=2))
     print("CLUSTER_BIAS_END")
