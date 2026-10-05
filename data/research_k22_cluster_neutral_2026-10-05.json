@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-05",
+  "test": "K22 cluster-neutral challenger v1",
+  "status": "REJECTED_FOR_PRODUCTION",
+  "cluster_bias_prior": {
+    "6/42": "No material bias.",
+    "6/49": "Persistent over-clustering mainly in K22 pool selection; smaller additional wheel bias.",
+    "production_6_pair_pct": 58.7778,
+    "same_pool_random_pair_pct": 56.3203,
+    "game_random_pair_pct": 49.5248,
+    "production_6_triple_pct": 6.8889,
+    "game_random_triple_pct": 4.8032,
+    "actual_draw_pair_pct": 51.3774,
+    "actual_draw_triple_pct": 4.8209
+  },
+  "challenger": {
+    "max_swaps": 2,
+    "protected": "repeat additions",
+    "removable": "bottom 8 score-ranked non-protected selected numbers",
+    "replacements": "top 8 score-ranked numbers outside K22",
+    "targets": {
+      "adjacent_pairs_max": 10,
+      "consecutive_triples_max": 4
+    },
+    "outcome_blind": true
+  },
+  "current150": {
+    "pool": {
+      "mean_hits_base": 2.9,
+      "mean_hits_candidate": 2.9,
+      "p4plus_base": 0.3,
+      "p4plus_candidate": 0.3333333333,
+      "p5plus_base": 0.1066666667,
+      "p5plus_candidate": 0.0733333333,
+      "p6_base": 0.02,
+      "p6_candidate": 0.02,
+      "mean_adj_base": 11.1067,
+      "mean_adj_candidate": 9.7133,
+      "mean_triples_base": 5.0667,
+      "mean_triples_candidate": 3.48
+    },
+    "lines10": {
+      "p3plus_base": 0.24,
+      "p3plus_candidate": 0.2066666667,
+      "p4plus_base": 0.0133333333,
+      "p4plus_candidate": 0.0133333333,
+      "mean_best_base": 1.9933333333,
+      "mean_best_candidate": 1.9666666667
+    }
+  },
+  "archive300": {
+    "pool": {
+      "mean_hits_base": 2.72,
+      "mean_hits_candidate": 2.7,
+      "p4plus_base": 0.24,
+      "p4plus_candidate": 0.2333333333,
+      "p5plus_base": 0.0633333333,
+      "p5plus_candidate": 0.0666666667,
+      "p6_base": 0.0066666667,
+      "p6_candidate": 0.0033333333,
+      "mean_adj_base": 10.31,
+      "mean_adj_candidate": 9.3,
+      "mean_triples_base": 4.7433,
+      "mean_triples_candidate": 3.5333
+    },
+    "lines10": {
+      "p3plus_base": 0.1366666667,
+      "p3plus_candidate": 0.15,
+      "p4plus_base": 0.0166666667,
+      "p4plus_candidate": 0.0133333333,
+      "p5plus_base": 0.0033333333,
+      "p5plus_candidate": 0.0033333333
+    }
+  },
+  "decision": {
+    "production_change": false,
+    "freeze_as_shadow": false,
+    "rationale": "Structural cluster neutrality is achieved, but performance is mixed and rare-hit protection is not demonstrated. Do not trade observed selection performance for cosmetic/random-looking spacing.",
+    "next_research": "If revisited, test only an extreme-cluster guard (e.g. intervene when pool clustering is far above expectation), not blanket neutralization."
+  }
+}
