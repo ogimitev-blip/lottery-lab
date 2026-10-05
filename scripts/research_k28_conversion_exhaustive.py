@@ -106,6 +106,20 @@ def main():
     structural=structural_stats(lines)
     capture=exhaustive_capture(lines)
 
+    # Analytical null: n independent uniformly random 6-of-28 lines.
+    # This is not a wheel guarantee, but a useful structural benchmark.
+    single={}
+    for r in (3,4,5,6):
+        single[r]=sum(
+            math.comb(6,k)*math.comb(22,6-k)
+            for k in range(r,7)
+        )/math.comb(28,6)
+    random_benchmark={}
+    for n in PREFIXES:
+        random_benchmark[str(n)]={
+            f"p{r}plus":1.0-(1.0-single[r])**n for r in (3,4,5,6)
+        }
+
     headline={}
     for n in PREFIXES:
         h6=capture["6"][str(n)]
@@ -130,6 +144,13 @@ def main():
                 "p4":h4["p_best_ge_4"],
                 "mean_best":h4["mean_best_hits"],
             },
+            "random_line_benchmark_given_pool_hits_6":random_benchmark[str(n)],
+            "delta_vs_random_pp_given_pool_hits_6":{
+                "p3plus":100.0*(h6["p_best_ge_3"]-random_benchmark[str(n)]["p3plus"]),
+                "p4plus":100.0*(h6["p_best_ge_4"]-random_benchmark[str(n)]["p4plus"]),
+                "p5plus":100.0*(h6["p_best_ge_5"]-random_benchmark[str(n)]["p5plus"]),
+                "p6":100.0*(h6["p_best_ge_6"]-random_benchmark[str(n)]["p6plus"]),
+            },
         }
 
     print("K28_EXHAUSTIVE_BEGIN")
@@ -140,6 +161,7 @@ def main():
         "exhaustive_universes":{str(h):math.comb(POOL_SIZE,h) for h in H_VALUES},
         "structural":structural,
         "capture":capture,
+        "independent_random_benchmark":random_benchmark,
         "headline":headline,
         "note":"Outcome-blind exhaustive structural test. For each possible set of h winning numbers inside K28 (h=3..6), computes the best overlap achieved by each nested wheel prefix."
     },indent=2))
