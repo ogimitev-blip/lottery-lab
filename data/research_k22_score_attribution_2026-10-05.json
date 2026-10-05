@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-05",
+  "test": "K22 score attribution / hierarchical ablation",
+  "status": "KEEP_PRODUCTION_WEIGHTS_UNCHANGED",
+  "method": {
+    "current150": 150,
+    "latest50": 50,
+    "prior100": 100,
+    "archive300": 300,
+    "k": 22,
+    "random_expected_pool_hits": 2.693877551020408,
+    "variants": [
+      "full_flex",
+      "full_top22",
+      "no_overdue",
+      "drop_smooth",
+      "drop_fm",
+      "drop_ps"
+    ],
+    "note": "Leave-one-family-out ablation with surviving weights renormalized; strict walk-forward history. Historical evidence is descriptive, not proof of lottery predictability."
+  },
+  "findings": {
+    "full_current150": {
+      "mean_hits": 2.9,
+      "p4plus": 0.3,
+      "p5plus": 0.1066666667,
+      "p6": 0.02
+    },
+    "full_latest50": {
+      "mean_hits": 2.88,
+      "p4plus": 0.32,
+      "p5plus": 0.12,
+      "p6": 0.02
+    },
+    "full_prior100": {
+      "mean_hits": 2.91,
+      "p4plus": 0.29,
+      "p5plus": 0.1,
+      "p6": 0.02
+    },
+    "full_archive300": {
+      "mean_hits": 2.72,
+      "p4plus": 0.24,
+      "p5plus": 0.0633333333,
+      "p6": 0.0066666667
+    },
+    "recent_driver_evidence": {
+      "drop_ps_latest50": {
+        "mean_hits": 2.82,
+        "p5plus": 0.1,
+        "mean_delta_on_full5plus": -0.1666666667
+      },
+      "drop_smooth_latest50": {
+        "mean_hits": 2.8,
+        "p5plus": 0.08,
+        "mean_delta_on_full5plus": -0.1666666667
+      },
+      "drop_fm_latest50": {
+        "mean_hits": 2.84,
+        "p5plus": 0.14,
+        "mean_delta_on_full5plus": 0
+      },
+      "no_overdue_latest50": {
+        "mean_hits": 2.8,
+        "p5plus": 0.08,
+        "mean_delta_on_full5plus": -0.5
+      },
+      "no_repeat_overlay_latest50": {
+        "mean_hits": 2.7,
+        "p4plus": 0.26,
+        "p5plus": 0.1,
+        "mean_delta_vs_full": -0.18
+      }
+    },
+    "prior100_driver_evidence": {
+      "drop_ps": {
+        "mean_delta_on_full5plus": -0.5
+      },
+      "drop_fm": {
+        "mean_delta_on_full5plus": -0.2
+      },
+      "drop_smooth": {
+        "mean_delta_on_full5plus": 0
+      },
+      "no_overdue": {
+        "mean_delta_on_full5plus": -0.3
+      },
+      "no_repeat_overlay": {
+        "mean_delta_on_full5plus": -0.4
+      }
+    },
+    "archive300": {
+      "note": "Longer archive is mixed. Removing FM slightly improves overall mean hits but weakens some of the strong full-model 4+/5+ cases. Pure top-22 slightly improves mean hits/p4+ but lowers p5+ relative to flex.",
+      "drop_fm_mean_delta_vs_full": 0.0566666667,
+      "full_top22_mean_delta_vs_full": 0.0333333333,
+      "full_top22_p5plus": 0.06,
+      "full_flex_p5plus": 0.0633333333
+    },
+    "standalone": {
+      "current150_fm_mean_top22_hits": 2.8666666667,
+      "prior100_fm_mean_top22_hits": 2.91,
+      "archive300_smooth_mean_top22_hits": 2.75,
+      "warning": "Standalone overdue ranking is not a robust global predictor; its value appears as a nonlinear rescue overlay in the full model."
+    },
+    "prospective_76_78": {
+      "draw76": "All ablations still captured 6/6. Winners were already high-ranked in PS/FM/ensemble; overdue was not responsible.",
+      "draw77": "All main variants captured only 3/6. No component rescue was evident.",
+      "draw78": "Full model captured 5/6; removing overdue fell to 3/6, while drop-smooth fell to 4/6. Overdue promoted #3 and #24 into the selected set."
+    }
+  },
+  "interpretation": [
+    "FM is the strongest standalone ranking family in the recent/prior window, but its long-run incremental value is not stable enough to upweight.",
+    "Persistence/PS is not spectacular standalone, but removing it disproportionately damages high-hit tail events.",
+    "Smooth is a stabilizer, especially in some rare-hit cases, but not a dominant standalone driver.",
+    "Overdue is best interpreted as tail insurance rather than a standalone predictor. It was decisive in draw 78, but globally is weak on its own.",
+    "The two-draw repeat/flex overlay sacrifices some long-run average-hit efficiency in the archive but improves recent performance and tends to protect p5+ tail capture."
+  ],
+  "decision": {
+    "production_change": false,
+    "weights_change": false,
+    "remove_overdue": false,
+    "remove_repeat_overlay": false,
+    "next_research": "Only if further work is desired: raw FM subfeature attribution (recent z, long z, trend, repeat persistence, directional adjacency, same-draw clustering). No production tuning before prospective evidence accumulates."
+  }
+}
