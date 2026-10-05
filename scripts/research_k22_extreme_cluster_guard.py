@@ -84,19 +84,26 @@ def guard(pool,additions,score,threshold):
     base_total=sum(float(score.loc[n]) for n in pool)
     best=list(pool)
     best_swaps=[]
-    best_key=(before_score>=threshold,before_score,0,-base_total,tuple(sorted(pool)))
 
-    # Prefer first candidate that exits the extreme zone; then lower clustering,
-    # fewer swaps, and maximum retained model score.
+    def candidate_key(candidate,nswap):
+        cs,aa,tt=cluster_score(candidate)
+        total_score=sum(float(score.loc[n]) for n in candidate)
+        # Primary objective: exit the extreme zone. Once outside it, prefer
+        # the fewest swaps before seeking any further reduction in clustering.
+        # If no candidate can exit, minimize residual clustering first.
+        if cs < threshold:
+            return (0,nswap,cs,-total_score,tuple(sorted(candidate)))
+        return (1,cs,nswap,-total_score,tuple(sorted(candidate)))
+
+    best_key=candidate_key(best,0)
+
     for nswap in range(1,MAX_SWAPS+1):
         for rems in itertools.combinations(removable,nswap):
             for adds in itertools.combinations(outsiders,nswap):
                 cand=[n for n in pool if n not in rems]+list(adds)
                 if len(set(cand))!=POOL_K:
                     continue
-                cs,aa,tt=cluster_score(cand)
-                total_score=sum(float(score.loc[n]) for n in cand)
-                key=(cs>=threshold,cs,nswap,-total_score,tuple(sorted(cand)))
+                key=candidate_key(cand,nswap)
                 if key<best_key:
                     best,best_key,best_swaps=cand,key,list(zip(rems,adds))
 
