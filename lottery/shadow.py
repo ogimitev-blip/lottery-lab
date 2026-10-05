@@ -10,6 +10,8 @@ from .data import load_draws_df,load_results_meta
 from .modes import generate_mode
 from .version import APP_VERSION,MODEL_642,MODEL_649
 from .conversion_v5 import build_rank_aware_v5
+from .k22_vnext import current_pool_649_vnext
+from .wheels import build_broad_six,extend_sequence
 
 ROOT=Path(__file__).resolve().parents[1]
 SHADOW_PATH=ROOT/"data"/"shadow_experiments.jsonl"
@@ -23,6 +25,7 @@ SHADOW_CONFIG=[
     {"game":"6/49","mode_id":"649_k22_11","strength":0.00,"label":"K22-11 conversion v4","conversion_variant":"v4_structural"},
     {"game":"6/49","mode_id":"649_k22_22","strength":0.00,"label":"K22-22 base","conversion_variant":"production"},
     {"game":"6/49","mode_id":"649_k22_22","strength":0.00,"label":"K22-22 conversion v5","conversion_variant":"v5_rank_aware"},
+    {"game":"6/49","mode_id":"649_k22_22","strength":0.00,"label":"K22-22 score vNext","conversion_variant":"vnext_score"},
     {"game":"6/42","mode_id":"642_18","strength":0.00,"label":"K28-18 base"},
     {"game":"6/42","mode_id":"642_18","strength":0.10,"label":"K28-18 crowd 10%"},
     {"game":"6/42","mode_id":"642_30","strength":0.00,"label":"K28-30 base"},
@@ -66,6 +69,8 @@ def build_shadow_batch(game,target,draws):
         strength=float(cfg["strength"])
         conversion_variant=str(cfg.get("conversion_variant","standard"))
         tickets=base
+        row_pool=list(state["pool"])
+        row_additions=list(state["additions"])
         meta=None
         if conversion_variant=="v4_structural":
             spec=pd.read_csv(ROOT/"systems"/"k22_conversion_v4_candidate.csv")
@@ -82,6 +87,12 @@ def build_shadow_batch(game,target,draws):
             tickets=build_rank_aware_v5(
                 base[:6],state["pool"],state["diagnostics"],len(base),target["draw_no"]
             )
+        if conversion_variant=="vnext_score":
+            vpool,vadds,vdiag,vscore=current_pool_649_vnext(draws,22)
+            vbase=build_broad_six(vpool,vscore,649)
+            tickets=extend_sequence(vbase,vpool,vscore,len(base),20260917+490000)
+            row_pool=list(vpool)
+            row_additions=list(vadds)
         if strength>0:
             if crowd.empty:
                 continue
@@ -108,8 +119,8 @@ def build_shadow_batch(game,target,draws):
             "conversion_variant":conversion_variant,
             "model_version":_model_version(game),
             "app_version":APP_VERSION,
-            "pool":list(map(int,state["pool"])),
-            "repeat_additions":list(map(int,state["additions"])),
+            "pool":list(map(int,row_pool)),
+            "repeat_additions":list(map(int,row_additions)),
             "tickets":[list(map(int,t)) for t in tickets],
             "notional_stake_eur":float(state["cost"]),
             "crowd_snapshot_draw":snapshot_draw,
