@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-05",
+  "test": "K28 exhaustive conversion v1",
+  "status": "PASSED_NO_PRODUCTION_CHANGE",
+  "wheel": "systems/k28_nested_130.csv",
+  "universe": {
+    "pool_size": 28,
+    "winning_subsets_tested": {
+      "3": 3276,
+      "4": 20475,
+      "5": 98280,
+      "6": 376740
+    }
+  },
+  "headline": {
+    "18": {
+      "pool6": {
+        "p3plus": 0.9145060254,
+        "p4plus": 0.1691352126,
+        "p5plus": 0.0063545151,
+        "p6": 0.00004777831,
+        "mean_best": 3.0900435313
+      },
+      "pool5": {
+        "p3plus": 0.7006715507,
+        "p4plus": 0.0615384615,
+        "p5": 0.0010989011
+      },
+      "pool4": {
+        "p3plus": 0.3775824176,
+        "p4": 0.0131868132
+      },
+      "delta_vs_independent_random_pp": {
+        "p3plus": 9.29624147,
+        "p4plus": 1.04978603,
+        "p5plus": 0.00190324
+      }
+    },
+    "30": {
+      "pool6": {
+        "p3plus": 0.9884562298,
+        "p4plus": 0.2739448957,
+        "p5plus": 0.0105908584,
+        "p6": 0.00007963051,
+        "mean_best": 3.2730716144
+      },
+      "delta_vs_independent_random_pp": {
+        "p3plus": 4.50219736,
+        "p4plus": 2.37908385,
+        "p5plus": 0.00540355
+      }
+    },
+    "50": {
+      "pool6": {
+        "p3plus": 0.9998619738,
+        "p4plus": 0.4293995859,
+        "p5plus": 0.0176514307,
+        "p6": 0.00013271752,
+        "mean_best": 3.4470457079
+      },
+      "delta_vs_independent_random_pp": {
+        "p3plus": 0.81972981,
+        "p4plus": 4.82990072,
+        "p5plus": 0.0151812
+      }
+    },
+    "80": {
+      "pool6": {
+        "p3plus": 1,
+        "p4plus": 0.6123347667,
+        "p5plus": 0.0282422891,
+        "p6": 0.00021234804,
+        "mean_best": 3.6407894038
+      },
+      "delta_vs_independent_random_pp": {
+        "p3plus": 0.04714938,
+        "p4plus": 7.64139867,
+        "p5plus": 0.03902379
+      }
+    },
+    "130": {
+      "pool6": {
+        "p3plus": 1,
+        "p4plus": 0.8070101396,
+        "p5plus": 0.0458937198,
+        "p6": 0.00034506556,
+        "mean_best": 3.853248925
+      },
+      "delta_vs_independent_random_pp": {
+        "p3plus": 0.00039301,
+        "p4plus": 9.42285003,
+        "p5plus": 0.10294501
+      }
+    }
+  },
+  "structural_findings": [
+    "All 130 lines are unique.",
+    "At 18 and 30 lines, no pair of tickets intersects in more than two positions, so 4/5/6-subsets are not duplicated across tickets.",
+    "The existing nested wheel beats an independent-random-line benchmark on 3+ and 4+ conversion at every tested prefix when all six winners are inside K28.",
+    "The main limitation at 18 lines is line count: conditional P(4+ | 6 winners in K28) is about 16.9%, not an obvious construction defect."
+  ],
+  "decision": "Keep K28 production wheel unchanged. Continue prospective evidence collection; do not promote anti-crowd from one draw."
+}
