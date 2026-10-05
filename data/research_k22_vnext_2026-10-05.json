@@ -66,10 +66,10 @@
   },
   "draw79": {
     "target_date": "2026-10-08",
-    "shadow_id": "7ee1fe99c7a021a0f802",
+    "shadow_id": "3eba5b7c95efc98cb57a",
     "actual_money_spent_eur": 0,
     "base_and_challenger_pool_membership_identical": true,
-    "implication": "Draw 79 isolates ranking/wheel-conversion effects because the K22 membership is unchanged while ticket construction differs."
+    "implication": "Draw 79 isolates ranking/wheel-conversion effects because K22 membership is unchanged while ticket construction differs."
   },
   "decision": {
     "production_change": false,
