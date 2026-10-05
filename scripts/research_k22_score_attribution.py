@@ -262,6 +262,14 @@ def main():
             "ablation":summarize_pools(cp),
             "standalone":summarize_standalone(cs),
         },
+        "latest50":{
+            "ablation":summarize_pools(cp[cp.target<50].copy()),
+            "standalone":summarize_standalone(cs[cs.target<50].copy()),
+        },
+        "prior100":{
+            "ablation":summarize_pools(cp[(cp.target>=50)&(cp.target<150)].copy()),
+            "standalone":summarize_standalone(cs[(cs.target>=50)&(cs.target<150)].copy()),
+        },
         "archive300":{
             "ablation":summarize_pools(ap),
             "standalone":summarize_standalone(ass),
