@@ -93,6 +93,8 @@ def main():
     for game in ("6/42","6/49"):
         df=load_draws_df(game)
         cols=[f"n{i}" for i in range(1,7)]
+        df=df[pd.to_numeric(df.draw_no,errors="coerce").notna()].copy()
+        df["draw_no"]=pd.to_numeric(df.draw_no,errors="coerce").astype(int)
         draws=[list(map(int,r)) for r in df[cols].to_numpy().tolist()]
         drawnos=[int(x) for x in df.draw_no]
         limit=min(MAX_TARGETS,len(draws)-MIN_HISTORY)
