@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-05",
+  "test": "Consecutive-number cluster bias",
+  "status": "K28_OK_K22_SELECTION_BIAS_FOUND",
+  "method": {
+    "walkforward_targets_per_game": 150,
+    "same_pool_random_samples_per_target": 4000,
+    "game_random_samples": 250000,
+    "historical_actual_649_draws": 726
+  },
+  "6/42": {
+    "conclusion": "No material cluster bias.",
+    "production_18": {
+      "any_consecutive_pair_pct": 54.3333,
+      "same_pool_random_pct": 55.1905,
+      "game_random_pct": 55.7112,
+      "consecutive_triple_pct": 5.8889,
+      "same_pool_random_triple_pct": 6.3363,
+      "game_random_triple_pct": 6.5284
+    },
+    "pool_inventory": {
+      "mean_adjacent_pairs": 17.78,
+      "random_k28_expected_adjacent_pairs": 18,
+      "mean_consecutive_triples": 11.1867,
+      "random_k28_expected_consecutive_triples": 11.4146
+    }
+  },
+  "6/49": {
+    "conclusion": "Persistent over-clustering originates mainly in K22 pool selection; production wheel adds a smaller further bias.",
+    "production_6": {
+      "any_consecutive_pair_pct": 58.7778,
+      "same_pool_random_pct": 56.3203,
+      "game_random_pct": 49.5248,
+      "consecutive_triple_pct": 6.8889,
+      "same_pool_random_triple_pct": 6.1312,
+      "game_random_triple_pct": 4.8032,
+      "span3_le3_pct": 16.8889,
+      "same_pool_random_span3_le3_pct": 14.6088,
+      "game_random_span3_le3_pct": 12.8116
+    },
+    "production_11": {
+      "any_consecutive_pair_pct": 56.9697,
+      "same_pool_random_pct": 56.3203,
+      "game_random_pct": 49.5248
+    },
+    "production_22": {
+      "any_consecutive_pair_pct": 57.6667,
+      "same_pool_random_pct": 56.3203,
+      "game_random_pct": 49.5248
+    },
+    "pool_inventory": {
+      "mean_adjacent_pairs": 11.1067,
+      "random_k22_expected_adjacent_pairs": 9.4286,
+      "excess_adjacent_pairs_pct": 17.8,
+      "mean_consecutive_triples": 5.0667,
+      "random_k22_expected_consecutive_triples": 3.9286,
+      "excess_consecutive_triples_pct": 29
+    },
+    "actual_draw_history": {
+      "draws": 726,
+      "any_consecutive_pair_pct": 51.3774,
+      "consecutive_triple_pct": 4.8209,
+      "span3_le3_pct": 13.2231,
+      "span3_le4_pct": 23.6915,
+      "interpretation": "Actual draws are close to uniform-random benchmarks and far less clustered than K22 production tickets."
+    }
+  },
+  "decision": {
+    "production_change": false,
+    "k28": "Keep unchanged.",
+    "k22": "Do not change production yet. Create/test an outcome-blind cluster-neutral K22 selection challenger before any promotion.",
+    "rationale": "The K22 over-clustering is persistent and not mirrored in actual draw history, but historical/prospective selection performance must be protected before changing the pool."
+  }
+}
