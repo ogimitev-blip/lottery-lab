@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-05",
+  "test": "K22 extreme-cluster guard",
+  "status": "REJECTED_FOR_PRODUCTION_AND_SHADOW",
+  "design": {
+    "cluster_score": "adjacent_pairs + 2*consecutive_triples",
+    "random_k22_q95_score": 26,
+    "trigger_score_min": 27,
+    "random_trigger_rate": 0.04602,
+    "max_swaps": 2,
+    "intervention": "minimum swaps needed to exit extreme zone; repeat additions protected",
+    "outcome_blind": true
+  },
+  "current150": {
+    "triggered_draws": 26,
+    "trigger_rate": 0.1733333333,
+    "pool_mean_hits_base": 2.9,
+    "pool_mean_hits_candidate": 2.9,
+    "pool_wins": 2,
+    "pool_ties": 22,
+    "pool_losses": 2,
+    "lines10": {
+      "p3plus_base": 0.24,
+      "p3plus_candidate": 0.2266666667,
+      "p4plus_base": 0.0133333333,
+      "p4plus_candidate": 0.0066666667,
+      "mean_best_base": 1.9933333333,
+      "mean_best_candidate": 1.9533333333,
+      "triggered_wins": 1,
+      "triggered_ties": 18,
+      "triggered_losses": 7
+    },
+    "mean_swaps_triggered": 1.1538461538,
+    "mean_cluster_before_triggered": 29.8076923077,
+    "mean_cluster_after_triggered": 22.2692307692
+  },
+  "archive300": {
+    "triggered_draws": 21,
+    "trigger_rate": 0.07,
+    "pool_mean_hits_base": 2.72,
+    "pool_mean_hits_candidate": 2.7133333333,
+    "lines10": {
+      "p3plus_base": 0.1366666667,
+      "p3plus_candidate": 0.14,
+      "p4plus_base": 0.0166666667,
+      "p4plus_candidate": 0.0166666667,
+      "mean_best_base": 1.86,
+      "mean_best_candidate": 1.8566666667,
+      "triggered_wins": 2,
+      "triggered_ties": 16,
+      "triggered_losses": 3
+    }
+  },
+  "draw79": {
+    "adjacent_pairs": 10,
+    "consecutive_triples": 5,
+    "cluster_score": 20,
+    "trigger_min": 27,
+    "would_trigger": false
+  },
+  "decision": {
+    "production_change": false,
+    "freeze_as_shadow": false,
+    "rationale": "Extreme-only intervention removes clustering efficiently, but current-150 10-line conversion degrades materially and archive evidence is mixed. Clustering should remain diagnostic, not an optimization target.",
+    "implication": "Keep K22 selection and production wheel unchanged. Do not alter draw 79 tickets."
+  }
+}
