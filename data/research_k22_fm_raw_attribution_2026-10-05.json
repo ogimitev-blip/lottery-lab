@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-05",
+  "test": "K22 raw FM subfeature attribution",
+  "status": "KEEP_PRODUCTION_UNCHANGED",
+  "features": {
+    "rz": "recent-rate z-score",
+    "lz": "long-window rate z-score",
+    "tz": "recent-vs-older trend z-score",
+    "rp": "repeat persistence",
+    "dh": "directional adjacency",
+    "ch": "same-draw adjacency/clustering"
+  },
+  "evidence": {
+    "current150": {
+      "full": {
+        "mean_hits": 2.9,
+        "p4plus": 0.3,
+        "p5plus": 0.1066666667,
+        "p6": 0.02
+      },
+      "drop_rz": {
+        "mean_hits": 2.8133333333,
+        "p4plus": 0.2733333333,
+        "p5plus": 0.0933333333,
+        "mean_delta": -0.0866666667
+      },
+      "drop_lz": {
+        "mean_hits": 2.9,
+        "p4plus": 0.28,
+        "p5plus": 0.0533333333,
+        "p6": 0.0066666667,
+        "mean_delta_on_full5plus": -1.0625
+      },
+      "drop_tz": {
+        "mean_hits": 2.8533333333,
+        "p4plus": 0.2733333333,
+        "p5plus": 0.1
+      },
+      "drop_rp": {
+        "mean_hits": 2.88,
+        "p4plus": 0.3,
+        "p5plus": 0.12
+      },
+      "drop_dh": {
+        "mean_hits": 2.8866666667,
+        "p4plus": 0.28,
+        "p5plus": 0.0933333333
+      },
+      "drop_ch": {
+        "mean_hits": 2.88,
+        "p4plus": 0.2733333333,
+        "p5plus": 0.1
+      }
+    },
+    "latest50": {
+      "full": {
+        "mean_hits": 2.88,
+        "p4plus": 0.32,
+        "p5plus": 0.12,
+        "p6": 0.02
+      },
+      "drop_rz": {
+        "mean_hits": 2.66,
+        "p4plus": 0.22,
+        "p5plus": 0.1,
+        "mean_delta": -0.22
+      },
+      "drop_lz": {
+        "mean_hits": 2.96,
+        "p4plus": 0.3,
+        "p5plus": 0.06,
+        "mean_delta_on_full5plus": -1
+      },
+      "drop_rp": {
+        "mean_hits": 2.84,
+        "p4plus": 0.3,
+        "p5plus": 0.14,
+        "p6": 0.04
+      },
+      "standalone_rp": {
+        "mean_top22_hits": 3,
+        "p4plus": 0.32
+      },
+      "standalone_tz": {
+        "mean_top22_hits": 2.9,
+        "p4plus": 0.4
+      },
+      "standalone_dh": {
+        "mean_top22_hits": 2.88
+      }
+    },
+    "prior100": {
+      "full": {
+        "mean_hits": 2.91,
+        "p4plus": 0.29,
+        "p5plus": 0.1,
+        "p6": 0.02
+      },
+      "drop_rz": {
+        "mean_hits": 2.89,
+        "p4plus": 0.3,
+        "p5plus": 0.09
+      },
+      "drop_lz": {
+        "mean_hits": 2.87,
+        "p4plus": 0.27,
+        "p5plus": 0.05,
+        "mean_delta_on_full5plus": -1.1
+      },
+      "drop_tz": {
+        "mean_hits": 2.86,
+        "p4plus": 0.26,
+        "p5plus": 0.09
+      }
+    },
+    "archive300": {
+      "full": {
+        "mean_hits": 2.72,
+        "p4plus": 0.24,
+        "p5plus": 0.0633333333,
+        "p6": 0.0066666667
+      },
+      "drop_rz": {
+        "mean_hits": 2.7433333333,
+        "p4plus": 0.2266666667,
+        "p5plus": 0.0566666667,
+        "mean_delta_on_full5plus": -0.4736842105
+      },
+      "drop_lz": {
+        "mean_hits": 2.7633333333,
+        "p4plus": 0.2466666667,
+        "p5plus": 0.06,
+        "mean_delta_on_full5plus": -0.3684210526
+      },
+      "drop_tz": {
+        "mean_hits": 2.74,
+        "p4plus": 0.2433333333,
+        "p5plus": 0.0666666667,
+        "mean_delta_on_full5plus": 0
+      },
+      "drop_rp": {
+        "mean_hits": 2.7333333333,
+        "p4plus": 0.2833333333,
+        "p5plus": 0.06
+      }
+    },
+    "prospective_76_78": {
+      "draw76": "Dropping any single raw FM subfeature still left the K22 at 6/6.",
+      "draw77": "Dropping any single raw FM subfeature still left the K22 at 3/6.",
+      "draw78": "Full K22 hit 5/6. Dropping lz reduced it to 4/6; all other single raw-feature drops stayed at 5/6."
+    }
+  },
+  "interpretation": [
+    "rz is the clearest current-regime marginal contributor: removing it materially hurts latest-50 mean hits and p4+.",
+    "lz is not strong as a standalone predictor, but it is the strongest tail-preservation component: removing it sharply degrades full-model 5+ cases in current and prior windows.",
+    "tz has useful standalone ranking signal, especially recently, but removing it from the hierarchy has only modest impact because other components partly substitute for it.",
+    "rp is regime-dependent: strong standalone in latest-50 but weak/negative over longer history; do not upweight based on the recent window alone.",
+    "dh carries some standalone information but its incremental contribution is modest and mixed.",
+    "ch is the weakest standalone component and appears mostly redundant, yet removing it can still damage some high-hit cases; no evidence supports deleting it now."
+  ],
+  "decision": {
+    "production_change": false,
+    "weights_change": false,
+    "preserve_all_raw_features": true,
+    "do_not_upweight_rp": true,
+    "do_not_remove_ch": true,
+    "next_research": "If continuing, test a frozen recent-regime challenger that modestly increases rz influence while explicitly protecting lz tail contribution, then validate only prospectively / on untouched holdout windows."
+  },
+  "caveat": "Lottery outcomes are random; these historical attribution differences are descriptive and do not establish future predictability."
+}
