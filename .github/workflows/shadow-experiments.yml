@@ -37,7 +37,7 @@ jobs:
       - run: python scripts/generate_shadow_experiments.py
       - name: Commit newly frozen shadow rows
         run: |
-          if git diff --quiet -- data/shadow_experiments.jsonl data/allocation_shadows.jsonl; then
+          if [ -z "$(git status --porcelain -- data/shadow_experiments.jsonl data/allocation_shadows.jsonl)" ]; then
             echo "No new future shadow batch."
             exit 0
           fi
