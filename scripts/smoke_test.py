@@ -81,7 +81,7 @@ for game in ["6/42","6/49"]:
     print("HISTORY_DEPTH",game,sm)
 
 
-from lottery.shadow import summarize_shadow_pairs,shadow_research_scoreboard,conversion_research_scoreboard,outcome_attribution,shadow_cycle_health,shadow_manifest_status
+from lottery.shadow import SHADOW_CONFIG,summarize_shadow_pairs,shadow_research_scoreboard,conversion_research_scoreboard,outcome_attribution,shadow_cycle_health,shadow_manifest_status
 
 synthetic=[]
 for draw_no in range(1,51):
@@ -122,7 +122,8 @@ assert 6==a["selection_misses"]+a["conversion_misses"]+3
 print("SHADOW_ATTRIBUTION_OK")
 
 cycle_rows=[]
-for i in range(9):
+expected_649=sum(1 for x in SHADOW_CONFIG if x["game"]=="6/49")
+for i in range(expected_649):
     cycle_rows.append({
         "status":"pending","game":"6/49","target_draw_no":76,
         "shadow_id":f"pending-{i}","target_date":"2099-09-27",
@@ -131,7 +132,7 @@ for i in range(9):
 cycle=shadow_cycle_health(cycle_rows)
 assert len(cycle)==1
 assert cycle.iloc[0].cycle_status=="READY"
-assert int(cycle.iloc[0].frozen_variants)==9
+assert int(cycle.iloc[0].frozen_variants)==expected_649
 assert bool(cycle.iloc[0].freeze_before_target)
 print("SHADOW_CYCLE_OK")
 
