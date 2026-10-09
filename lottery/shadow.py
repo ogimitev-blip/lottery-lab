@@ -554,13 +554,18 @@ def conversion_pair_frame(scored_rows=None):
 
     pairs=[]
     for (game,draw_no,mode),g in df.groupby(["game","target_draw_no","mode_id"]):
+        crowd_strength=(
+            pd.to_numeric(g["crowd_strength"],errors="coerce")
+            if "crowd_strength" in g.columns
+            else pd.Series(0.0,index=g.index)
+        )
         base=g[
             g.conversion_variant.isin(["production","standard"])
-            & (pd.to_numeric(g.crowd_strength,errors="coerce")==0)
+            & (crowd_strength==0)
         ]
         variants=g[
             g.conversion_variant.isin(["v4_structural","v5_rank_aware","shape_diverse_v1"])
-            & (pd.to_numeric(g.crowd_strength,errors="coerce")==0)
+            & (crowd_strength==0)
         ]
         if base.empty or variants.empty:
             continue
