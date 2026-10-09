@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-09",
+  "status": "PROSPECTIVE_SHADOW_ONLY",
+  "production_changed": false,
+  "hypothesis": "Represent draw-shape motifs in ticket ordering without changing the selected pool, ticket contents, line count, or spend.",
+  "motifs": [
+    "adjacent numbers",
+    "gap-2 numbers",
+    "three consecutive",
+    "three-step-2 progression",
+    "extreme parity",
+    "5+ even",
+    "5+ <=25",
+    "5+ >=20",
+    "all <=25",
+    "all >=20",
+    "same final digit pair",
+    "same final digit triple",
+    "tight numeric span"
+  ],
+  "design": {
+    "population_reference": "120,000 deterministic uniform combinations per game; outcome-independent",
+    "transformation": "reorder the exact same production ticket set",
+    "shape_weight": 0.3,
+    "latest_holdout_draws": 50,
+    "archive_draws_per_game": 250
+  },
+  "population_probabilities": {
+    "6/49": {
+      "adjacent": 0.49437,
+      "gap2": 0.44932,
+      "three_consecutive": 0.04826,
+      "three_step2": 0.04438,
+      "parity_extreme": 0.18958,
+      "five_plus_even": 0.08642,
+      "five_plus_low25": 0.10363,
+      "five_plus_high20": 0.23579,
+      "all_low25": 0.01284,
+      "all_high20": 0.04249,
+      "same_last_pair": 0.79482,
+      "same_last_triple": 0.09288,
+      "tight_span": 0.03605
+    },
+    "6/42": {
+      "adjacent": 0.55565,
+      "gap2": 0.50188,
+      "three_consecutive": 0.06464,
+      "three_step2": 0.06019,
+      "parity_extreme": 0.18351,
+      "five_plus_even": 0.09282,
+      "five_plus_low25": 0.20573,
+      "five_plus_high20": 0.14153,
+      "all_low25": 0.03368,
+      "all_high20": 0.01908,
+      "same_last_pair": 0.784,
+      "same_last_triple": 0.08319,
+      "tight_span": 0.07237
+    }
+  },
+  "key_results": {
+    "6/49_5_lines": {
+      "latest50": {
+        "p3_delta_pp": 10,
+        "p4_delta_pp": -2,
+        "mean_best_delta": 0.32
+      },
+      "archive250": {
+        "p3_delta_pp": 0.8,
+        "p4_delta_pp": 0,
+        "mean_best_delta": -0.06
+      },
+      "verdict": "mixed_not_promoted"
+    },
+    "6/49_11_lines": {
+      "latest50": {
+        "p3_delta_pp": 6,
+        "p4_delta_pp": 0,
+        "mean_best_delta": 0.1
+      },
+      "archive250": {
+        "p3_delta_pp": 3.2,
+        "p4_delta_pp": 0,
+        "mean_best_delta": 0.008
+      },
+      "verdict": "promising_shadow"
+    },
+    "6/42_6_lines": {
+      "latest50": {
+        "p3_delta_pp": 8,
+        "p4_delta_pp": 2,
+        "mean_best_delta": 0.16
+      },
+      "archive250": {
+        "p3_delta_pp": 0.4,
+        "p4_delta_pp": 0,
+        "mean_best_delta": 0.004
+      },
+      "verdict": "promising_but_weak_shadow"
+    },
+    "6/42_30_lines": {
+      "latest50": {
+        "p3_delta_pp": 4,
+        "p4_delta_pp": 4,
+        "mean_best_delta": 0.06
+      },
+      "archive250": {
+        "p3_delta_pp": 2.8,
+        "p4_delta_pp": 2.4,
+        "mean_best_delta": 0.048
+      },
+      "conditional_archive_pool_hits_ge4": {
+        "baseline_p4": 0.04094,
+        "shape_p4": 0.07602
+      },
+      "conditional_archive_pool_hits_ge5": {
+        "baseline_p4": 0.06977,
+        "shape_p4": 0.12791
+      },
+      "verdict": "strongest_candidate_shadow"
+    }
+  },
+  "decision": "Do not alter production or the current <=10 EUR real-money plan. Add prospective shape-diverse shadows for K22-6, K22-11, K28-6 and K28-30; require forward evidence before promotion.",
+  "caveats": [
+    "Shape motifs do not make individual lottery combinations more predictable.",
+    "The objective is conversion diversity: ordering existing tickets so small prefixes cover a broader set of plausible draw shapes.",
+    "Rare 4+ and 5+ events remain sample-limited; no production promotion from retrospective evidence alone."
+  ]
+}
