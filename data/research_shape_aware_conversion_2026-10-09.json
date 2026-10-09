@@ -124,5 +124,16 @@
     "Shape motifs do not make individual lottery combinations more predictable.",
     "The objective is conversion diversity: ordering existing tickets so small prefixes cover a broader set of plausible draw shapes.",
     "Rare 4+ and 5+ events remain sample-limited; no production promotion from retrospective evidence alone."
-  ]
+  ],
+  "forward_shadow": {
+    "target_draw_no": 80,
+    "target_date": "2026-10-11",
+    "frozen_before_draw": true,
+    "variants": [
+      "K22-6 shape diverse v1",
+      "K22-11 shape diverse v1",
+      "K28-6 shape diverse v1",
+      "K28-30 shape diverse v1"
+    ]
+  }
 }
