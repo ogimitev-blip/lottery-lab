@@ -81,11 +81,8 @@ def z(v):
     return np.zeros_like(a) if sd<1e-12 else (a-a.mean())/sd
 
 
-def structural_features(ticket,selected,exp,pool):
+def structural_features(ticket,selected,exp,pool,c4,c3,c2):
     t=tuple(sorted(ticket))
-    c4=Counter(x for s in selected for x in itertools.combinations(s,4))
-    c3=Counter(x for s in selected for x in itertools.combinations(s,3))
-    c2=Counter(x for s in selected for x in itertools.combinations(s,2))
     new4=sum(c4[x]==0 for x in itertools.combinations(t,4))
     new3=sum(c3[x]==0 for x in itertools.combinations(t,3))
     new2=sum(c2[x]==0 for x in itertools.combinations(t,2))
@@ -129,8 +126,9 @@ def reorder_shape_aware(tickets,pool,pop_probs,variant="calibrated",alpha=0.30):
     selected=[]
     exp=Counter()
     shape_counts=Counter()
+    c4=Counter(); c3=Counter(); c2=Counter()
     while remaining:
-        structs=[structural_features(t,selected,exp,pool) for t in remaining]
+        structs=[structural_features(t,selected,exp,pool,c4,c3,c2) for t in remaining]
         cols=list(zip(*structs))
         sz=[z(c) for c in cols]
         struct_score=2.0*sz[0]+1.0*sz[1]+0.35*sz[2]+0.70*sz[3]+0.75*sz[4]
@@ -142,6 +140,9 @@ def reorder_shape_aware(tickets,pool,pop_probs,variant="calibrated",alpha=0.30):
         t=remaining.pop(best)
         selected.append(t)
         for n in t: exp[n]+=1
+        for x in itertools.combinations(t,4): c4[x]+=1
+        for x in itertools.combinations(t,3): c3[x]+=1
+        for x in itertools.combinations(t,2): c2[x]+=1
         f=motif_flags(t)
         for k,v in f.items(): shape_counts[k]+=v
     return selected
