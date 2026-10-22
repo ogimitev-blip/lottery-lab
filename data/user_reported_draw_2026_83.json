@@ -1,0 +1,49 @@
+{
+  "game_draw_no": 83,
+  "draw_date": "2026-10-22",
+  "source": "user-reported results in conversation; not yet independently verified against official BST result page",
+  "verification_status": "PENDING_OFFICIAL_CONFIRMATION",
+  "games": {
+    "6/49": [
+      15,
+      16,
+      20,
+      24,
+      36,
+      47
+    ],
+    "6/42": [
+      16,
+      17,
+      19,
+      21,
+      26,
+      40
+    ]
+  },
+  "proposed_ticket_results": {
+    "6/49": {
+      "lines": 4,
+      "hits": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "best": 2,
+      "winning_3plus": 0
+    },
+    "6/42": {
+      "lines": 4,
+      "hits": [
+        2,
+        0,
+        1,
+        1
+      ],
+      "best": 2,
+      "winning_3plus": 0
+    }
+  },
+  "note": "Do not promote to canonical draws CSV or official payout metadata until independently verified."
+}
