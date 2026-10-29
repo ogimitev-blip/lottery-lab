@@ -1,0 +1,86 @@
+{
+  "schema": "lottery_lab_shape_hybrid_shadow_v1",
+  "game": "6/42",
+  "draw_no": 85,
+  "draw_date": "2026-10-29",
+  "source_cutoff_draw": 84,
+  "source_last_date": "2026-10-25",
+  "status": "SHADOW_EXPERIMENT_NOT_CONFIRMED_PLAYED",
+  "frozen_control_path": "data/proposed_tickets_2026-10-29_draw85.json",
+  "baseline_tickets": [
+    [
+      9,
+      12,
+      18,
+      21,
+      22,
+      24
+    ],
+    [
+      2,
+      7,
+      17,
+      26,
+      37,
+      40
+    ],
+    [
+      1,
+      4,
+      16,
+      23,
+      38,
+      42
+    ],
+    [
+      5,
+      8,
+      14,
+      20,
+      30,
+      41
+    ]
+  ],
+  "shape_hybrid_tickets": [
+    [
+      9,
+      12,
+      20,
+      21,
+      22,
+      24
+    ],
+    [
+      2,
+      7,
+      17,
+      26,
+      37,
+      40
+    ],
+    [
+      1,
+      4,
+      16,
+      23,
+      38,
+      42
+    ],
+    [
+      5,
+      8,
+      14,
+      18,
+      30,
+      41
+    ]
+  ],
+  "modification": "swap 18 from baseline line 1 with 20 from baseline line 4; keep all original 24 selected numbers disjoint",
+  "target_motifs": [
+    "line 1 has 20,21,22 consecutive and 20,22,24 step 2",
+    "line 2 has 7,17,37 same final digit"
+  ],
+  "no_increase_of_stake": true,
+  "probability_claim": "Under fair random draws any four mutually disjoint six-number tickets have identical probability of at least one 3+ regardless of chosen motifs; research comparison only",
+  "rules": "Do not overwrite existing frozen control or record as an actual played ticket; score both independently once verified official draw is available."
+}
