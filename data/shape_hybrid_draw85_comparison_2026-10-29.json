@@ -1,0 +1,258 @@
+{
+  "draw_no": 85,
+  "draw_date": "2026-10-29",
+  "source": "https://www.toto.bg/?lang=1&pid=toto2_49",
+  "status": "OFFICIAL_SITE_VERIFIED_RESULT",
+  "bets_confirmed_by_user": false,
+  "notes": "Retrospective scoring of user-proposed frozen control and separately frozen pre-draw hybrid shadows; not evidence of actual plays or model predictive performance.",
+  "comparisons": {
+    "6/49": {
+      "winning_numbers": [
+        10,
+        21,
+        31,
+        33,
+        41,
+        46
+      ],
+      "control_lines": [
+        {
+          "numbers": [
+            16,
+            19,
+            24,
+            36,
+            37,
+            49
+          ],
+          "hits": 0,
+          "matched_numbers": []
+        },
+        {
+          "numbers": [
+            10,
+            15,
+            20,
+            26,
+            27,
+            47
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            10
+          ]
+        },
+        {
+          "numbers": [
+            8,
+            9,
+            33,
+            34,
+            45,
+            48
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            33
+          ]
+        },
+        {
+          "numbers": [
+            2,
+            17,
+            29,
+            35,
+            38,
+            42
+          ],
+          "hits": 0,
+          "matched_numbers": []
+        }
+      ],
+      "hybrid_lines": [
+        {
+          "numbers": [
+            16,
+            19,
+            24,
+            35,
+            36,
+            37
+          ],
+          "hits": 0,
+          "matched_numbers": []
+        },
+        {
+          "numbers": [
+            10,
+            15,
+            20,
+            26,
+            27,
+            47
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            10
+          ]
+        },
+        {
+          "numbers": [
+            8,
+            9,
+            33,
+            34,
+            45,
+            48
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            33
+          ]
+        },
+        {
+          "numbers": [
+            2,
+            17,
+            29,
+            38,
+            42,
+            49
+          ],
+          "hits": 0,
+          "matched_numbers": []
+        }
+      ],
+      "any3_control": false,
+      "any3_hybrid": false,
+      "pool_hits": 2
+    },
+    "6/42": {
+      "winning_numbers": [
+        2,
+        3,
+        7,
+        11,
+        23,
+        41
+      ],
+      "control_lines": [
+        {
+          "numbers": [
+            9,
+            12,
+            18,
+            21,
+            22,
+            24
+          ],
+          "hits": 0,
+          "matched_numbers": []
+        },
+        {
+          "numbers": [
+            2,
+            7,
+            17,
+            26,
+            37,
+            40
+          ],
+          "hits": 2,
+          "matched_numbers": [
+            2,
+            7
+          ]
+        },
+        {
+          "numbers": [
+            1,
+            4,
+            16,
+            23,
+            38,
+            42
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            23
+          ]
+        },
+        {
+          "numbers": [
+            5,
+            8,
+            14,
+            20,
+            30,
+            41
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            41
+          ]
+        }
+      ],
+      "hybrid_lines": [
+        {
+          "numbers": [
+            9,
+            12,
+            20,
+            21,
+            22,
+            24
+          ],
+          "hits": 0,
+          "matched_numbers": []
+        },
+        {
+          "numbers": [
+            2,
+            7,
+            17,
+            26,
+            37,
+            40
+          ],
+          "hits": 2,
+          "matched_numbers": [
+            2,
+            7
+          ]
+        },
+        {
+          "numbers": [
+            1,
+            4,
+            16,
+            23,
+            38,
+            42
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            23
+          ]
+        },
+        {
+          "numbers": [
+            5,
+            8,
+            14,
+            18,
+            30,
+            41
+          ],
+          "hits": 1,
+          "matched_numbers": [
+            41
+          ]
+        }
+      ],
+      "any3_control": false,
+      "any3_hybrid": false,
+      "pool_hits": 4
+    }
+  }
+}
