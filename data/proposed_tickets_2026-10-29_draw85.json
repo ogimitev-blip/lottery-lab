@@ -1,0 +1,87 @@
+{
+  "schema": "lottery_lab_proposed_tickets_v1",
+  "draw_no": 85,
+  "draw_date": "2026-10-29",
+  "status": "PREDRAW_PROPOSED_NOT_CONFIRMED_PLAYED",
+  "source_cutoff_draw": 84,
+  "source_last_date": "2026-10-25",
+  "game_method": "K22/K28 historical score pools plus 4x6 disjoint ticket diversification; no claimed predictive edge",
+  "games": {
+    "6/49": {
+      "ticket_price_eur": 0.9,
+      "tickets": [
+        [
+          16,
+          19,
+          24,
+          36,
+          37,
+          49
+        ],
+        [
+          10,
+          15,
+          20,
+          26,
+          27,
+          47
+        ],
+        [
+          8,
+          9,
+          33,
+          34,
+          45,
+          48
+        ],
+        [
+          2,
+          17,
+          29,
+          35,
+          38,
+          42
+        ]
+      ]
+    },
+    "6/42": {
+      "ticket_price_eur": 0.8,
+      "tickets": [
+        [
+          9,
+          12,
+          18,
+          21,
+          22,
+          24
+        ],
+        [
+          2,
+          7,
+          17,
+          26,
+          37,
+          40
+        ],
+        [
+          1,
+          4,
+          16,
+          23,
+          38,
+          42
+        ],
+        [
+          5,
+          8,
+          14,
+          20,
+          30,
+          41
+        ]
+      ]
+    }
+  },
+  "total_proposed_stake_eur": 6.8,
+  "note": "Do not treat as actual bets without user confirmation. Keep immutable for prospective scoring."
+}
