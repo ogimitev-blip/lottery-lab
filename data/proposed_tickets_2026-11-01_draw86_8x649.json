@@ -1,0 +1,158 @@
+{
+  "schema": "lottery_lab_prospective_8x649_allocation_v1",
+  "draw_no": 86,
+  "draw_date": "2026-11-01",
+  "game": "6/49",
+  "source_cutoff_draw": 85,
+  "status": "FROZEN_USER_SELECTED_ALLOCATION_NOT_CONFIRMED_PURCHASED",
+  "user_selection": "8 lines 6/49, 0 lines 6/42, total EUR 7.20",
+  "original_proposal_path": "data/proposed_tickets_2026-11-01_draw86.json",
+  "preserved_first_four_from": "lottery_games.6/49.hybrid_one",
+  "preserved_tickets": [
+    [
+      2,
+      16,
+      26,
+      39,
+      45,
+      49
+    ],
+    [
+      20,
+      27,
+      33,
+      34,
+      36,
+      38
+    ],
+    [
+      8,
+      9,
+      29,
+      41,
+      42,
+      48
+    ],
+    [
+      10,
+      15,
+      17,
+      24,
+      37,
+      46
+    ]
+  ],
+  "added_tickets": [
+    [
+      1,
+      3,
+      4,
+      5,
+      22,
+      43
+    ],
+    [
+      6,
+      11,
+      18,
+      25,
+      32,
+      47
+    ],
+    [
+      12,
+      14,
+      19,
+      23,
+      30,
+      40
+    ],
+    [
+      13,
+      21,
+      28,
+      31,
+      35,
+      44
+    ]
+  ],
+  "final_tickets": [
+    [
+      2,
+      16,
+      26,
+      39,
+      45,
+      49
+    ],
+    [
+      20,
+      27,
+      33,
+      34,
+      36,
+      38
+    ],
+    [
+      8,
+      9,
+      29,
+      41,
+      42,
+      48
+    ],
+    [
+      10,
+      15,
+      17,
+      24,
+      37,
+      46
+    ],
+    [
+      1,
+      3,
+      4,
+      5,
+      22,
+      43
+    ],
+    [
+      6,
+      11,
+      18,
+      25,
+      32,
+      47
+    ],
+    [
+      12,
+      14,
+      19,
+      23,
+      30,
+      40
+    ],
+    [
+      13,
+      21,
+      28,
+      31,
+      35,
+      44
+    ]
+  ],
+  "prices": {
+    "eur_per_6x49_line": 0.9,
+    "eur_for_8_lines": 7.2,
+    "eur_for_6x42": 0
+  },
+  "coverage": {
+    "distinct_numbers": 48,
+    "unselected_number": 7,
+    "repeated_numbers": 0
+  },
+  "rationale": "The first four tickets are frozen and unchanged. The four additional lines cover 24 previously unused numbers, while allowing some consecutive numbers and varied even/odd profiles. Number 7 omitted solely for coverage choice, not because it is less likely to be drawn.",
+  "constraints": "No purchase or cash disbursement made by ChatGPT. All four newly added lines are selections fixed before draw 86; do not change after results.",
+  "independent_assumptions": "Fair uniform draw, each 6-number set has the same probability. Shape motifs are not predictive."
+}
