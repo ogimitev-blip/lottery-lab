@@ -1,0 +1,114 @@
+{
+  "schema": "lottery_lab_user_reported_result_1",
+  "draw_no": 86,
+  "draw_date": "2026-11-01",
+  "game": "6/49",
+  "result_status": "USER_REPORTED_PENDING_OFFICIAL_VERIFICATION",
+  "user_reported_drawn_numbers": [
+    11,
+    16,
+    20,
+    39,
+    40,
+    45
+  ],
+  "official_source": "https://info.toto.bg/results/6x49/2026-86",
+  "official_payout_3_eur": null,
+  "ticket_proposal_source": "data/proposed_tickets_2026-11-01_draw86_13x649.json",
+  "tickets_not_confirmed_played": true,
+  "comparisons": [
+    {
+      "line": 1,
+      "matched": [
+        16,
+        39,
+        45
+      ],
+      "count": 3
+    },
+    {
+      "line": 2,
+      "matched": [
+        20
+      ],
+      "count": 1
+    },
+    {
+      "line": 3,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 4,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 5,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 6,
+      "matched": [
+        11
+      ],
+      "count": 1
+    },
+    {
+      "line": 7,
+      "matched": [
+        40
+      ],
+      "count": 1
+    },
+    {
+      "line": 8,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 9,
+      "matched": [
+        20,
+        39
+      ],
+      "count": 2
+    },
+    {
+      "line": 10,
+      "matched": [
+        11,
+        45
+      ],
+      "count": 2
+    },
+    {
+      "line": 11,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 12,
+      "matched": [
+        16
+      ],
+      "count": 1
+    },
+    {
+      "line": 13,
+      "matched": [],
+      "count": 0
+    }
+  ],
+  "count_rows_match_3plus": 1,
+  "count_rows_match_4plus": 0,
+  "match_3plus_rows": [
+    1
+  ],
+  "additional_5_lines_win3": 0,
+  "stake_if_all_13_bought_eur": 11.7,
+  "estimated_payout_eur": null,
+  "net_return_eur": null,
+  "notes": "Scored solely from six user-reported numbers. Official result page still served draw85 on 2026-11-01 when checked. No assertion official winnings, payout, or actual purchase."
+}
