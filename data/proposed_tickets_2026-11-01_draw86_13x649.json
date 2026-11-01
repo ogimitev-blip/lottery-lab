@@ -1,0 +1,237 @@
+{
+  "schema": "lottery_lab_proposed_13lines_6x49_v1",
+  "status": "USER_REQUESTED_ADDITIONAL_TICKETS_NOT_CONFIRMED_PURCHASED",
+  "draw_no": 86,
+  "draw_date": "2026-11-01",
+  "game": "6/49",
+  "frozen_existing_source": "data/proposed_tickets_2026-11-01_draw86_8x649.json",
+  "preserved_eight_tickets": [
+    [
+      2,
+      16,
+      26,
+      39,
+      45,
+      49
+    ],
+    [
+      20,
+      27,
+      33,
+      34,
+      36,
+      38
+    ],
+    [
+      8,
+      9,
+      29,
+      41,
+      42,
+      48
+    ],
+    [
+      10,
+      15,
+      17,
+      24,
+      37,
+      46
+    ],
+    [
+      1,
+      3,
+      4,
+      5,
+      22,
+      43
+    ],
+    [
+      6,
+      11,
+      18,
+      25,
+      32,
+      47
+    ],
+    [
+      12,
+      14,
+      19,
+      23,
+      30,
+      40
+    ],
+    [
+      13,
+      21,
+      28,
+      31,
+      35,
+      44
+    ]
+  ],
+  "new_additional_tickets": [
+    [
+      7,
+      18,
+      19,
+      20,
+      39,
+      42
+    ],
+    [
+      9,
+      11,
+      13,
+      24,
+      34,
+      45
+    ],
+    [
+      1,
+      14,
+      26,
+      31,
+      33,
+      46
+    ],
+    [
+      3,
+      16,
+      25,
+      28,
+      36,
+      41
+    ],
+    [
+      5,
+      12,
+      17,
+      29,
+      35,
+      38
+    ]
+  ],
+  "all_thirteen_tickets": [
+    [
+      2,
+      16,
+      26,
+      39,
+      45,
+      49
+    ],
+    [
+      20,
+      27,
+      33,
+      34,
+      36,
+      38
+    ],
+    [
+      8,
+      9,
+      29,
+      41,
+      42,
+      48
+    ],
+    [
+      10,
+      15,
+      17,
+      24,
+      37,
+      46
+    ],
+    [
+      1,
+      3,
+      4,
+      5,
+      22,
+      43
+    ],
+    [
+      6,
+      11,
+      18,
+      25,
+      32,
+      47
+    ],
+    [
+      12,
+      14,
+      19,
+      23,
+      30,
+      40
+    ],
+    [
+      13,
+      21,
+      28,
+      31,
+      35,
+      44
+    ],
+    [
+      7,
+      18,
+      19,
+      20,
+      39,
+      42
+    ],
+    [
+      9,
+      11,
+      13,
+      24,
+      34,
+      45
+    ],
+    [
+      1,
+      14,
+      26,
+      31,
+      33,
+      46
+    ],
+    [
+      3,
+      16,
+      25,
+      28,
+      36,
+      41
+    ],
+    [
+      5,
+      12,
+      17,
+      29,
+      35,
+      38
+    ]
+  ],
+  "per_line_eur": 0.9,
+  "previous_budget_eur": 7.2,
+  "additional_budget_cap_eur": 5.2,
+  "additional_lines": 5,
+  "additional_cost_eur": 4.5,
+  "total_cost_eur": 11.7,
+  "unused_additional_budget_eur": 0.7,
+  "coverage": {
+    "unique_numbers_out_of_49": 49,
+    "max_pairwise_ticket_intersection": 1,
+    "repeated_pairs": 0
+  },
+  "rationale": "Keep prior 8 lines exactly. Select 30 distinct values for 5 new lines with no repeated pairs across 13 tickets, including number 7 omitted from first 8. Use visible consecutive and step-2 structures in two new lines.",
+  "expected_value_note": "No evidence that clustering, covering all numbers, or zero repeated pairs increases any individual number's draw likelihood. The allocation maximizes coverage diversity, not predictive power.",
+  "cautions": "No tickets purchased by assistant; do not reclassify as played; verify official time before purchasing."
+}
