@@ -1,0 +1,229 @@
+{
+  "schema": "lottery_lab_proposed_2026_draw87_v1",
+  "status": "FROZEN_PROPOSED_NOT_CONFIRMED_PLAYED",
+  "draw_no": 87,
+  "draw_date": "2026-11-05",
+  "creation_context": "2026-11-02 Europe/Sofia, pre-draw; verified cutoff #86 2026-11-01",
+  "source": "data/draws_649.csv",
+  "source_cutoff_draw": 86,
+  "game": "6/49",
+  "user_visible_strategy": "hybrid_one",
+  "proposed_tickets": [
+    [
+      2,
+      11,
+      16,
+      29,
+      39,
+      42
+    ],
+    [
+      20,
+      23,
+      24,
+      37,
+      45,
+      48
+    ],
+    [
+      15,
+      17,
+      26,
+      27,
+      38,
+      49
+    ],
+    [
+      8,
+      9,
+      10,
+      33,
+      36,
+      46
+    ]
+  ],
+  "controlled_research": {
+    "baseline": [
+      [
+        2,
+        11,
+        16,
+        29,
+        39,
+        42
+      ],
+      [
+        20,
+        23,
+        24,
+        37,
+        45,
+        48
+      ],
+      [
+        10,
+        15,
+        26,
+        27,
+        38,
+        49
+      ],
+      [
+        8,
+        9,
+        17,
+        33,
+        36,
+        46
+      ]
+    ],
+    "hybrid_one": [
+      [
+        2,
+        11,
+        16,
+        29,
+        39,
+        42
+      ],
+      [
+        20,
+        23,
+        24,
+        37,
+        45,
+        48
+      ],
+      [
+        15,
+        17,
+        26,
+        27,
+        38,
+        49
+      ],
+      [
+        8,
+        9,
+        10,
+        33,
+        36,
+        46
+      ]
+    ],
+    "hybrid_two": [
+      [
+        11,
+        16,
+        29,
+        39,
+        42,
+        49
+      ],
+      [
+        20,
+        23,
+        24,
+        37,
+        45,
+        48
+      ],
+      [
+        2,
+        15,
+        17,
+        26,
+        27,
+        38
+      ],
+      [
+        8,
+        9,
+        10,
+        33,
+        36,
+        46
+      ]
+    ],
+    "random_assignment": [
+      [
+        26,
+        39,
+        42,
+        45,
+        48,
+        49
+      ],
+      [
+        9,
+        17,
+        23,
+        24,
+        33,
+        38
+      ],
+      [
+        2,
+        11,
+        15,
+        16,
+        27,
+        29
+      ],
+      [
+        8,
+        10,
+        20,
+        36,
+        37,
+        46
+      ]
+    ],
+    "second_shape": {
+      "trip": [
+        29,
+        39,
+        49
+      ],
+      "dest": 0,
+      "swaps": 1
+    },
+    "protocol_path": "research/SHAPE_HYBRID_PROSPECTIVE_PROTOCOL_2026-10-30.md",
+    "same_selected_set": true
+  },
+  "pool_model": "K22: ensemble+overdue+last-two overlay then two additional next-ranked for 24 distinct",
+  "model_score_source": "lottery/models.py",
+  "selected_24_numbers": [
+    16,
+    20,
+    38,
+    9,
+    45,
+    8,
+    10,
+    2,
+    36,
+    24,
+    26,
+    39,
+    33,
+    48,
+    29,
+    27,
+    15,
+    17,
+    42,
+    37,
+    11,
+    46,
+    49,
+    23
+  ],
+  "budget": {
+    "line_price_eur": 0.9,
+    "lines_649": 4,
+    "lines_642": 0,
+    "total_eur": 3.6
+  },
+  "disclaimer": "No lottery model has demonstrated prediction of a fair draw; no ticket actually purchased by assistant. Do not modify the frozen proposal after the draw."
+}
