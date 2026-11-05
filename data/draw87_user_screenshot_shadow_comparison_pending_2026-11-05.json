@@ -1,0 +1,136 @@
+{
+  "schema": "lottery_lab_draw_outcome_user_screenshot_v1",
+  "game": "6/49",
+  "draw_no": 87,
+  "draw_date": "2026-11-05",
+  "winning_numbers": [
+    2,
+    14,
+    15,
+    27,
+    43,
+    44
+  ],
+  "verification": "USER_SUPPLIED_IMAGE_ONLY_OFFICIAL_SITE_NOT_YET_CONFIRMED",
+  "source_proposal": "data/proposed_tickets_2026-11-05_draw87.json",
+  "source_proposal_status": "FROZEN_PROPOSED_NOT_CONFIRMED_PLAYED",
+  "bought_ticket_status": "NOT_CONFIRMED",
+  "arms": {
+    "baseline": {
+      "matches": [
+        {
+          "line": 1,
+          "matches": [
+            2
+          ]
+        },
+        {
+          "line": 2,
+          "matches": []
+        },
+        {
+          "line": 3,
+          "matches": [
+            15,
+            27
+          ]
+        },
+        {
+          "line": 4,
+          "matches": []
+        }
+      ],
+      "max_hits": 2,
+      "lines_with_3_plus": []
+    },
+    "hybrid_one": {
+      "matches": [
+        {
+          "line": 1,
+          "matches": [
+            2
+          ]
+        },
+        {
+          "line": 2,
+          "matches": []
+        },
+        {
+          "line": 3,
+          "matches": [
+            15,
+            27
+          ]
+        },
+        {
+          "line": 4,
+          "matches": []
+        }
+      ],
+      "max_hits": 2,
+      "lines_with_3_plus": []
+    },
+    "hybrid_two": {
+      "matches": [
+        {
+          "line": 1,
+          "matches": []
+        },
+        {
+          "line": 2,
+          "matches": []
+        },
+        {
+          "line": 3,
+          "matches": [
+            2,
+            15,
+            27
+          ]
+        },
+        {
+          "line": 4,
+          "matches": []
+        }
+      ],
+      "max_hits": 3,
+      "lines_with_3_plus": [
+        3
+      ]
+    },
+    "random_assignment": {
+      "matches": [
+        {
+          "line": 1,
+          "matches": []
+        },
+        {
+          "line": 2,
+          "matches": []
+        },
+        {
+          "line": 3,
+          "matches": [
+            2,
+            15,
+            27
+          ]
+        },
+        {
+          "line": 4,
+          "matches": []
+        }
+      ],
+      "max_hits": 3,
+      "lines_with_3_plus": [
+        3
+      ]
+    }
+  },
+  "distinct_pool_hits": [
+    2,
+    15,
+    27
+  ],
+  "notes": "Hybrid two and random shadow would each yield one 3-hit ticket, but these were not recommended as purchased tickets. Do not count shadow wins as financial payouts. One outcome insufficient to establish superiority."
+}
