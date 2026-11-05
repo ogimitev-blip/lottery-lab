@@ -1,0 +1,121 @@
+{
+  "schema": "lottery_lab_proposed_2026_draw87_6x649_v1",
+  "status": "FROZEN_PROPOSED_NOT_CONFIRMED_PLAYED",
+  "draw_no": 87,
+  "draw_date": "2026-11-05",
+  "game": "6/49",
+  "source_cutoff_draw": 86,
+  "original_proposal": "data/proposed_tickets_2026-11-05_draw87.json",
+  "unchanged_original_4_lines": [
+    [
+      2,
+      11,
+      16,
+      29,
+      39,
+      42
+    ],
+    [
+      20,
+      23,
+      24,
+      37,
+      45,
+      48
+    ],
+    [
+      15,
+      17,
+      26,
+      27,
+      38,
+      49
+    ],
+    [
+      8,
+      9,
+      10,
+      33,
+      36,
+      46
+    ]
+  ],
+  "added_lines": [
+    [
+      1,
+      30,
+      34,
+      35,
+      41,
+      47
+    ],
+    [
+      3,
+      4,
+      13,
+      19,
+      28,
+      44
+    ]
+  ],
+  "final_6_lines": [
+    [
+      2,
+      11,
+      16,
+      29,
+      39,
+      42
+    ],
+    [
+      20,
+      23,
+      24,
+      37,
+      45,
+      48
+    ],
+    [
+      15,
+      17,
+      26,
+      27,
+      38,
+      49
+    ],
+    [
+      8,
+      9,
+      10,
+      33,
+      36,
+      46
+    ],
+    [
+      1,
+      30,
+      34,
+      35,
+      41,
+      47
+    ],
+    [
+      3,
+      4,
+      13,
+      19,
+      28,
+      44
+    ]
+  ],
+  "selected_added_numbers_justification": "Remaining 12 highest model-ranked numbers not covered by original 24; assigned to maintain broad number coverage, modest parity balance and a neighboring pair",
+  "stake_eur": 5.4,
+  "price_per_line_eur": 0.9,
+  "unique_numbers": 36,
+  "no_6x42_lines": true,
+  "no_ticket_purchase_confirmed": true,
+  "disclaimers": [
+    "Fair random lottery: motif patterns do not enhance numerical prediction",
+    "No prior frozen record overwritten"
+  ]
+}
