@@ -1,0 +1,250 @@
+{
+  "schema": "lottery_lab_proposed_2026_draw88_v1",
+  "game": "6/49",
+  "draw_no": 88,
+  "draw_date": "2026-11-08",
+  "status": "FROZEN_PROPOSED_NOT_CONFIRMED_PLAYED",
+  "source_cutoff_draw": 87,
+  "source_csv": "data/draws_649.csv",
+  "latest_verified_result": [
+    2,
+    14,
+    15,
+    27,
+    43,
+    44
+  ],
+  "freeze_context": "Created 2026-11-07 Europe/Sofia before draw 88",
+  "selection": "K22 production scoring + flexible pool, extended to 24 distinct numbers, history cutoff draw 87 only",
+  "pool": [
+    16,
+    20,
+    38,
+    9,
+    2,
+    15,
+    27,
+    10,
+    45,
+    8,
+    24,
+    39,
+    33,
+    36,
+    29,
+    44,
+    26,
+    48,
+    42,
+    17,
+    43,
+    11,
+    37,
+    46
+  ],
+  "proposed_strategy": "hybrid_one",
+  "tickets": [
+    [
+      9,
+      10,
+      11,
+      33,
+      39,
+      48
+    ],
+    [
+      8,
+      20,
+      26,
+      27,
+      29,
+      46
+    ],
+    [
+      15,
+      36,
+      38,
+      42,
+      43,
+      45
+    ],
+    [
+      2,
+      16,
+      17,
+      24,
+      37,
+      44
+    ]
+  ],
+  "shadows": {
+    "balanced_baseline": [
+      [
+        10,
+        11,
+        16,
+        33,
+        39,
+        48
+      ],
+      [
+        8,
+        20,
+        26,
+        27,
+        29,
+        46
+      ],
+      [
+        15,
+        36,
+        38,
+        42,
+        43,
+        45
+      ],
+      [
+        2,
+        9,
+        17,
+        24,
+        37,
+        44
+      ]
+    ],
+    "hybrid_one": [
+      [
+        9,
+        10,
+        11,
+        33,
+        39,
+        48
+      ],
+      [
+        8,
+        20,
+        26,
+        27,
+        29,
+        46
+      ],
+      [
+        15,
+        36,
+        38,
+        42,
+        43,
+        45
+      ],
+      [
+        2,
+        16,
+        17,
+        24,
+        37,
+        44
+      ]
+    ],
+    "hybrid_two": [
+      [
+        9,
+        10,
+        11,
+        33,
+        39,
+        48
+      ],
+      [
+        16,
+        20,
+        26,
+        27,
+        29,
+        46
+      ],
+      [
+        15,
+        36,
+        38,
+        42,
+        43,
+        45
+      ],
+      [
+        2,
+        8,
+        17,
+        24,
+        37,
+        44
+      ]
+    ],
+    "random_assignment": [
+      [
+        8,
+        17,
+        24,
+        44,
+        46,
+        48
+      ],
+      [
+        10,
+        11,
+        26,
+        27,
+        37,
+        45
+      ],
+      [
+        20,
+        29,
+        36,
+        38,
+        39,
+        42
+      ],
+      [
+        2,
+        9,
+        15,
+        16,
+        33,
+        43
+      ]
+    ]
+  },
+  "prospective_protocol": "research/SHAPE_HYBRID_PROSPECTIVE_PROTOCOL_2026-10-30.md",
+  "hybrid_one_motif": {
+    "type": "three consecutive",
+    "values": [
+      9,
+      10,
+      11
+    ],
+    "line": 1,
+    "swaps_from_baseline": 1
+  },
+  "hybrid_two_additional_motif": {
+    "type": "three same final digits",
+    "values": [
+      16,
+      26,
+      46
+    ],
+    "line": 2
+  },
+  "budget": {
+    "six_over_49_lines": 4,
+    "six_over_42_lines": 0,
+    "eur_per_line": 0.9,
+    "total_eur": 3.6
+  },
+  "invariants": {
+    "four_lines_each_six_numbers": true,
+    "unique_numbers": 24,
+    "identical_24_numbers_in_all_shadow_arms": true
+  },
+  "note": "Mathematical lottery odds do not improve from shape motifs. Research only, no ticket purchased or authorized by assistant."
+}
