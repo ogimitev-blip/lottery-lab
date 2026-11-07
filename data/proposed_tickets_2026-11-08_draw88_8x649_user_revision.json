@@ -1,0 +1,155 @@
+{
+  "schema": "lottery_lab_draw88_8line_user_revision_v1",
+  "game": "6/49",
+  "draw_no": 88,
+  "draw_date": "2026-11-08",
+  "status": "PRE_DRAW_USER_REQUESTED_PROPOSAL_NOT_CONFIRMED_PLAYED",
+  "source_cutoff_draw": 87,
+  "base_for_preservation": "Four lines shown in assistant's immediately preceding user-visible proposal",
+  "source_note": "The previously stored data/proposed_tickets_2026-11-08_draw88.json has a different frozen set of four lines; this file is a separate user-visible proposal revision and does not overwrite or retrospectively alter it.",
+  "preserved_four_lines": [
+    [
+      10,
+      11,
+      16,
+      33,
+      39,
+      48
+    ],
+    [
+      8,
+      20,
+      26,
+      27,
+      29,
+      46
+    ],
+    [
+      36,
+      38,
+      42,
+      43,
+      44,
+      45
+    ],
+    [
+      2,
+      9,
+      15,
+      17,
+      24,
+      37
+    ]
+  ],
+  "additional_four_lines": [
+    [
+      1,
+      3,
+      4,
+      5,
+      22,
+      47
+    ],
+    [
+      6,
+      12,
+      18,
+      25,
+      31,
+      49
+    ],
+    [
+      7,
+      13,
+      19,
+      23,
+      30,
+      40
+    ],
+    [
+      14,
+      21,
+      28,
+      32,
+      34,
+      35
+    ]
+  ],
+  "final_eight_lines": [
+    [
+      10,
+      11,
+      16,
+      33,
+      39,
+      48
+    ],
+    [
+      8,
+      20,
+      26,
+      27,
+      29,
+      46
+    ],
+    [
+      36,
+      38,
+      42,
+      43,
+      44,
+      45
+    ],
+    [
+      2,
+      9,
+      15,
+      17,
+      24,
+      37
+    ],
+    [
+      1,
+      3,
+      4,
+      5,
+      22,
+      47
+    ],
+    [
+      6,
+      12,
+      18,
+      25,
+      31,
+      49
+    ],
+    [
+      7,
+      13,
+      19,
+      23,
+      30,
+      40
+    ],
+    [
+      14,
+      21,
+      28,
+      32,
+      34,
+      35
+    ]
+  ],
+  "price_per_line_eur": 0.9,
+  "total_cost_eur": 7.2,
+  "lines_for_6x42": 0,
+  "coverage": {
+    "distinct_numbers": 48,
+    "excluded_numbers": [
+      41
+    ]
+  },
+  "model_note": "The new lines cover 24 previously unused numbers; one or two have consecutive patterns for diversity, not forecasting.",
+  "not_purchased": true
+}
