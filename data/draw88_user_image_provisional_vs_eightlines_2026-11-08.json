@@ -1,0 +1,103 @@
+{
+  "schema": "lottery_lab_draw88_user_image_pending_v1",
+  "game": "6/49",
+  "draw_no": 88,
+  "draw_date": "2026-11-08",
+  "outcome_source": "user-provided screenshot of the draw",
+  "verification_status": "USER_IMAGE_NOT_YET_INDEPENDENTLY_CONFIRMED_BST",
+  "numbers": [
+    7,
+    19,
+    27,
+    28,
+    29,
+    47
+  ],
+  "scored_proposal": "data/proposed_tickets_2026-11-08_draw88_8x649_user_revision.json",
+  "score_user_eight": [
+    {
+      "line": 1,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 2,
+      "matched": [
+        27,
+        29
+      ],
+      "count": 2
+    },
+    {
+      "line": 3,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 4,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 5,
+      "matched": [
+        47
+      ],
+      "count": 1
+    },
+    {
+      "line": 6,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 7,
+      "matched": [
+        7,
+        19
+      ],
+      "count": 2
+    },
+    {
+      "line": 8,
+      "matched": [
+        28
+      ],
+      "count": 1
+    }
+  ],
+  "score_original_frozen_four": [
+    {
+      "line": 1,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 2,
+      "matched": [
+        27,
+        29
+      ],
+      "count": 2
+    },
+    {
+      "line": 3,
+      "matched": [],
+      "count": 0
+    },
+    {
+      "line": 4,
+      "matched": [],
+      "count": 0
+    }
+  ],
+  "stake_eur_if_eight_bought": 7.2,
+  "net_eur_if_eight_bought": -7.2,
+  "played_status": "NOT_CONFIRMED",
+  "observations": [
+    "All six drawn numbers are represented in 48-number set from user-visible eight lines",
+    "No 3+ matches in any of eight lines",
+    "27 and 29 are in line2; 28 is in line8; winning draw contains consecutive 27,28,29",
+    "Some originally frozen four-line rows differ from the displayed four-line revised proposal; do not overwrite original controls"
+  ]
+}
