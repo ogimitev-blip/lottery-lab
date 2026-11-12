@@ -1,0 +1,73 @@
+{
+  "schema": "lottery_lab_draw89_user_revision_6x649_v1",
+  "game": "6/49",
+  "draw_no": 89,
+  "draw_date": "2026-11-12",
+  "status": "PREDRAW_USER_SELECTED_PROPOSAL_NOT_CONFIRMED_PLAYED",
+  "superseded_user_choice": "8x6/49 EUR 8 proposed",
+  "source_frozen_eight_line_path": "data/proposed_tickets_2026-11-12_draw89_8x649.json",
+  "source_cutoff_draw": 88,
+  "proposed_six_lines": [
+    [
+      15,
+      16,
+      24,
+      28,
+      39,
+      43
+    ],
+    [
+      10,
+      17,
+      20,
+      26,
+      29,
+      42
+    ],
+    [
+      2,
+      19,
+      27,
+      44,
+      45,
+      48
+    ],
+    [
+      8,
+      9,
+      33,
+      36,
+      37,
+      38
+    ],
+    [
+      6,
+      7,
+      11,
+      12,
+      30,
+      49
+    ],
+    [
+      21,
+      23,
+      25,
+      31,
+      41,
+      47
+    ]
+  ],
+  "strategy": "Keep original first six of eight previously frozen rows unchanged; remove original lines seven and eight",
+  "budget": {
+    "lines_6x49": 6,
+    "lines_6x42": 0,
+    "per_line_eur": 1,
+    "total_eur": 6
+  },
+  "coverage": {
+    "unique_numbers": 36,
+    "cross_row_duplicate_numbers": 0
+  },
+  "research_note": "Retain original frozen 8-line proposal for backtests. This derivative records the user's actual requested subset, not proof of ticket purchase.",
+  "no_purchase_confirmed": true
+}
