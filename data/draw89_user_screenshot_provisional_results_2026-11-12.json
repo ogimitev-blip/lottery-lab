@@ -1,0 +1,242 @@
+{
+  "schema": "lottery_lab_draw89_user_screenshot_results_v1",
+  "game": "6/49",
+  "draw_no": 89,
+  "draw_date": "2026-11-12",
+  "winning_numbers": [
+    7,
+    15,
+    18,
+    21,
+    30,
+    33
+  ],
+  "verification": "USER_SUPPLIED_TV_SCREENSHOT; BST website still shows previous draw #88 at time of check",
+  "proposal_six_lines_path": "data/proposed_tickets_2026-11-12_draw89_6x649_user_revision.json",
+  "proposal_eight_lines_path": "data/proposed_tickets_2026-11-12_draw89_8x649.json",
+  "six_user_requested": {
+    "grading": [
+      {
+        "line": 1,
+        "matches": [
+          15
+        ],
+        "count": 1
+      },
+      {
+        "line": 2,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 3,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 4,
+        "matches": [
+          33
+        ],
+        "count": 1
+      },
+      {
+        "line": 5,
+        "matches": [
+          7,
+          30
+        ],
+        "count": 2
+      },
+      {
+        "line": 6,
+        "matches": [
+          21
+        ],
+        "count": 1
+      }
+    ],
+    "unique_pool_hits": [
+      7,
+      15,
+      21,
+      30,
+      33
+    ],
+    "winners_3_plus": 0,
+    "stake_eur_if_played": 6,
+    "net_if_played_eur": -6
+  },
+  "shadow_eight_lines": {
+    "grading": [
+      {
+        "line": 1,
+        "matches": [
+          15
+        ],
+        "count": 1
+      },
+      {
+        "line": 2,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 3,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 4,
+        "matches": [
+          33
+        ],
+        "count": 1
+      },
+      {
+        "line": 5,
+        "matches": [
+          7,
+          30
+        ],
+        "count": 2
+      },
+      {
+        "line": 6,
+        "matches": [
+          21
+        ],
+        "count": 1
+      },
+      {
+        "line": 7,
+        "matches": [
+          18
+        ],
+        "count": 1
+      },
+      {
+        "line": 8,
+        "matches": [],
+        "count": 0
+      }
+    ],
+    "winners_3_plus": 0,
+    "not_confirmed_played": true
+  },
+  "baseline_eight_lines": {
+    "grading": [
+      {
+        "line": 1,
+        "matches": [
+          15
+        ],
+        "count": 1
+      },
+      {
+        "line": 2,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 3,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 4,
+        "matches": [
+          33
+        ],
+        "count": 1
+      },
+      {
+        "line": 5,
+        "matches": [
+          7,
+          30
+        ],
+        "count": 2
+      },
+      {
+        "line": 6,
+        "matches": [
+          21
+        ],
+        "count": 1
+      },
+      {
+        "line": 7,
+        "matches": [
+          18
+        ],
+        "count": 1
+      },
+      {
+        "line": 8,
+        "matches": [],
+        "count": 0
+      }
+    ],
+    "winners_3_plus": 0,
+    "not_played_control": true
+  },
+  "random_eight_lines": {
+    "grading": [
+      {
+        "line": 1,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 2,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 3,
+        "matches": [
+          7,
+          30
+        ],
+        "count": 2
+      },
+      {
+        "line": 4,
+        "matches": [
+          18
+        ],
+        "count": 1
+      },
+      {
+        "line": 5,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 6,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 7,
+        "matches": [
+          15,
+          21
+        ],
+        "count": 2
+      },
+      {
+        "line": 8,
+        "matches": [
+          33
+        ],
+        "count": 1
+      }
+    ],
+    "winners_3_plus": 0,
+    "not_played_control": true
+  },
+  "research_note": "The future 3 core + 3 near-variant paired strategy was agreed for future draws and was NOT used in draw89; don't score draw89 as a paired-strategy trial. The observed five hits among thirty-six numbers do not prove K22 has predictive value.",
+  "ticket_purchase_not_confirmed": true
+}
