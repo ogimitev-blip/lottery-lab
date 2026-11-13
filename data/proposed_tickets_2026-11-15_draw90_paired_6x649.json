@@ -1,0 +1,387 @@
+{
+  "schema": "lottery_lab_6x49_draw90_paired_near_miss_v1",
+  "game": "6/49",
+  "draw_no": 90,
+  "draw_date": "2026-11-15",
+  "status": "FROZEN_PROPOSED_PREDRAW_NOT_CONFIRMED_PLAYED",
+  "official_last_draw": 89,
+  "official_last_date": "2026-11-12",
+  "official_result_89": [
+    7,
+    15,
+    18,
+    21,
+    30,
+    33
+  ],
+  "official_result_link": "https://info.toto.bg/results/6x49/2026-89",
+  "scored_source": "lottery/models.py: current_pool_649 k22; rank top18 of K22 for core rows, deterministic score and even/high balance allocation",
+  "draw_data_source": "data/draws_649.csv",
+  "production_K22_core": [
+    16,
+    20,
+    27,
+    15,
+    9,
+    38,
+    2,
+    33,
+    10,
+    29,
+    8,
+    45,
+    44,
+    36,
+    28,
+    48,
+    24,
+    30,
+    17,
+    42,
+    7,
+    19
+  ],
+  "flex_overlay_recent": [
+    7,
+    19
+  ],
+  "selected_main_18": [
+    16,
+    20,
+    27,
+    15,
+    9,
+    38,
+    2,
+    33,
+    10,
+    29,
+    8,
+    45,
+    44,
+    36,
+    28,
+    48,
+    24,
+    30
+  ],
+  "pairs": [
+    {
+      "id": "A",
+      "main": [
+        10,
+        16,
+        28,
+        30,
+        38,
+        45
+      ],
+      "variant": [
+        10,
+        17,
+        28,
+        30,
+        37,
+        45
+      ],
+      "main_line": 1,
+      "variant_line": 4,
+      "replaced": [
+        16,
+        38
+      ],
+      "added": [
+        17,
+        37
+      ],
+      "distances": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "B",
+      "main": [
+        9,
+        20,
+        29,
+        33,
+        44,
+        48
+      ],
+      "variant": [
+        9,
+        19,
+        29,
+        33,
+        44,
+        49
+      ],
+      "main_line": 2,
+      "variant_line": 5,
+      "replaced": [
+        20,
+        48
+      ],
+      "added": [
+        19,
+        49
+      ],
+      "distances": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "C",
+      "main": [
+        2,
+        8,
+        15,
+        24,
+        27,
+        36
+      ],
+      "variant": [
+        1,
+        8,
+        15,
+        24,
+        26,
+        36
+      ],
+      "main_line": 3,
+      "variant_line": 6,
+      "replaced": [
+        2,
+        27
+      ],
+      "added": [
+        1,
+        26
+      ],
+      "distances": [
+        1,
+        1
+      ]
+    }
+  ],
+  "user_proposed_six_lines": [
+    [
+      10,
+      16,
+      28,
+      30,
+      38,
+      45
+    ],
+    [
+      9,
+      20,
+      29,
+      33,
+      44,
+      48
+    ],
+    [
+      2,
+      8,
+      15,
+      24,
+      27,
+      36
+    ],
+    [
+      10,
+      17,
+      28,
+      30,
+      37,
+      45
+    ],
+    [
+      9,
+      19,
+      29,
+      33,
+      44,
+      49
+    ],
+    [
+      1,
+      8,
+      15,
+      24,
+      26,
+      36
+    ]
+  ],
+  "rule": "Each A'/B'/C' preserves exactly four values; replaces exactly two with ±1 or ±2 neighbors selected using ONLY historical scores.",
+  "diagnostic_only": {
+    "individual_near_miss_distances": [
+      {
+        "main_line": 1,
+        "variant_line": 4,
+        "replaced": [
+          16,
+          38
+        ],
+        "added": [
+          17,
+          37
+        ],
+        "distances": [
+          1,
+          1
+        ]
+      },
+      {
+        "main_line": 2,
+        "variant_line": 5,
+        "replaced": [
+          20,
+          48
+        ],
+        "added": [
+          19,
+          49
+        ],
+        "distances": [
+          1,
+          1
+        ]
+      },
+      {
+        "main_line": 3,
+        "variant_line": 6,
+        "replaced": [
+          2,
+          27
+        ],
+        "added": [
+          1,
+          26
+        ],
+        "distances": [
+          1,
+          1
+        ]
+      }
+    ],
+    "distinct_coverage": 24,
+    "pairwise_overlap": [
+      [
+        6,
+        0,
+        0,
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        6,
+        0,
+        0,
+        4,
+        0
+      ],
+      [
+        0,
+        0,
+        6,
+        0,
+        0,
+        4
+      ],
+      [
+        4,
+        0,
+        0,
+        6,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        0,
+        0,
+        4,
+        0,
+        0,
+        6
+      ]
+    ]
+  },
+  "frozen_shadow_control": {
+    "description": "Same first 3 main tickets + 3 additional disjoint ranked tickets using distinct numbers; same stake, no outcome-driven rewiring",
+    "six_disjoint_lines": [
+      [
+        10,
+        16,
+        28,
+        30,
+        38,
+        45
+      ],
+      [
+        9,
+        20,
+        29,
+        33,
+        44,
+        48
+      ],
+      [
+        2,
+        8,
+        15,
+        24,
+        27,
+        36
+      ],
+      [
+        7,
+        17,
+        18,
+        26,
+        46,
+        47
+      ],
+      [
+        11,
+        19,
+        23,
+        34,
+        35,
+        42
+      ],
+      [
+        4,
+        13,
+        37,
+        41,
+        43,
+        49
+      ]
+    ],
+    "distinct_coverage": 36,
+    "status": "RESEARCH_CONTROL_NOT_TO_BE_PURCHASED"
+  },
+  "budget": {
+    "six_over_49_lines": 6,
+    "six_over_42_lines": 0,
+    "per_line_eur": 0.9,
+    "total_eur": 5.4,
+    "draw_type": "regular"
+  },
+  "protocol": "research/PAIRED_TICKETS_NEAR_MISS_PROTOCOL_2026-11-12.md",
+  "disclosure": "No statistical evidence that near numerical miss predicts exact wins. Every distinct ticket has the same jackpot probability under fair draws. No purchase confirmed."
+}
