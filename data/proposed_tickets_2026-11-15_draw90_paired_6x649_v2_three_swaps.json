@@ -1,0 +1,313 @@
+{
+  "schema": "lottery_lab_draw90_user_revision_three_substitutions_v1",
+  "game": "6/49",
+  "draw_no": 90,
+  "draw_date": "2026-11-15",
+  "status": "FROZEN_USER_REQUESTED_PROPOSAL_REVISION_NOT_CONFIRMED_PLAYED",
+  "source_cutoff_draw": 89,
+  "replaces_for_user_selection": "data/proposed_tickets_2026-11-15_draw90_paired_6x649.json",
+  "version_note": "Original 2-change frozen proposal remains unchanged and is still available as prospective control, this is a new pre-draw user revision requested 2026-11-13.",
+  "rationale": "Compared to two substitutions at +/-1, use three substitutions per paired variant while still favoring local numeric neighbors within +/-1..3.",
+  "user_proposed_six_lines": [
+    [
+      10,
+      16,
+      28,
+      30,
+      38,
+      45
+    ],
+    [
+      9,
+      20,
+      29,
+      33,
+      44,
+      48
+    ],
+    [
+      2,
+      8,
+      15,
+      24,
+      27,
+      36
+    ],
+    [
+      10,
+      19,
+      26,
+      30,
+      39,
+      45
+    ],
+    [
+      9,
+      22,
+      29,
+      35,
+      44,
+      46
+    ],
+    [
+      4,
+      8,
+      15,
+      23,
+      27,
+      34
+    ]
+  ],
+  "paired_groups": [
+    {
+      "pair": "A",
+      "main": [
+        10,
+        16,
+        28,
+        30,
+        38,
+        45
+      ],
+      "variant": [
+        10,
+        19,
+        26,
+        30,
+        39,
+        45
+      ],
+      "identical_count": 3,
+      "changes": {
+        "removed": [
+          16,
+          28,
+          38
+        ],
+        "added": [
+          19,
+          26,
+          39
+        ],
+        "moves": [
+          "16→19 (+3)",
+          "28→26 (−2)",
+          "38→39 (+1)"
+        ]
+      }
+    },
+    {
+      "pair": "B",
+      "main": [
+        9,
+        20,
+        29,
+        33,
+        44,
+        48
+      ],
+      "variant": [
+        9,
+        22,
+        29,
+        35,
+        44,
+        46
+      ],
+      "identical_count": 3,
+      "changes": {
+        "removed": [
+          20,
+          33,
+          48
+        ],
+        "added": [
+          22,
+          35,
+          46
+        ],
+        "moves": [
+          "20→22 (+2)",
+          "33→35 (+2)",
+          "48→46 (−2)"
+        ]
+      }
+    },
+    {
+      "pair": "C",
+      "main": [
+        2,
+        8,
+        15,
+        24,
+        27,
+        36
+      ],
+      "variant": [
+        4,
+        8,
+        15,
+        23,
+        27,
+        34
+      ],
+      "identical_count": 3,
+      "changes": {
+        "removed": [
+          2,
+          24,
+          36
+        ],
+        "added": [
+          4,
+          23,
+          34
+        ],
+        "moves": [
+          "2→4 (+2)",
+          "24→23 (−1)",
+          "36→34 (−2)"
+        ]
+      }
+    }
+  ],
+  "primary_K22_model_pool": [
+    16,
+    20,
+    27,
+    15,
+    9,
+    38,
+    2,
+    33,
+    10,
+    29,
+    8,
+    45,
+    44,
+    36,
+    28,
+    48,
+    24,
+    30,
+    17,
+    42,
+    7,
+    19
+  ],
+  "research_controls": {
+    "existing_two_substitutions": [
+      [
+        10,
+        16,
+        28,
+        30,
+        38,
+        45
+      ],
+      [
+        9,
+        20,
+        29,
+        33,
+        44,
+        48
+      ],
+      [
+        2,
+        8,
+        15,
+        24,
+        27,
+        36
+      ],
+      [
+        10,
+        17,
+        28,
+        30,
+        37,
+        45
+      ],
+      [
+        9,
+        19,
+        29,
+        33,
+        44,
+        49
+      ],
+      [
+        1,
+        8,
+        15,
+        24,
+        26,
+        36
+      ]
+    ],
+    "six_disjoint_baseline": [
+      [
+        10,
+        16,
+        28,
+        30,
+        38,
+        45
+      ],
+      [
+        9,
+        20,
+        29,
+        33,
+        44,
+        48
+      ],
+      [
+        2,
+        8,
+        15,
+        24,
+        27,
+        36
+      ],
+      [
+        7,
+        17,
+        18,
+        26,
+        46,
+        47
+      ],
+      [
+        11,
+        19,
+        23,
+        34,
+        35,
+        42
+      ],
+      [
+        4,
+        13,
+        37,
+        41,
+        43,
+        49
+      ]
+    ],
+    "baseline_source": "data/proposed_tickets_2026-11-15_draw90_paired_6x649.json"
+  },
+  "coverage": {
+    "distinct_values": 27,
+    "distinct_primary": 18,
+    "additional_values": 9,
+    "per_pair_shared_numbers": 3
+  },
+  "price_eur": 0.9,
+  "stake_eur": 5.4,
+  "lines_649": 6,
+  "lines_642": 0,
+  "scientific_warning": "Numerical near-miss and increased ticket coverage do not predict fair lottery draws. Matching three numbers between a base and variant does not add exact-hit likelihood. Score out of sample using same-budget controls.",
+  "purchase_status": "not confirmed purchased"
+}
