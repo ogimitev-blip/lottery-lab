@@ -1,0 +1,104 @@
+{
+  "schema": "lottery_lab_draw90_user_revision_seven_line_v4",
+  "game": "6/49",
+  "draw_no": 90,
+  "draw_date": "2026-11-15",
+  "status": "FROZEN_PREDRAW_USER_REQUESTED_SEVEN_LINE_PROPOSAL_NOT_CONFIRMED_PURCHASED",
+  "prior_frozen_user_selection": "data/proposed_tickets_2026-11-15_draw90_paired_6x649_v3_shape_mix.json",
+  "prior_proposals_not_modified": true,
+  "cutoff_draw": 89,
+  "strategy": "Retain all six rows from shape-mix v3 unmodified; add a seventh non-overlapping three-consecutive-number shape-coverage row.",
+  "user_proposed_seven_lines": [
+    [
+      10,
+      16,
+      28,
+      30,
+      38,
+      45
+    ],
+    [
+      9,
+      20,
+      29,
+      33,
+      44,
+      48
+    ],
+    [
+      2,
+      8,
+      15,
+      24,
+      27,
+      36
+    ],
+    [
+      10,
+      17,
+      25,
+      30,
+      40,
+      45
+    ],
+    [
+      12,
+      29,
+      31,
+      33,
+      46,
+      48
+    ],
+    [
+      4,
+      7,
+      15,
+      24,
+      27,
+      34
+    ],
+    [
+      21,
+      22,
+      23,
+      26,
+      37,
+      42
+    ]
+  ],
+  "added_line": {
+    "line_number": 7,
+    "numbers": [
+      21,
+      22,
+      23,
+      26,
+      37,
+      42
+    ],
+    "motif": [
+      21,
+      22,
+      23
+    ],
+    "even_count": 3,
+    "odd_count": 3,
+    "low_1_24_count": 3,
+    "high_25_49_count": 3
+  },
+  "coverage": {
+    "distinct_values": 33,
+    "added_new_values": 6
+  },
+  "comparison_controls": {
+    "v3_six_line": "data/proposed_tickets_2026-11-15_draw90_paired_6x649_v3_shape_mix.json",
+    "older_controls_recorded_in_v3": true
+  },
+  "budget": {
+    "line_price_eur": 0.9,
+    "lines": 7,
+    "total_eur": 6.3
+  },
+  "no_purchase_confirmed": true,
+  "caveat": "Coverage and number shapes do not raise the odds for individual lines in a fair drawing."
+}
