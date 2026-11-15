@@ -1,0 +1,6987 @@
+{
+  "schema": "lottery_lab_retrospective_walk_forward_v1",
+  "method": "historical rolling holdout, model refit using only past rows for each target index; min 100 earlier draws, future rows excluded",
+  "data_source": "data/draws_649.csv",
+  "data_source_blob_sha": "b40bd5d55d462f4b08f7bf441a688a7b595322a4",
+  "method_versions": [
+    "repo lottery/models.py ensemble+overdue/flex_pool JS mirror",
+    "top18 of K22 balanced into 3 sixes",
+    "v1 2 local substitutions +/-2, variants retain 4",
+    "v2 3 local substitutions +/-3, variants retain 3",
+    "disjoint: original three mains plus three top-ranked non-overlapping rows",
+    "random: deterministic 36-unique-number rows"
+  ],
+  "caveats": [
+    "Retrospective testing on a model family conceived using overlapping historical draws, not independent prospective proof",
+    "CSV legacy rows missing date/draw_no, chronological order assumed as present in repository",
+    "Main allocation and variant chooser are reproducible approximations of the previously proposed v1/v2 procedures rather than an exact replay of historical frozen tickets",
+    "No confirmed winnings or payout model; comparison uses at least one ticket with >=3 or >=4 only",
+    "Random control seeded with deterministic 20261115+idx*1103"
+  ],
+  "summary": {
+    "tested": 196,
+    "original_rows": 296,
+    "history_min": 100,
+    "history_latest": {
+      "draw_no": "89",
+      "date": "2026-11-12",
+      "nums": [
+        7,
+        15,
+        18,
+        21,
+        30,
+        33
+      ]
+    },
+    "legacy_rows_without_date": 269,
+    "fallback2": 0,
+    "fallback3": 0,
+    "expected_K22_hits": 2.693877551020408,
+    "expected_top18_hits": 2.204081632653061,
+    "average_K22_hits": 2.8469387755102042,
+    "average_top18_hits": 2.316326530612245,
+    "averages": {
+      "v1": {
+        "draws_with3plus": 25,
+        "draws_with4plus": 3,
+        "number3plus_tickets": 28,
+        "average_best_hits": 1.719387755102041,
+        "rate3plus": 0.12755102040816327,
+        "rate4plus": 0.015306122448979591
+      },
+      "v2": {
+        "draws_with3plus": 22,
+        "draws_with4plus": 3,
+        "number3plus_tickets": 26,
+        "average_best_hits": 1.7755102040816326,
+        "rate3plus": 0.11224489795918367,
+        "rate4plus": 0.015306122448979591
+      },
+      "disjoint": {
+        "draws_with3plus": 19,
+        "draws_with4plus": 1,
+        "number3plus_tickets": 19,
+        "average_best_hits": 1.836734693877551,
+        "rate3plus": 0.09693877551020408,
+        "rate4plus": 0.00510204081632653
+      },
+      "random": {
+        "draws_with3plus": 21,
+        "draws_with4plus": 1,
+        "number3plus_tickets": 21,
+        "average_best_hits": 1.8010204081632653,
+        "rate3plus": 0.10714285714285714,
+        "rate4plus": 0.00510204081632653
+      }
+    },
+    "periods": [
+      {
+        "n": 98,
+        "range_label": "195 to 98",
+        "methods": {
+          "v1": {
+            "three": 15,
+            "four": 2
+          },
+          "v2": {
+            "three": 11,
+            "four": 1
+          },
+          "disjoint": {
+            "three": 9,
+            "four": 0
+          },
+          "random": {
+            "three": 12,
+            "four": 0
+          }
+        }
+      },
+      {
+        "n": 98,
+        "range_label": "97 to 0",
+        "methods": {
+          "v1": {
+            "three": 10,
+            "four": 1
+          },
+          "v2": {
+            "three": 11,
+            "four": 2
+          },
+          "disjoint": {
+            "three": 10,
+            "four": 1
+          },
+          "random": {
+            "three": 9,
+            "four": 1
+          }
+        }
+      }
+    ]
+  },
+  "records": [
+    {
+      "idx": 195,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        15,
+        25,
+        38,
+        40,
+        44
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 194,
+      "draw": null,
+      "date": null,
+      "win": [
+        7,
+        16,
+        24,
+        29,
+        31,
+        46
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 193,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        3,
+        15,
+        18,
+        21,
+        25
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 192,
+      "draw": null,
+      "date": null,
+      "win": [
+        20,
+        22,
+        24,
+        32,
+        35,
+        49
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 191,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        21,
+        26,
+        28,
+        46,
+        48
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 190,
+      "draw": null,
+      "date": null,
+      "win": [
+        16,
+        18,
+        19,
+        27,
+        37,
+        49
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 189,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        13,
+        20,
+        23,
+        30,
+        45
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 188,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        17,
+        18,
+        20,
+        32,
+        47
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 187,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        5,
+        21,
+        34,
+        40,
+        42
+      ],
+      "pool_hits": 1,
+      "main_hits": 0,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 186,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        11,
+        26,
+        31,
+        35,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 185,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        7,
+        12,
+        20,
+        31,
+        38
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 184,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        13,
+        18,
+        24,
+        30,
+        41
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 183,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        8,
+        10,
+        18,
+        25,
+        39
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 182,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        15,
+        23,
+        28,
+        42,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 2,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 181,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        12,
+        15,
+        19,
+        21,
+        34
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 180,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        13,
+        31,
+        39,
+        41,
+        47
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 179,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        19,
+        31,
+        35,
+        36,
+        47
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 178,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        20,
+        21,
+        31,
+        37,
+        39
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 177,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        7,
+        23,
+        31,
+        41,
+        45
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 176,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        3,
+        17,
+        25,
+        36,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 175,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        9,
+        14,
+        16,
+        20,
+        34
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 174,
+      "draw": null,
+      "date": null,
+      "win": [
+        14,
+        21,
+        23,
+        36,
+        37,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 173,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        19,
+        20,
+        22,
+        24,
+        46
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 172,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        11,
+        15,
+        36,
+        38,
+        39
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 171,
+      "draw": null,
+      "date": null,
+      "win": [
+        23,
+        34,
+        37,
+        46,
+        47,
+        48
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 170,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        22,
+        36,
+        42,
+        44,
+        49
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 169,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        16,
+        19,
+        35,
+        39,
+        47
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 168,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        11,
+        17,
+        18,
+        19,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 167,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        6,
+        16,
+        33,
+        45,
+        46
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 166,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        14,
+        21,
+        22,
+        37,
+        46
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 165,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        5,
+        6,
+        17,
+        26,
+        40
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 164,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        13,
+        14,
+        16,
+        26,
+        27
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 163,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        19,
+        22,
+        27,
+        28,
+        44
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 162,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        18,
+        20,
+        21,
+        31,
+        46
+      ],
+      "pool_hits": 6,
+      "main_hits": 5,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 161,
+      "draw": null,
+      "date": null,
+      "win": [
+        27,
+        34,
+        35,
+        39,
+        48,
+        49
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 160,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        22,
+        24,
+        26,
+        29,
+        34
+      ],
+      "pool_hits": 3,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 159,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        14,
+        24,
+        38,
+        39,
+        44
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 158,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        18,
+        26,
+        32,
+        46,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 157,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        17,
+        25,
+        31,
+        37,
+        44
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 156,
+      "draw": null,
+      "date": null,
+      "win": [
+        7,
+        29,
+        30,
+        31,
+        34,
+        35
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 155,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        14,
+        35,
+        39,
+        42,
+        49
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 154,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        14,
+        19,
+        32,
+        34,
+        36
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 153,
+      "draw": null,
+      "date": null,
+      "win": [
+        17,
+        27,
+        30,
+        33,
+        37,
+        44
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 152,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        10,
+        17,
+        23,
+        38,
+        48
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 151,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        15,
+        17,
+        22,
+        27,
+        36
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 150,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        9,
+        15,
+        17,
+        28,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 149,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        19,
+        37,
+        46,
+        47,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 148,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        15,
+        19,
+        20,
+        26,
+        38
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 147,
+      "draw": null,
+      "date": null,
+      "win": [
+        16,
+        18,
+        31,
+        32,
+        37,
+        41
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 146,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        11,
+        15,
+        25,
+        27,
+        47
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 145,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        6,
+        8,
+        26,
+        29,
+        38
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 144,
+      "draw": null,
+      "date": null,
+      "win": [
+        15,
+        27,
+        31,
+        32,
+        35,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 143,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        13,
+        17,
+        39,
+        42,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 142,
+      "draw": null,
+      "date": null,
+      "win": [
+        16,
+        17,
+        24,
+        28,
+        35,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 141,
+      "draw": null,
+      "date": null,
+      "win": [
+        25,
+        29,
+        30,
+        33,
+        36,
+        38
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 140,
+      "draw": null,
+      "date": null,
+      "win": [
+        18,
+        32,
+        35,
+        40,
+        41,
+        43
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 139,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        24,
+        30,
+        38,
+        48,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 138,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        23,
+        26,
+        27,
+        38,
+        42
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 137,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        5,
+        7,
+        18,
+        23,
+        34
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 136,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        16,
+        30,
+        35,
+        37,
+        42
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 135,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        28,
+        31,
+        32,
+        35,
+        44
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 134,
+      "draw": null,
+      "date": null,
+      "win": [
+        7,
+        15,
+        24,
+        36,
+        41,
+        45
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 133,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        11,
+        18,
+        23,
+        26,
+        37
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 132,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        14,
+        17,
+        29,
+        32,
+        37
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 4,
+        "ge3": 1,
+        "ge4": 1
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 131,
+      "draw": null,
+      "date": null,
+      "win": [
+        16,
+        18,
+        27,
+        35,
+        39,
+        41
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 4,
+        "ge3": 2,
+        "ge4": 1
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 130,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        12,
+        15,
+        16,
+        20,
+        34
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 129,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        10,
+        24,
+        27,
+        30,
+        36
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 128,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        5,
+        23,
+        28,
+        31,
+        35
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 127,
+      "draw": null,
+      "date": null,
+      "win": [
+        7,
+        22,
+        25,
+        29,
+        37,
+        42
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 126,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        22,
+        33,
+        35,
+        36,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 125,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        11,
+        13,
+        23,
+        25,
+        32
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 124,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        4,
+        10,
+        21,
+        22,
+        27
+      ],
+      "pool_hits": 6,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 123,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        18,
+        28,
+        37,
+        42,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 122,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        3,
+        8,
+        12,
+        37,
+        48
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 121,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        8,
+        13,
+        18,
+        33,
+        44
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 120,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        14,
+        18,
+        33,
+        34,
+        40
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 119,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        19,
+        21,
+        22,
+        47,
+        48
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 118,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        13,
+        14,
+        18,
+        41,
+        43
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 117,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        11,
+        12,
+        28,
+        32,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 116,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        6,
+        19,
+        23,
+        31,
+        36
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 115,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        27,
+        32,
+        34,
+        37,
+        45
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 114,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        19,
+        35,
+        39,
+        42,
+        43
+      ],
+      "pool_hits": 3,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 113,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        14,
+        20,
+        30,
+        38,
+        42
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 112,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        17,
+        23,
+        30,
+        34,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 2,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 111,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        29,
+        30,
+        40,
+        47,
+        48
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 110,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        6,
+        9,
+        26,
+        38,
+        41
+      ],
+      "pool_hits": 0,
+      "main_hits": 0,
+      "v1": {
+        "max": 0,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 109,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        12,
+        20,
+        23,
+        34,
+        45
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 108,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        6,
+        8,
+        23,
+        24,
+        34
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 107,
+      "draw": null,
+      "date": null,
+      "win": [
+        16,
+        26,
+        34,
+        38,
+        42,
+        45
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 106,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        17,
+        18,
+        35,
+        38,
+        47
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 105,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        24,
+        30,
+        36,
+        38,
+        43
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 104,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        5,
+        26,
+        29,
+        43,
+        45
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 103,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        14,
+        20,
+        22,
+        29,
+        49
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 102,
+      "draw": null,
+      "date": null,
+      "win": [
+        15,
+        23,
+        30,
+        31,
+        43,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 4,
+        "ge3": 2,
+        "ge4": 1
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 2,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 101,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        18,
+        29,
+        34,
+        36,
+        42
+      ],
+      "pool_hits": 6,
+      "main_hits": 6,
+      "v1": {
+        "max": 3,
+        "ge3": 2,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 2,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 100,
+      "draw": null,
+      "date": null,
+      "win": [
+        21,
+        30,
+        35,
+        43,
+        45,
+        46
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 99,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        22,
+        24,
+        38,
+        42,
+        45
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 98,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        9,
+        15,
+        35,
+        44,
+        47
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 97,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        7,
+        17,
+        21,
+        39,
+        45
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 96,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        13,
+        15,
+        22,
+        47,
+        48
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 95,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        15,
+        16,
+        24,
+        41,
+        48
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 94,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        13,
+        16,
+        23,
+        34,
+        48
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 4,
+        "ge3": 1,
+        "ge4": 1
+      },
+      "v2": {
+        "max": 4,
+        "ge3": 1,
+        "ge4": 1
+      },
+      "disjoint": {
+        "max": 4,
+        "ge3": 1,
+        "ge4": 1
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 93,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        14,
+        24,
+        28,
+        33,
+        48
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 92,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        8,
+        10,
+        15,
+        31,
+        34
+      ],
+      "pool_hits": 4,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 91,
+      "draw": null,
+      "date": null,
+      "win": [
+        7,
+        11,
+        15,
+        23,
+        35,
+        44
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 90,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        15,
+        20,
+        21,
+        40,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 89,
+      "draw": null,
+      "date": null,
+      "win": [
+        20,
+        24,
+        41,
+        42,
+        43,
+        45
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 88,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        13,
+        15,
+        19,
+        33,
+        35
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 87,
+      "draw": null,
+      "date": null,
+      "win": [
+        22,
+        24,
+        26,
+        32,
+        33,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 86,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        20,
+        27,
+        38,
+        46,
+        47
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 85,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        10,
+        18,
+        20,
+        28,
+        48
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 84,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        13,
+        24,
+        28,
+        32,
+        36
+      ],
+      "pool_hits": 4,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 83,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        24,
+        28,
+        36,
+        37,
+        46
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 82,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        11,
+        12,
+        18,
+        19,
+        42
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 81,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        17,
+        20,
+        31,
+        33,
+        44
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 80,
+      "draw": null,
+      "date": null,
+      "win": [
+        17,
+        18,
+        22,
+        37,
+        41,
+        46
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 79,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        4,
+        41,
+        43,
+        44,
+        47
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 78,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        12,
+        13,
+        15,
+        23,
+        36
+      ],
+      "pool_hits": 4,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 77,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        20,
+        26,
+        30,
+        41,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 76,
+      "draw": null,
+      "date": null,
+      "win": [
+        16,
+        18,
+        23,
+        36,
+        39,
+        44
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 75,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        16,
+        18,
+        34,
+        36,
+        46
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 74,
+      "draw": null,
+      "date": null,
+      "win": [
+        22,
+        25,
+        37,
+        44,
+        45,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 73,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        31,
+        33,
+        37,
+        38,
+        48
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 72,
+      "draw": null,
+      "date": null,
+      "win": [
+        10,
+        14,
+        21,
+        24,
+        36,
+        37
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 4,
+        "ge3": 1,
+        "ge4": 1
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 71,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        18,
+        19,
+        24,
+        37,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 4,
+        "ge3": 1,
+        "ge4": 1
+      }
+    },
+    {
+      "idx": 70,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        15,
+        17,
+        36,
+        37,
+        49
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 69,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        4,
+        13,
+        22,
+        33,
+        48
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 68,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        4,
+        24,
+        30,
+        34,
+        37
+      ],
+      "pool_hits": 5,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 67,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        3,
+        12,
+        40,
+        44,
+        49
+      ],
+      "pool_hits": 4,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 66,
+      "draw": null,
+      "date": null,
+      "win": [
+        23,
+        24,
+        33,
+        38,
+        42,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 65,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        22,
+        28,
+        30,
+        33,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 64,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        12,
+        16,
+        23,
+        35,
+        40
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 63,
+      "draw": null,
+      "date": null,
+      "win": [
+        20,
+        25,
+        27,
+        29,
+        30,
+        46
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 62,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        18,
+        23,
+        38,
+        40,
+        49
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 61,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        6,
+        7,
+        12,
+        13,
+        19
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 60,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        6,
+        21,
+        22,
+        39,
+        45
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 59,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        4,
+        8,
+        14,
+        28,
+        43
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 58,
+      "draw": null,
+      "date": null,
+      "win": [
+        11,
+        18,
+        21,
+        38,
+        48,
+        49
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 57,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        19,
+        37,
+        40,
+        41,
+        47
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 56,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        7,
+        11,
+        16,
+        23,
+        30
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 55,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        11,
+        26,
+        30,
+        36,
+        38
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 54,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        8,
+        18,
+        20,
+        26,
+        42
+      ],
+      "pool_hits": 3,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 53,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        14,
+        23,
+        27,
+        36,
+        42
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 52,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        8,
+        13,
+        20,
+        42,
+        49
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 51,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        23,
+        24,
+        27,
+        37,
+        38
+      ],
+      "pool_hits": 5,
+      "main_hits": 5,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 50,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        7,
+        13,
+        31,
+        38,
+        42
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 49,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        5,
+        7,
+        32,
+        46,
+        49
+      ],
+      "pool_hits": 3,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 48,
+      "draw": null,
+      "date": null,
+      "win": [
+        3,
+        17,
+        33,
+        36,
+        39,
+        45
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 47,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        9,
+        38,
+        43,
+        45,
+        46
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 46,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        6,
+        15,
+        19,
+        26,
+        35
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 45,
+      "draw": null,
+      "date": null,
+      "win": [
+        9,
+        17,
+        29,
+        39,
+        42,
+        49
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 44,
+      "draw": null,
+      "date": null,
+      "win": [
+        13,
+        17,
+        28,
+        35,
+        37,
+        49
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 43,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        9,
+        26,
+        30,
+        39,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 42,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        10,
+        11,
+        15,
+        16,
+        37
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 41,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        7,
+        8,
+        14,
+        29,
+        42
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 40,
+      "draw": null,
+      "date": null,
+      "win": [
+        22,
+        26,
+        28,
+        29,
+        40,
+        42
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 39,
+      "draw": null,
+      "date": null,
+      "win": [
+        6,
+        13,
+        16,
+        19,
+        42,
+        44
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 38,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        11,
+        44,
+        46,
+        47,
+        48
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 37,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        4,
+        17,
+        33,
+        35,
+        38
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 36,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        9,
+        12,
+        13,
+        33,
+        38
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 35,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        11,
+        21,
+        28,
+        36,
+        49
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 34,
+      "draw": null,
+      "date": null,
+      "win": [
+        12,
+        17,
+        23,
+        30,
+        38,
+        41
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 33,
+      "draw": null,
+      "date": null,
+      "win": [
+        16,
+        29,
+        35,
+        37,
+        44,
+        47
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 32,
+      "draw": null,
+      "date": null,
+      "win": [
+        5,
+        10,
+        17,
+        20,
+        42,
+        47
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 31,
+      "draw": null,
+      "date": null,
+      "win": [
+        8,
+        25,
+        30,
+        32,
+        33,
+        48
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 30,
+      "draw": null,
+      "date": null,
+      "win": [
+        1,
+        7,
+        8,
+        14,
+        37,
+        44
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 29,
+      "draw": null,
+      "date": null,
+      "win": [
+        4,
+        19,
+        20,
+        27,
+        28,
+        34
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 28,
+      "draw": null,
+      "date": null,
+      "win": [
+        14,
+        33,
+        35,
+        37,
+        39,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 27,
+      "draw": null,
+      "date": null,
+      "win": [
+        2,
+        17,
+        21,
+        29,
+        34,
+        36
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 26,
+      "draw": "63",
+      "date": "2026-08-13",
+      "win": [
+        4,
+        11,
+        13,
+        20,
+        39,
+        47
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 25,
+      "draw": "64",
+      "date": "2026-08-16",
+      "win": [
+        2,
+        17,
+        20,
+        34,
+        38,
+        39
+      ],
+      "pool_hits": 5,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 24,
+      "draw": "65",
+      "date": "2026-08-20",
+      "win": [
+        4,
+        12,
+        15,
+        16,
+        30,
+        39
+      ],
+      "pool_hits": 4,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 23,
+      "draw": "66",
+      "date": "2026-08-23",
+      "win": [
+        6,
+        17,
+        25,
+        35,
+        38,
+        48
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 22,
+      "draw": "67",
+      "date": "2026-08-27",
+      "win": [
+        1,
+        8,
+        15,
+        17,
+        41,
+        43
+      ],
+      "pool_hits": 3,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 21,
+      "draw": "68",
+      "date": "2026-08-30",
+      "win": [
+        2,
+        9,
+        10,
+        13,
+        25,
+        46
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 20,
+      "draw": "69",
+      "date": "2026-09-03",
+      "win": [
+        8,
+        16,
+        20,
+        35,
+        38,
+        47
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 19,
+      "draw": "70",
+      "date": "2026-09-06",
+      "win": [
+        6,
+        9,
+        19,
+        25,
+        30,
+        38
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 18,
+      "draw": "71",
+      "date": "2026-09-10",
+      "win": [
+        9,
+        16,
+        18,
+        22,
+        30,
+        37
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 17,
+      "draw": "72",
+      "date": "2026-09-13",
+      "win": [
+        5,
+        14,
+        16,
+        20,
+        25,
+        29
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 16,
+      "draw": "73",
+      "date": "2026-09-17",
+      "win": [
+        9,
+        10,
+        26,
+        33,
+        35,
+        46
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 15,
+      "draw": "74",
+      "date": "2026-09-20",
+      "win": [
+        1,
+        26,
+        27,
+        34,
+        45,
+        48
+      ],
+      "pool_hits": 1,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 14,
+      "draw": "75",
+      "date": "2026-09-24",
+      "win": [
+        8,
+        19,
+        21,
+        27,
+        35,
+        43
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 13,
+      "draw": "76",
+      "date": "2026-09-27",
+      "win": [
+        8,
+        9,
+        17,
+        27,
+        37,
+        48
+      ],
+      "pool_hits": 6,
+      "main_hits": 6,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 12,
+      "draw": "77",
+      "date": "2026-10-01",
+      "win": [
+        16,
+        26,
+        36,
+        41,
+        45,
+        48
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 11,
+      "draw": "78",
+      "date": "2026-10-04",
+      "win": [
+        2,
+        3,
+        9,
+        11,
+        24,
+        33
+      ],
+      "pool_hits": 5,
+      "main_hits": 4,
+      "v1": {
+        "max": 3,
+        "ge3": 2,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 10,
+      "draw": "79",
+      "date": "2026-10-08",
+      "win": [
+        20,
+        24,
+        26,
+        29,
+        31,
+        45
+      ],
+      "pool_hits": 4,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 9,
+      "draw": "80",
+      "date": "2026-10-11",
+      "win": [
+        1,
+        20,
+        34,
+        38,
+        41,
+        44
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 8,
+      "draw": "81",
+      "date": "2026-10-15",
+      "win": [
+        2,
+        4,
+        10,
+        32,
+        36,
+        46
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 7,
+      "draw": "82",
+      "date": "2026-10-18",
+      "win": [
+        8,
+        19,
+        28,
+        29,
+        38,
+        45
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 6,
+      "draw": "83",
+      "date": "2026-10-22",
+      "win": [
+        15,
+        16,
+        20,
+        24,
+        36,
+        47
+      ],
+      "pool_hits": 4,
+      "main_hits": 4,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 5,
+      "draw": "84",
+      "date": "2026-10-25",
+      "win": [
+        4,
+        10,
+        16,
+        27,
+        29,
+        34
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 3,
+        "ge3": 1,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 4,
+      "draw": "85",
+      "date": "2026-10-29",
+      "win": [
+        10,
+        21,
+        31,
+        33,
+        41,
+        46
+      ],
+      "pool_hits": 2,
+      "main_hits": 1,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 3,
+      "draw": "86",
+      "date": "2026-11-01",
+      "win": [
+        11,
+        16,
+        20,
+        39,
+        40,
+        45
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 2,
+      "draw": "87",
+      "date": "2026-11-05",
+      "win": [
+        2,
+        14,
+        15,
+        27,
+        43,
+        44
+      ],
+      "pool_hits": 3,
+      "main_hits": 3,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 1,
+      "draw": "88",
+      "date": "2026-11-08",
+      "win": [
+        7,
+        19,
+        27,
+        28,
+        29,
+        47
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    },
+    {
+      "idx": 0,
+      "draw": "89",
+      "date": "2026-11-12",
+      "win": [
+        7,
+        15,
+        18,
+        21,
+        30,
+        33
+      ],
+      "pool_hits": 2,
+      "main_hits": 2,
+      "v1": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "v2": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "disjoint": {
+        "max": 1,
+        "ge3": 0,
+        "ge4": 0
+      },
+      "random": {
+        "max": 2,
+        "ge3": 0,
+        "ge4": 0
+      }
+    }
+  ]
+}
