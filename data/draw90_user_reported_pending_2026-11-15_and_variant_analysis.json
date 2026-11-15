@@ -1,0 +1,277 @@
+{
+  "schema": "lottery_lab_draw90_user_report_provisional_v1",
+  "draw_no": 90,
+  "draw_date": "2026-11-15",
+  "game": "6/49",
+  "winning_numbers_user_reported": [
+    10,
+    11,
+    17,
+    30,
+    36,
+    37
+  ],
+  "verification": "USER_REPORTED_PENDING_OFFICIAL_PUBLICATION",
+  "sources_of_scored_tickets": [
+    "data/proposed_tickets_2026-11-15_draw90_paired_6x649.json",
+    "data/proposed_tickets_2026-11-15_draw90_paired_6x649_v2_three_swaps.json",
+    "data/proposed_tickets_2026-11-15_draw90_paired_6x649_v3_shape_mix.json",
+    "data/proposed_tickets_2026-11-15_draw90_7x649_v4_added_shape.json"
+  ],
+  "scoring": [
+    {
+      "source": "data/proposed_tickets_2026-11-15_draw90_paired_6x649.json",
+      "lines": 6,
+      "grades": [
+        {
+          "line": 1,
+          "matches": [
+            10,
+            30
+          ],
+          "count": 2
+        },
+        {
+          "line": 2,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 3,
+          "matches": [
+            36
+          ],
+          "count": 1
+        },
+        {
+          "line": 4,
+          "matches": [
+            10,
+            17,
+            30,
+            37
+          ],
+          "count": 4
+        },
+        {
+          "line": 5,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 6,
+          "matches": [
+            36
+          ],
+          "count": 1
+        }
+      ],
+      "three_plus": 1,
+      "four_plus": 1
+    },
+    {
+      "source": "data/proposed_tickets_2026-11-15_draw90_paired_6x649_v2_three_swaps.json",
+      "lines": 6,
+      "grades": [
+        {
+          "line": 1,
+          "matches": [
+            10,
+            30
+          ],
+          "count": 2
+        },
+        {
+          "line": 2,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 3,
+          "matches": [
+            36
+          ],
+          "count": 1
+        },
+        {
+          "line": 4,
+          "matches": [
+            10,
+            30
+          ],
+          "count": 2
+        },
+        {
+          "line": 5,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 6,
+          "matches": [],
+          "count": 0
+        }
+      ],
+      "three_plus": 0,
+      "four_plus": 0
+    },
+    {
+      "source": "data/proposed_tickets_2026-11-15_draw90_paired_6x649_v3_shape_mix.json",
+      "lines": 6,
+      "grades": [
+        {
+          "line": 1,
+          "matches": [
+            10,
+            30
+          ],
+          "count": 2
+        },
+        {
+          "line": 2,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 3,
+          "matches": [
+            36
+          ],
+          "count": 1
+        },
+        {
+          "line": 4,
+          "matches": [
+            10,
+            17,
+            30
+          ],
+          "count": 3
+        },
+        {
+          "line": 5,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 6,
+          "matches": [],
+          "count": 0
+        }
+      ],
+      "three_plus": 1,
+      "four_plus": 0
+    },
+    {
+      "source": "data/proposed_tickets_2026-11-15_draw90_7x649_v4_added_shape.json",
+      "lines": 7,
+      "grades": [
+        {
+          "line": 1,
+          "matches": [
+            10,
+            30
+          ],
+          "count": 2
+        },
+        {
+          "line": 2,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 3,
+          "matches": [
+            36
+          ],
+          "count": 1
+        },
+        {
+          "line": 4,
+          "matches": [
+            10,
+            17,
+            30
+          ],
+          "count": 3
+        },
+        {
+          "line": 5,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 6,
+          "matches": [],
+          "count": 0
+        },
+        {
+          "line": 7,
+          "matches": [
+            37
+          ],
+          "count": 1
+        }
+      ],
+      "three_plus": 1,
+      "four_plus": 0
+    }
+  ],
+  "disjoint_control": {
+    "source": "data/proposed_tickets_2026-11-15_draw90_paired_6x649.json",
+    "grades": [
+      {
+        "line": 1,
+        "matches": [
+          10,
+          30
+        ],
+        "count": 2
+      },
+      {
+        "line": 2,
+        "matches": [],
+        "count": 0
+      },
+      {
+        "line": 3,
+        "matches": [
+          36
+        ],
+        "count": 1
+      },
+      {
+        "line": 4,
+        "matches": [
+          17
+        ],
+        "count": 1
+      },
+      {
+        "line": 5,
+        "matches": [
+          11
+        ],
+        "count": 1
+      },
+      {
+        "line": 6,
+        "matches": [
+          37
+        ],
+        "count": 1
+      }
+    ],
+    "three_plus": 0
+  },
+  "recommended_at_draw": "v4 seven-line user proposal, not confirmed purchased",
+  "cost_if_v4_played_eur": 6.3,
+  "expected_prizes_note": "Payout unknown until official BST draw90 prize table is published. A three-match ticket qualifies for a prize under 6/49 rules.",
+  "observations": [
+    "Current v4 line 4 (10,17,25,30,40,45) matches three: 10,17,30.",
+    "Initial v1 line 4 (10,17,28,30,37,45) would have matched FOUR: 10,17,30,37, but v1 was superseded and must not be counted as a purchased winning ticket.",
+    "The v2 line4 would have matched 10 and 30 only.",
+    "Disjoint control has no 3+ matches; not proof of superiority from one draw."
+  ],
+  "no_bets_placed_by_assistant": true
+}
