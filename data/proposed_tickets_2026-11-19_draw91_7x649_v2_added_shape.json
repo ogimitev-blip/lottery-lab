@@ -1,0 +1,102 @@
+{
+  "schema": "lottery_lab_2026_draw91_user_revision_seven_rows_v2",
+  "status": "FROZEN_PREDRAW_USER_REVISION_NOT_CONFIRMED_PLAYED",
+  "game": "6/49",
+  "draw_no": 91,
+  "draw_date": "2026-11-19",
+  "source_cutoff_draw": 90,
+  "original_proposal_path": "data/proposed_tickets_2026-11-19_draw91_paired_6x649.json",
+  "revision": "Retain all 6 previously frozen proposed lines, add a seventh with six unused numbers and a triple consecutive Shape motif",
+  "proposed_seven_rows": [
+    [
+      2,
+      9,
+      16,
+      33,
+      38,
+      45
+    ],
+    [
+      10,
+      17,
+      27,
+      28,
+      29,
+      30
+    ],
+    [
+      8,
+      11,
+      15,
+      20,
+      36,
+      37
+    ],
+    [
+      4,
+      9,
+      16,
+      33,
+      39,
+      44
+    ],
+    [
+      13,
+      18,
+      26,
+      28,
+      29,
+      30
+    ],
+    [
+      5,
+      12,
+      15,
+      20,
+      35,
+      37
+    ],
+    [
+      21,
+      22,
+      23,
+      34,
+      41,
+      48
+    ]
+  ],
+  "extra_line": {
+    "line": 7,
+    "numbers": [
+      21,
+      22,
+      23,
+      34,
+      41,
+      48
+    ],
+    "three_consecutive": [
+      21,
+      22,
+      23
+    ],
+    "even": 3,
+    "odd": 3,
+    "low_1_to_24": 3,
+    "high_25_to_49": 3
+  },
+  "coverage": {
+    "distinct_numbers": 33,
+    "unique_new_numbers": 6,
+    "no_overlap_with_prior_6": true
+  },
+  "budget": {
+    "six_over_49_lines": 7,
+    "six_over_42_lines": 0,
+    "price_per_line_eur": 0.9,
+    "total_eur": 6.3
+  },
+  "original_research_controls_unmodified": true,
+  "previous_record_not_overwritten": true,
+  "caveat": "Adding one more line raises coverage/cost but motifs do not predict draws. This is a pre-draw recommendation only; purchase not confirmed."
+}
