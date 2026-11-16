@@ -1,0 +1,434 @@
+{
+  "schema": "lottery_lab_2026_draw91_frozen_paired_shape_v1",
+  "game": "6/49",
+  "draw_no": 91,
+  "draw_date": "2026-11-19",
+  "status": "FROZEN_PREDRAW_USER_PROPOSAL_NOT_CONFIRMED_PLAYED",
+  "created_local_date": "2026-11-16 Europe/Sofia",
+  "results_cutoff": {
+    "draw_no": 90,
+    "draw_date": "2026-11-15",
+    "numbers": [
+      10,
+      11,
+      17,
+      30,
+      36,
+      37
+    ],
+    "source_url": "https://info.toto.bg/results/6x49/2026-90"
+  },
+  "source_data": "data/draws_649.csv",
+  "history_rows_used": 297,
+  "model": {
+    "type": "K22 historical ensemble, flexible recent-draw overlay",
+    "source": "lottery/models.py",
+    "flex_pool_22": [
+      16,
+      27,
+      20,
+      10,
+      15,
+      9,
+      36,
+      30,
+      2,
+      37,
+      29,
+      33,
+      8,
+      38,
+      17,
+      11,
+      28,
+      45,
+      48,
+      44,
+      7,
+      49
+    ],
+    "overlay_from_recent_draws": [
+      7
+    ],
+    "top18_primary": [
+      16,
+      27,
+      20,
+      10,
+      15,
+      9,
+      36,
+      30,
+      2,
+      37,
+      29,
+      33,
+      8,
+      38,
+      17,
+      11,
+      28,
+      45
+    ],
+    "other_ranked_18_for_control": [
+      48,
+      44,
+      49,
+      26,
+      42,
+      24,
+      23,
+      19,
+      47,
+      4,
+      13,
+      46,
+      7,
+      18,
+      35,
+      43,
+      39,
+      21
+    ]
+  },
+  "strategy": "Three non-overlapping K22 main tickets, each with one close structural variant retaining exactly three of six numbers. Three local substitutions per variant, distance <=3; no purchase claimed.",
+  "proposed_six_rows": [
+    [
+      2,
+      9,
+      16,
+      33,
+      38,
+      45
+    ],
+    [
+      10,
+      17,
+      27,
+      28,
+      29,
+      30
+    ],
+    [
+      8,
+      11,
+      15,
+      20,
+      36,
+      37
+    ],
+    [
+      4,
+      9,
+      16,
+      33,
+      39,
+      44
+    ],
+    [
+      13,
+      18,
+      26,
+      28,
+      29,
+      30
+    ],
+    [
+      5,
+      12,
+      15,
+      20,
+      35,
+      37
+    ]
+  ],
+  "row_roles": [
+    "Main A",
+    "Main B",
+    "Main C",
+    "Variant A",
+    "Variant B",
+    "Variant C"
+  ],
+  "paired_rows": [
+    {
+      "id": "A",
+      "primary": [
+        2,
+        9,
+        16,
+        33,
+        38,
+        45
+      ],
+      "variant": [
+        4,
+        9,
+        16,
+        33,
+        39,
+        44
+      ],
+      "retained": [
+        9,
+        16,
+        33
+      ],
+      "substitutions": [
+        {
+          "from": 2,
+          "to": 4
+        },
+        {
+          "from": 38,
+          "to": 39
+        },
+        {
+          "from": 45,
+          "to": 44
+        }
+      ],
+      "motif": "3 even / 3 odd"
+    },
+    {
+      "id": "B",
+      "primary": [
+        10,
+        17,
+        27,
+        28,
+        29,
+        30
+      ],
+      "variant": [
+        13,
+        18,
+        26,
+        28,
+        29,
+        30
+      ],
+      "retained": [
+        28,
+        29,
+        30
+      ],
+      "substitutions": [
+        {
+          "from": 10,
+          "to": 13
+        },
+        {
+          "from": 17,
+          "to": 18
+        },
+        {
+          "from": 27,
+          "to": 26
+        }
+      ],
+      "motif": "consecutive 28-29-30 plus every-other 26-28-30; 4 even 2 odd"
+    },
+    {
+      "id": "C",
+      "primary": [
+        8,
+        11,
+        15,
+        20,
+        36,
+        37
+      ],
+      "variant": [
+        5,
+        12,
+        15,
+        20,
+        35,
+        37
+      ],
+      "retained": [
+        15,
+        20,
+        37
+      ],
+      "substitutions": [
+        {
+          "from": 8,
+          "to": 5
+        },
+        {
+          "from": 11,
+          "to": 12
+        },
+        {
+          "from": 36,
+          "to": 35
+        }
+      ],
+      "motif": "same final digit 5-15-35; 2 even 4 odd"
+    }
+  ],
+  "structural_audit": {
+    "per_row_balance": [
+      {
+        "even": 3,
+        "odd": 3,
+        "low_1_to_24": 3,
+        "high_25_to_49": 3
+      },
+      {
+        "even": 3,
+        "odd": 3,
+        "low_1_to_24": 2,
+        "high_25_to_49": 4
+      },
+      {
+        "even": 3,
+        "odd": 3,
+        "low_1_to_24": 4,
+        "high_25_to_49": 2
+      },
+      {
+        "even": 3,
+        "odd": 3,
+        "low_1_to_24": 3,
+        "high_25_to_49": 3
+      },
+      {
+        "even": 4,
+        "odd": 2,
+        "low_1_to_24": 2,
+        "high_25_to_49": 4
+      },
+      {
+        "even": 2,
+        "odd": 4,
+        "low_1_to_24": 4,
+        "high_25_to_49": 2
+      }
+    ],
+    "distinct_numbers": 27,
+    "main_distinct": 18,
+    "variant_new_distinct": 9,
+    "between_different_pairs_overlap": 0,
+    "within_each_pair_overlap": 3
+  },
+  "research_controls": {
+    "six_disjoint_equal_stake": {
+      "rows": [
+        [
+          2,
+          9,
+          16,
+          33,
+          38,
+          45
+        ],
+        [
+          10,
+          17,
+          27,
+          28,
+          29,
+          30
+        ],
+        [
+          8,
+          11,
+          15,
+          20,
+          36,
+          37
+        ],
+        [
+          4,
+          7,
+          23,
+          26,
+          43,
+          48
+        ],
+        [
+          13,
+          18,
+          19,
+          39,
+          42,
+          44
+        ],
+        [
+          21,
+          24,
+          35,
+          46,
+          47,
+          49
+        ]
+      ],
+      "distinct_numbers": 36,
+      "description": "same 3 main rows + 3 disjoint six-number rows from next eighteen highest-scoring unused numbers; never presented as tickets to purchase"
+    },
+    "two_substitution_equal_stake": {
+      "rows": [
+        [
+          2,
+          9,
+          16,
+          33,
+          38,
+          45
+        ],
+        [
+          10,
+          17,
+          27,
+          28,
+          29,
+          30
+        ],
+        [
+          8,
+          11,
+          15,
+          20,
+          36,
+          37
+        ],
+        [
+          4,
+          9,
+          16,
+          33,
+          38,
+          44
+        ],
+        [
+          10,
+          18,
+          27,
+          28,
+          29,
+          31
+        ],
+        [
+          8,
+          12,
+          15,
+          20,
+          35,
+          37
+        ]
+      ],
+      "description": "same main three rows, variant retaining four and replacing two with local neighbors; shadow research only"
+    }
+  },
+  "budget": {
+    "number_of_6x49_lines": 6,
+    "number_of_6x42_lines": 0,
+    "eur_per_line": 0.9,
+    "total_eur": 5.4
+  },
+  "no_system_9": true,
+  "caveats": "Models have no verified predictive power. K22 not validated out-of-sample. Equal count of distinct tickets yields equal jackpot probability under a uniform fair lottery, independent of motif or numeric closeness. Disjoint rows have higher theoretical P(any 3+) under fair draw than paired variants. Never retroactively overwrite. User purchase not confirmed."
+}
