@@ -1,0 +1,217 @@
+{
+  "schema": "lottery_lab_draw91_verified_result_and_predraw_comparison_v1",
+  "draw_no": 91,
+  "draw_date": "2026-11-19",
+  "game": "6/49",
+  "winning_numbers": [
+    6,
+    15,
+    20,
+    21,
+    35,
+    36
+  ],
+  "verification": "OFFICIAL_BST_CURRENT_RESULTS_HOMEPAGE_2026_11_19",
+  "source_url": "https://info.toto.bg/statistika",
+  "prize_3_eur": "PENDING_OFFICIAL_DRAW91_TABLE",
+  "proposed_seven_rows_source": "data/proposed_tickets_2026-11-19_draw91_7x649_v2_added_shape.json",
+  "actual_play_confirmation": "NOT_CONFIRMED",
+  "primary_seven": {
+    "score": [
+      {
+        "line": 1,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 2,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 3,
+        "matched": [
+          15,
+          20,
+          36
+        ],
+        "hits": 3
+      },
+      {
+        "line": 4,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 5,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 6,
+        "matched": [
+          15,
+          20,
+          35
+        ],
+        "hits": 3
+      },
+      {
+        "line": 7,
+        "matched": [
+          21
+        ],
+        "hits": 1
+      }
+    ],
+    "summary": {
+      "three_or_more": 2,
+      "four_or_more": 0,
+      "pool_hits": 5
+    },
+    "stake_if_played_eur": 6.3
+  },
+  "previously_frozen_six": {
+    "score": [
+      {
+        "line": 1,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 2,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 3,
+        "matched": [
+          15,
+          20,
+          36
+        ],
+        "hits": 3
+      },
+      {
+        "line": 4,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 5,
+        "matched": [],
+        "hits": 0
+      },
+      {
+        "line": 6,
+        "matched": [
+          15,
+          20,
+          35
+        ],
+        "hits": 3
+      }
+    ],
+    "summary": {
+      "three_or_more": 2,
+      "four_or_more": 0,
+      "pool_hits": 4
+    }
+  },
+  "controls": {
+    "six_disjoint": {
+      "score": [
+        {
+          "line": 1,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 2,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 3,
+          "matched": [
+            15,
+            20,
+            36
+          ],
+          "hits": 3
+        },
+        {
+          "line": 4,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 5,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 6,
+          "matched": [
+            21,
+            35
+          ],
+          "hits": 2
+        }
+      ],
+      "summary": {
+        "three_or_more": 1,
+        "four_or_more": 0,
+        "pool_hits": 5
+      }
+    },
+    "two_swaps": {
+      "score": [
+        {
+          "line": 1,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 2,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 3,
+          "matched": [
+            15,
+            20,
+            36
+          ],
+          "hits": 3
+        },
+        {
+          "line": 4,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 5,
+          "matched": [],
+          "hits": 0
+        },
+        {
+          "line": 6,
+          "matched": [
+            15,
+            20,
+            35
+          ],
+          "hits": 3
+        }
+      ],
+      "summary": {
+        "three_or_more": 2,
+        "four_or_more": 0,
+        "pool_hits": 4
+      }
+    }
+  },
+  "interpretation": "Two 3-hit rows appeared in C and C' pair from 7-row recommended set. Same two three-hit rows also appear in two-swap experimental control. Six-disjoint hypothetical control yields one three-hit row. One draw does not establish predictive advantage or statistically reliable choice. Do not count hypothetical bets as winnings."
+}
