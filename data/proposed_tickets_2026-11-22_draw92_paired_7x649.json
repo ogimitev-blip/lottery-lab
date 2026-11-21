@@ -1,0 +1,442 @@
+{
+  "schema": "lottery_lab_draw92_7x649_paired_three_swap_shape_v1",
+  "game": "6/49",
+  "draw_no": 92,
+  "draw_date": "2026-11-22",
+  "status": "FROZEN_PROPOSED_BEFORE_DRAW_NOT_CONFIRMED_PLAYED",
+  "created_date": "2026-11-21 Europe/Sofia",
+  "model": "K22 historical ensemble + flexible pool, source lottery/models.py; same deterministic ranked-band/parity allocation used for draw91",
+  "source_cutoff": {
+    "draw": 91,
+    "date": "2026-11-19",
+    "numbers": [
+      6,
+      15,
+      20,
+      21,
+      35,
+      36
+    ],
+    "verified_url": "https://info.toto.bg/results/6x49/2026-91",
+    "source_csv": "data/draws_649.csv",
+    "source_sha": "f458a260b42dff84d78f9dd40a31faee42409d38"
+  },
+  "primary_pool22": [
+    20,
+    16,
+    36,
+    27,
+    15,
+    10,
+    9,
+    30,
+    29,
+    33,
+    37,
+    8,
+    38,
+    2,
+    11,
+    28,
+    35,
+    17,
+    45,
+    48,
+    21,
+    49
+  ],
+  "tickets": [
+    [
+      10,
+      17,
+      20,
+      29,
+      33,
+      38
+    ],
+    [
+      8,
+      11,
+      16,
+      27,
+      30,
+      35
+    ],
+    [
+      2,
+      9,
+      15,
+      28,
+      36,
+      37
+    ],
+    [
+      10,
+      19,
+      20,
+      29,
+      34,
+      39
+    ],
+    [
+      7,
+      13,
+      16,
+      26,
+      30,
+      35
+    ],
+    [
+      1,
+      9,
+      14,
+      25,
+      36,
+      37
+    ],
+    [
+      22,
+      23,
+      24,
+      31,
+      42,
+      49
+    ]
+  ],
+  "role": [
+    "A main",
+    "B main",
+    "C main",
+    "A' variant",
+    "B' variant",
+    "C' variant",
+    "standalone Shape"
+  ],
+  "paired": [
+    {
+      "pair": "A",
+      "primary": [
+        10,
+        17,
+        20,
+        29,
+        33,
+        38
+      ],
+      "variant": [
+        10,
+        19,
+        20,
+        29,
+        34,
+        39
+      ],
+      "retained": [
+        10,
+        20,
+        29
+      ],
+      "swaps": [
+        {
+          "from": 17,
+          "to": 19
+        },
+        {
+          "from": 33,
+          "to": 34
+        },
+        {
+          "from": 38,
+          "to": 39
+        }
+      ],
+      "motif": "three numbers ending in 9 (19 29 39)"
+    },
+    {
+      "pair": "B",
+      "primary": [
+        8,
+        11,
+        16,
+        27,
+        30,
+        35
+      ],
+      "variant": [
+        7,
+        13,
+        16,
+        26,
+        30,
+        35
+      ],
+      "retained": [
+        16,
+        30,
+        35
+      ],
+      "swaps": [
+        {
+          "from": 8,
+          "to": 7
+        },
+        {
+          "from": 11,
+          "to": 13
+        },
+        {
+          "from": 27,
+          "to": 26
+        }
+      ],
+      "motif": "3 even / 3 odd; 3 low / 3 high"
+    },
+    {
+      "pair": "C",
+      "primary": [
+        2,
+        9,
+        15,
+        28,
+        36,
+        37
+      ],
+      "variant": [
+        1,
+        9,
+        14,
+        25,
+        36,
+        37
+      ],
+      "retained": [
+        9,
+        36,
+        37
+      ],
+      "swaps": [
+        {
+          "from": 2,
+          "to": 1
+        },
+        {
+          "from": 15,
+          "to": 14
+        },
+        {
+          "from": 28,
+          "to": 25
+        }
+      ],
+      "motif": "2 even / 4 odd; local replacements"
+    }
+  ],
+  "extra_shape": {
+    "line": 7,
+    "nums": [
+      22,
+      23,
+      24,
+      31,
+      42,
+      49
+    ],
+    "motif": "22 23 24 consecutive; 3 even 3 odd, 3 low 3 high; all new numbers"
+  },
+  "coverage": {
+    "distinct_values": 33,
+    "base_values": 18,
+    "added_in_variants": 9,
+    "added_in_shape": 6,
+    "no_overlap_between_pairs": true,
+    "within_pair_common_numbers": 3
+  },
+  "balance": [
+    {
+      "line": 1,
+      "even": 3,
+      "odd": 3,
+      "low_1_24": 3,
+      "high_25_49": 3
+    },
+    {
+      "line": 2,
+      "even": 3,
+      "odd": 3,
+      "low_1_24": 3,
+      "high_25_49": 3
+    },
+    {
+      "line": 3,
+      "even": 3,
+      "odd": 3,
+      "low_1_24": 3,
+      "high_25_49": 3
+    },
+    {
+      "line": 4,
+      "even": 3,
+      "odd": 3,
+      "low_1_24": 3,
+      "high_25_49": 3
+    },
+    {
+      "line": 5,
+      "even": 3,
+      "odd": 3,
+      "low_1_24": 3,
+      "high_25_49": 3
+    },
+    {
+      "line": 6,
+      "even": 2,
+      "odd": 4,
+      "low_1_24": 3,
+      "high_25_49": 3
+    },
+    {
+      "line": 7,
+      "even": 3,
+      "odd": 3,
+      "low_1_24": 3,
+      "high_25_49": 3
+    }
+  ],
+  "controls": {
+    "two_swaps_plus_one_shape": {
+      "rows": [
+        [
+          10,
+          17,
+          20,
+          29,
+          33,
+          38
+        ],
+        [
+          8,
+          11,
+          16,
+          27,
+          30,
+          35
+        ],
+        [
+          2,
+          9,
+          15,
+          28,
+          36,
+          37
+        ],
+        [
+          10,
+          19,
+          20,
+          29,
+          33,
+          39
+        ],
+        [
+          7,
+          11,
+          16,
+          26,
+          30,
+          35
+        ],
+        [
+          1,
+          9,
+          15,
+          25,
+          36,
+          37
+        ],
+        [
+          22,
+          23,
+          24,
+          31,
+          42,
+          49
+        ]
+      ],
+      "distinct_values": 30,
+      "status": "RESEARCH_ONLY_NO_WAGER"
+    },
+    "seven_disjoint": {
+      "rows": [
+        [
+          10,
+          17,
+          20,
+          29,
+          33,
+          38
+        ],
+        [
+          8,
+          11,
+          16,
+          27,
+          30,
+          35
+        ],
+        [
+          2,
+          9,
+          15,
+          28,
+          36,
+          37
+        ],
+        [
+          4,
+          7,
+          13,
+          23,
+          26,
+          48
+        ],
+        [
+          18,
+          19,
+          21,
+          39,
+          42,
+          44
+        ],
+        [
+          5,
+          24,
+          25,
+          34,
+          43,
+          49
+        ],
+        [
+          3,
+          6,
+          12,
+          22,
+          31,
+          47
+        ]
+      ],
+      "distinct_values": 42,
+      "status": "RESEARCH_ONLY_NO_WAGER",
+      "note": "Unranked illustrative disjoint control; not a strictly next-highest-rank pool"
+    }
+  },
+  "budget": {
+    "line_price_eur": 0.9,
+    "lines_649": 7,
+    "lines_642": 0,
+    "total_eur": 6.3,
+    "under_ten_eur": true,
+    "price_source": "https://info.toto.bg/toto1-i-toto2/toto-2-6-ot-49"
+  },
+  "excluded_system_9": true,
+  "caveat": "No proven forecasting ability; Shape and closeness are research choices, not statistically advantaged predictions. Fair-draw P(any >=3 hits) depends on overlap between tickets; do not count control arms as played. Frozen pre-draw, no purchase confirmed."
+}
