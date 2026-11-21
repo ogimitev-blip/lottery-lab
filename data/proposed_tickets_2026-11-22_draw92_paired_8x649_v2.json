@@ -1,0 +1,103 @@
+{
+  "schema": "lottery_lab_draw92_8x649_added_diversity_v2",
+  "status": "FROZEN_PREDRAW_USER_REQUESTED_REVISION_NOT_CONFIRMED_PLAYED",
+  "game": "6/49",
+  "draw_no": 92,
+  "draw_date": "2026-11-22",
+  "historical_cutoff_draw": 91,
+  "prior_frozen_path": "data/proposed_tickets_2026-11-22_draw92_paired_7x649.json",
+  "previous_seven_rows_unchanged": true,
+  "proposed_eight_rows": [
+    [
+      10,
+      17,
+      20,
+      29,
+      33,
+      38
+    ],
+    [
+      8,
+      11,
+      16,
+      27,
+      30,
+      35
+    ],
+    [
+      2,
+      9,
+      15,
+      28,
+      36,
+      37
+    ],
+    [
+      10,
+      19,
+      20,
+      29,
+      34,
+      39
+    ],
+    [
+      7,
+      13,
+      16,
+      26,
+      30,
+      35
+    ],
+    [
+      1,
+      9,
+      14,
+      25,
+      36,
+      37
+    ],
+    [
+      22,
+      23,
+      24,
+      31,
+      42,
+      49
+    ],
+    [
+      3,
+      12,
+      21,
+      40,
+      44,
+      47
+    ]
+  ],
+  "eighth_row": {
+    "numbers": [
+      3,
+      12,
+      21,
+      40,
+      44,
+      47
+    ],
+    "category": "broad coverage",
+    "even": 3,
+    "odd": 3,
+    "low_1_to_24": 3,
+    "high_25_to_49": 3,
+    "no_overlap_with_first_seven": true
+  },
+  "coverage": {
+    "distinct_numbers": 39,
+    "additional_distinct_numbers": 6
+  },
+  "controls_still_in_original_file": true,
+  "budget": {
+    "number_of_lines": 8,
+    "price_per_line_eur": 0.9,
+    "total_eur": 7.2
+  },
+  "note": "Number patterns and near-miss variants do not have established predictive advantage under a fair lottery. The eighth line is not a confirmed purchased bet."
+}
